@@ -4,7 +4,7 @@ from .. import TFEmbedding
 from ..transformers import FlatMMCrossAttentionSublayer
 from ..transformers import SelfAttentionSublayer
 from ..positionwise_ff import PositionwiseSublayer
-from ...utils.mask_utils import generate_padding_masks, generate_lookahead_mask
+from ...utils.nn import generate_padding_masks, generate_lookahead_mask
 
 
 class TFEncoderBlock(nn.Module):

@@ -7,7 +7,7 @@ import torch
 from .evaluator import Evaluator
 from .optimizer import Optimizer
 from .monitor import Monitor
-from .utils.misc import get_module_groups
+from .utils.nn import get_module_groups
 from .utils.misc import load_pt_file
 from .utils.ml_metrics import Loss
 from .utils.data import make_dataloader

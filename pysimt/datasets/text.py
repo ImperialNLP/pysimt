@@ -6,7 +6,8 @@ import torch
 from torch.utils.data import Dataset
 from torch.nn.utils.rnn import pad_sequence
 
-from ..utils.data import read_sentences
+from ..utils.io import fopen
+from ..vocabulary import Vocabulary
 
 logger = logging.getLogger('pysimt')
 
@@ -21,6 +22,28 @@ class TextDataset(Dataset):
         bos (bool, optional): If ``True``, a special beginning-of-sentence
             "<bos>" marker will be prepended to sentences.
     """
+
+    @staticmethod
+    def read_sentences(fname: str,
+                       vocab: Vocabulary,
+                       bos: bool = False,
+                       eos: bool = True):
+        lines = []
+        lens = []
+        with fopen(fname) as f:
+            for idx, line in enumerate(pbar(f, unit='sents')):
+                line = line.strip()
+
+                # Empty lines will cause a lot of headaches,
+                # get rid of them during preprocessing!
+                assert line, "Empty line (%d) found in %s" % (idx + 1, fname)
+
+                # Map and append
+                seq = vocab.sent_to_idxs(line, explicit_bos=bos, explicit_eos=eos)
+                lines.append(seq)
+                lens.append(len(seq))
+
+        return lines, lens
 
     def __init__(self, fname, vocab, bos=False, eos=True, **kwargs):
         self.path = Path(fname)
@@ -37,7 +60,7 @@ class TextDataset(Dataset):
             logger.info('Multiple files found, using first: {}'.format(self.fnames[0]))
 
         # Read the sentences and map them to vocabulary
-        self.data, self.lengths = read_sentences(
+        self.data, self.lengths = self.read_sentences(
             self.fnames[0], self.vocab, bos=self.bos, eos=self.eos)
 
         # Dataset size

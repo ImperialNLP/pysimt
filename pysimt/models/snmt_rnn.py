@@ -6,12 +6,12 @@ from torch import nn
 
 from ..layers import RecurrentEncoder, VisualFeaturesEncoder
 from ..layers.decoders import ConditionalGRUDecoder
-from ..utils.misc import get_n_params
 from ..vocabulary import Vocabulary
+from ..utils.nn import get_n_params
 from ..utils.topology import Topology
 from ..utils.ml_metrics import Loss
 from ..utils.device import DEVICE
-from ..utils.misc import pbar
+from ..utils.io import pbar
 from ..datasets import MultimodalDataset
 from ..metrics import Metric
 

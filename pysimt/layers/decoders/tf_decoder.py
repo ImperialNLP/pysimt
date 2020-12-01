@@ -1,7 +1,7 @@
 import torch.nn.functional as F
 from torch import nn
 
-from ...utils.mask_utils import generate_combined_mask, generate_lookahead_mask
+from ...utils.nn import generate_combined_mask, generate_lookahead_mask
 
 from .. import TFEmbedding
 from ..positionwise_ff import PositionwiseSublayer

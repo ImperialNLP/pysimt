@@ -2,7 +2,7 @@ import torch
 
 from .base_sublayer import BaseSublayer
 from ..attention import ScaledDotAttention
-from ...utils.mask_utils import generate_default_mask
+from ...utils.nn import generate_default_mask
 
 
 class FlatMMCrossAttentionSublayer(BaseSublayer):

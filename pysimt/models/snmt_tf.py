@@ -1,7 +1,7 @@
 from torch import nn
 
 from ..layers import TFEncoder, TFDecoder
-from ..utils.label_smoothing_loss import LabelSmoothingLoss
+from ..utils.nn import LabelSmoothingLoss
 from . import SimultaneousNMT
 
 

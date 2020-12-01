@@ -1,6 +1,6 @@
 from torch import nn
 
-from ...utils.mask_utils import generate_visual_features_padding_masks
+from ...utils.nn import generate_visual_features_padding_masks
 from .. import FF
 
 

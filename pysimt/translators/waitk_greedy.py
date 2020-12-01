@@ -4,7 +4,7 @@ import time
 from .sim_greedy import SimultaneousGreedySearch
 from ..utils.data import sort_predictions
 from ..utils.device import DEVICE
-from ..utils.misc import pbar
+from ..utils.io import pbar
 
 logger = logging.getLogger('pysimt')
 

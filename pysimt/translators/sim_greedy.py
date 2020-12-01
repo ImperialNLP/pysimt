@@ -5,7 +5,7 @@ import itertools
 import torch
 
 from ..utils.device import DEVICE
-from ..utils.misc import pbar
+from ..utils.io import pbar
 from ..utils.data import sort_predictions
 
 from .greedy import GreedySearch

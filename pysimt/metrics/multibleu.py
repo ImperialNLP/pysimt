@@ -1,7 +1,7 @@
 from sacrebleu import corpus_bleu
 
 from ..utils.misc import listify
-from ..utils.data import read_reference_files, read_hypothesis_file
+from ..utils.io import read_reference_files, read_hypothesis_file
 from .metric import Metric
 
 
