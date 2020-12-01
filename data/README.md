@@ -1,5 +1,4 @@
-Data preparation
----
+# Data preparation
 
 - Make sure that you already created and activated the `pysimt` anaconda environment.
 - Please run `install.sh` from within this folder, to install the necessary tools for data pre-processing.
