@@ -1,16 +1,43 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 import os
 import sys
+import time
+import random
+import pathlib
 import argparse
+
+from hashlib import sha256
 
 from pysimt import logger
 from pysimt.config import Options
-from pysimt.utils.misc import setup_experiment, fix_seed
+from pysimt.utils.misc import fix_seed
 from pysimt.utils.device import DeviceManager
 
 
-if __name__ == '__main__':
+def setup_experiment(opts, suffix: str = '', short: bool = False):
+    """Return a representative string for the experiment."""
+
+    # subfolder is conf filename without .conf suffix
+    opts.train['subfolder'] = pathlib.Path(opts.filename).stem
+
+    # add suffix to subfolder name to keep experiment names shorter
+    if suffix:
+        opts.train['subfolder'] += "-{}".format(suffix)
+
+    # Create folders
+    folder = pathlib.Path(opts.train['save_path']) / opts.train['subfolder']
+    folder.mkdir(parents=True, exist_ok=True)
+
+    # Set random experiment ID
+    run_id = time.strftime('%Y%m%d%H%m%S') + str(random.random())
+    run_id = sha256(run_id.encode('ascii')).hexdigest()[:5]
+
+    # Finalize
+    model_type = opts.train['model_type'].lower()
+    opts.train['exp_id'] = f'{model_type}-r{run_id}'
+
+
+def main():
     parser = argparse.ArgumentParser(
         prog='pysimt',
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -133,3 +160,7 @@ if __name__ == '__main__':
     loop = MainLoop(model, opts.train, dev_mgr)
     loop()
     sys.exit(0)
+
+
+if __name__ == '__main__':
+    main()

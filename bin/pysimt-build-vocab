@@ -10,7 +10,7 @@ from collections import OrderedDict
 import numpy as np
 
 from pysimt.vocabulary import Vocabulary
-from pysimt.utils.misc import pbar
+from pysimt.utils.io import pbar
 
 
 def freqs_to_dict(token_freqs, min_freq=0, max_items=0, exclude_symbols=False):
