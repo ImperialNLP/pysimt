@@ -7,6 +7,7 @@ This repository includes the codes, the experiment configurations and the script
 to prepare/download data for the [Simultaneous Machine Translation with Visual Context](https://www.aclweb.org/anthology/2020.emnlp-main.184.pdf)
 paper presented at EMNLP 2020.
 
+
 ## Overview
 
 `pysimt` is a `PyTorch`-based sequence-to-sequence framework that facilitates
@@ -15,6 +16,10 @@ is especially geared towards a set of recent simultaneous MT approaches, includi
 heuristics-based decoding and prefix-to-prefix training/decoding. Common metrics
 such as average proportion (AP), average lag (AL), and consecutive wait (CW)
 are provided through well-defined APIs as well.
+
+Please visit [https://imperialnlp.github.io/pysimt](https://imperialnlp.github.io/pysimt)
+for detailed documentation.
+
 
 ## Citation
 
@@ -47,7 +52,3 @@ conda env create -f environment.yml
 
 Once the installation is done, run `pysimt-install-extra` command if you want
 to use METEOR as an evaluation metric.
-
-
-## Documentation
-
