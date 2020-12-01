@@ -2,7 +2,7 @@ import re
 import pathlib
 from typing import List, Union
 
-from .misc import get_temp_file, fopen
+from .io import get_temp_file, fopen
 
 
 class FilterChain:

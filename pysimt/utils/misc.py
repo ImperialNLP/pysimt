@@ -1,23 +1,10 @@
 import os
-import bz2
-import gzip
-import lzma
-import time
-import random
 import pathlib
-import logging
-import tempfile
-from hashlib import sha256
 
 from typing import List, Any, Dict
 
-import numpy as np
 import torch
-from tqdm import tqdm
 
-from ..cleanup import cleanup
-
-logger = logging.getLogger('pysimt')
 
 
 LANGUAGES = [
@@ -63,10 +50,6 @@ def get_meteor_jar(ver: str = '1.5'):
     return jar
 
 
-def pbar(iterator, unit='it'):
-    return tqdm(iterator, unit=unit, ncols=70, smoothing=0)
-
-
 def load_pt_file(fname: str, device: str = 'cpu') -> Dict[str, Any]:
     """Returns saved .(ck)pt file fields."""
     fname = str(pathlib.Path(fname).expanduser())
@@ -92,39 +75,6 @@ def listify(llist):
 
 def flatten(llist) -> List[Any]:
     return [item for sublist in llist for item in sublist]
-
-
-def get_local_args(d):
-    return {k: v for k, v in d.items() if not k.startswith(('__', 'self'))}
-
-
-def ensure_dirs(dirs: List[str]):
-    """Create a list of directories if not exists."""
-    dirs = [pathlib.Path(d) for d in listify(dirs)]
-    for d in dirs:
-        d.mkdir(parents=True, exist_ok=True)
-
-
-def fopen(filename: str, key: str = None):
-    """gzip,bzip2,xz,numpy aware file opening function."""
-    assert '*' not in str(filename), "Glob patterns not supported in fopen()"
-
-    filename = str(pathlib.Path(filename).expanduser())
-    if filename.endswith('.gz'):
-        return gzip.open(filename, 'rt')
-    elif filename.endswith('.bz2'):
-        return bz2.open(filename, 'rt')
-    elif filename.endswith(('.xz', '.lzma')):
-        return lzma.open(filename, 'rt')
-    elif filename.endswith(('.npy', '.npz')):
-        if filename.endswith('.npz'):
-            assert key is not None, "No key= given for .npz file."
-            return np.load(filename)[key]
-        else:
-            return np.load(filename)
-    else:
-        # Plain text
-        return open(filename, 'r')
 
 
 def readable_size(n: int) -> str:
@@ -165,41 +115,3 @@ def get_n_params(module):
     n_param_all = n_param_learnable + n_param_frozen
     return "# parameters: {} ({} learnable)".format(
         readable_size(n_param_all), readable_size(n_param_learnable))
-
-
-def get_temp_file(delete=False, close=False):
-    """Creates a temporary file under a folder."""
-    root = pathlib.Path(os.environ.get('NMTPY_TMP', '/tmp'))
-    if not root.exists():
-        root.mkdir(parents=True, exist_ok=True)
-
-    prefix = str(root / "pysimt_{}".format(os.getpid()))
-    t = tempfile.NamedTemporaryFile(
-        mode='w', prefix=prefix, delete=delete)
-    cleanup.register_tmp_file(t.name)
-    if close:
-        t.close()
-    return t
-
-
-def setup_experiment(opts, suffix: str = '', short: bool = False):
-    """Return a representative string for the experiment."""
-
-    # subfolder is conf filename without .conf suffix
-    opts.train['subfolder'] = pathlib.Path(opts.filename).stem
-
-    # add suffix to subfolder name to keep experiment names shorter
-    if suffix:
-        opts.train['subfolder'] += "-{}".format(suffix)
-
-    # Create folders
-    folder = pathlib.Path(opts.train['save_path']) / opts.train['subfolder']
-    folder.mkdir(parents=True, exist_ok=True)
-
-    # Set random experiment ID
-    run_id = time.strftime('%Y%m%d%H%m%S') + str(random.random())
-    run_id = sha256(run_id.encode('ascii')).hexdigest()[:5]
-
-    # Finalize
-    model_type = opts.train['model_type'].lower()
-    opts.train['exp_id'] = f'{model_type}-r{run_id}'
