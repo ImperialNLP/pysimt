@@ -1,0 +1,135 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import os
+import sys
+import argparse
+
+from pysimt import logger
+from pysimt.config import Options
+from pysimt.utils.misc import setup_experiment, fix_seed
+from pysimt.utils.device import DeviceManager
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        prog='pysimt',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        description="pysimt trains & translates a given configuration/checkpoint",
+        argument_default=argparse.SUPPRESS)
+
+    subparsers = parser.add_subparsers(dest='cmd', title='sub-commands',
+                                       description='Valid sub-commands')
+
+    # train command
+    parser_train = subparsers.add_parser('train', help='train help')
+    parser_train.add_argument('-C', '--config', type=str, required=True,
+                              help="Experiment configuration file")
+    parser_train.add_argument('-s', '--suffix', type=str, default="",
+                              help="Optional experiment suffix.")
+    parser_train.add_argument('-d', '--device-id', type=str, default='1gpu',
+                              help='cpu or [N]gpu cuda (Default: 1gpu)')
+    parser_train.add_argument('overrides', nargs="*", default=[],
+                              help="(section).key:value overrides for config")
+
+    ####################
+    # stranslate command
+    ####################
+    parser_trans = subparsers.add_parser('stranslate', help='simultaneous translate help')
+    parser_trans.add_argument('-n', '--disable-filters', action='store_true',
+                              help='Disable eval_filters given in config')
+    parser_trans.add_argument('-b', '--batch-size', type=int, default=16,
+                              help='Batch size for vanilla greedy search (gs)')
+    parser_trans.add_argument('-m', '--max-len', type=int, default=100,
+                              help='Hard limit for stopping if no <eos> produced (Default: 100)')
+    parser_trans.add_argument('-d', '--device-id', type=str, default='gpu',
+                              help='cpu or gpu (Default: gpu)')
+    parser_trans.add_argument('-x', '--override', nargs="*", default=[],
+                              help="(section).key:value overrides for config")
+    parser_trans.add_argument('-r', '--stochastic', action='store_true',
+                              help="Don't fix seed for sampling-based models.")
+    parser_trans.add_argument('-s', '--splits', type=str, required=True,
+                              help='Comma separated splits from config file')
+    parser_trans.add_argument('-S', '--source', type=str, default=None,
+                              help='Comma-separated key:value pairs to provide new inputs.')
+    parser_trans.add_argument('-o', '--output', type=str, required=True,
+                              help='Output filename prefix')
+
+    # gs: greedy search
+    # sgs: simultaneous greedy search
+    #   Can neural machine translation do simultaneous translation? (2016)
+    #   https://arxiv.org/abs/1606.02012
+    parser_trans.add_argument('-f', '--func', default='gs', choices=['gs', 'sgs', 'wk'],
+                              help="greedy search (gs), simultaneous gs (sgs), wait-k (wk)")
+
+    parser_trans.add_argument('--delta', type=str, default='',
+                              help="Comma-separeted list of delta values for sgs")
+    parser_trans.add_argument('--n-init-tokens', type=str, default='',
+                              help="Comma-separeted list of k (s_0) values for sgs and wk")
+    parser_trans.add_argument('--criteria', type=str, default='',
+                              help="Comma-separeted list of criteria for sgs (not required for wk)")
+
+    parser_trans.add_argument('model', type=str,
+                              help="Saved model/checkpoint file(s)")
+
+    # Parse command-line arguments first
+    args = parser.parse_args()
+    cmd = args.__dict__.pop('cmd')
+    if cmd is None:
+        parser.print_help()
+        sys.exit(1)
+
+    # Mode selection
+    if cmd == 'train':
+        # Parse configuration file and merge with the rest
+        opts = Options(args.config, args.overrides)
+
+        # Setup experiment folders
+        setup_experiment(opts, args.suffix)
+
+    # Reserve device(s)
+    dev_mgr = DeviceManager(args.device_id)
+
+    # translate entry point
+    if cmd == 'stranslate':
+        logger.setup()
+        if not args.stochastic:
+            fix_seed(1234)
+        from pysimt.stranslator import STranslator
+        stranslator = STranslator(**args.__dict__)
+        stranslator()
+        sys.exit(0)
+
+    #################################
+    # Training / Resuming entry point
+    #################################
+    import torch
+    import platform
+    import pysimt
+    from pysimt import models
+    from pysimt.mainloop import MainLoop
+    log = logger.setup(opts.train)
+
+    # If given, seed that; if not generate a random seed and print it
+    if opts.train['seed'] > 0:
+        seed = fix_seed(opts.train['seed'])
+    else:
+        opts.train['seed'] = fix_seed()
+
+    # Be verbose and fire the loop!
+    log.info(opts)
+
+    # Instantiate the model object
+    model = getattr(models, opts.train['model_type'])(opts=opts)
+
+    log.info("Python {} -- torch {} with CUDA {} (on machine '{}')".format(
+        platform.python_version(), torch.__version__,
+        torch.version.cuda, platform.node()))
+    log.info("pysimt {}".format(pysimt.__version__))
+    log.info(dev_mgr)
+    log.info("Seed for further reproducibility: {}".format(opts.train['seed']))
+
+    if 'SLURM_JOB_ID' in os.environ:
+        log.info("SLURM Job ID: {}".format(os.environ['SLURM_JOB_ID']))
+    loop = MainLoop(model, opts.train, dev_mgr)
+    loop()
+    sys.exit(0)

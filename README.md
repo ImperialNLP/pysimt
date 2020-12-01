@@ -23,3 +23,11 @@ The code will hopefully be here in the following weeks.
     pages = "2350--2361",
 }
 ```
+
+## Installation
+The following command will create an appropriate Anaconda environment with
+`pysimt` installed within in editable mode.
+
+```bash
+conda env create -f environment.yml
+```
