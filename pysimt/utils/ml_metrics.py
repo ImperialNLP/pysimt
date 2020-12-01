@@ -1,4 +1,3 @@
-
 class Loss:
     """Accumulates and computes correctly training and validation losses."""
     def __init__(self):
