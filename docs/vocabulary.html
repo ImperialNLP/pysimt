@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>pysimt.vocabulary API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>pysimt.vocabulary</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import json
+import pathlib
+import logging
+from collections import OrderedDict
+from typing import List
+
+logger = logging.getLogger(&#39;pysimt&#39;)
+
+
+class Vocabulary:
+    r&#34;&#34;&#34;Vocabulary class for integer&lt;-&gt;token mapping.
+
+    Args:
+        fname: The filename of the JSON vocabulary file created by
+            `pysimt-build-vocab` script.
+
+        short_list: Optional; If &gt; 0, only the most frequent `short_list`
+            items will be kept in the vocabulary.
+
+    Attributes:
+        vocab (pathlib.Path): The filepath of the .json vocabulary file.
+        short_list (int): Short-list threshold.
+        freqs (dict): A dictionary which maps vocabulary strings to their
+            normalized frequency across the training set.
+        counts (dict): A dictionary which maps vocabulary strings to their
+            occurrence counts across the training set.
+        n_tokens (int): The final number of elements in the vocabulary.
+        has_bos (bool): `True` if the vocabulary has &lt;bos&gt; token.
+        has_eos (bool): `True` if the vocabulary has &lt;eos&gt; token.
+        has_pad (bool): `True` if the vocabulary has &lt;pad&gt; token.
+        has_unk (bool): `True` if the vocabulary has &lt;unk&gt; token.
+
+    Note:
+        The final instance can be easily queried in both directions with
+        bracket notation using integers and strings.
+
+    Example:
+        &gt;&gt;&gt; vocab = Vocabulary(&#39;train.vocab.en&#39;)
+        &gt;&gt;&gt; vocab
+        Vocabulary of 9797 items (&#39;train.vocab.en&#39;)
+        &gt;&gt;&gt; vocab[&#39;woman&#39;]
+        14
+        &gt;&gt;&gt; vocab[14]
+        &#39;woman&#39;
+        &gt;&gt;&gt; vocab.sent_to_idxs(&#39;hello world .&#39;)
+        [4226, 1708, 5, 2]
+        &gt;&gt;&gt; vocab.sent_to_idxs(&#39;hello world .&#39;, explicit_eos=False)
+        [4226, 1708, 5]
+        &gt;&gt;&gt; vocab.idxs_to_sent([4226, 1708, 5, 2])
+        &#39;hello world .&#39;
+        &gt;&gt;&gt; vocab.idxs_to_sent([4226, 1708, 5, 2], debug=True)
+        &#39;hello world . &lt;eos&gt;&#39;
+        &gt;&gt;&gt; vocab.list_of_idxs_to_sents([[4226, 1708], [4226, 1708, 5]])
+        [&#39;hello world&#39;, &#39;hello world .&#39;]
+
+    Returns:
+        A `Vocabulary` instance.
+    &#34;&#34;&#34;
+
+    _TOKENS = {&#34;&lt;pad&gt;&#34;: 0, &#34;&lt;bos&gt;&#34;: 1, &#34;&lt;eos&gt;&#34;: 2, &#34;&lt;unk&gt;&#34;: 3}
+
+    def __init__(self, fname: str, short_list: int = 0):
+        self.vocab = pathlib.Path(fname).expanduser()
+        self.short_list = short_list
+        self._map = None
+        self._imap = None
+        self.freqs = None
+        self.counts = None
+        self._allmap = None
+        self.n_tokens = None
+
+        self.has_pad = False
+        self.has_bos = False
+        self.has_eos = False
+        self.has_unk = False
+
+        # Load file
+        with open(self.vocab) as f:
+            data = json.load(f)
+
+        if self.short_list &gt; 0:
+            # Get a slice of most frequent `short_list` items
+            data = dict(list(data.items())[:self.short_list])
+
+        self._map = {k: int(v.split()[0]) for k, v in data.items()}
+        self.counts = {k: int(v.split()[1]) for k, v in data.items()}
+
+        total_count = sum(self.counts.values())
+        self.freqs = {k: v / total_count for k, v in self.counts.items()}
+
+        # Sanity check for placeholder tokens
+        for tok, idx in self._TOKENS.items():
+            if self._map.get(tok, -1) != idx:
+                logger.info(f&#39;{tok} not found in {self.vocab.name!r}&#39;)
+                setattr(self, f&#39;has_{tok[1:-1]}&#39;, False)
+            else:
+                setattr(self, f&#39;has_{tok[1:-1]}&#39;, True)
+
+        # Set # of tokens
+        self.n_tokens = len(self._map)
+
+        # Invert dictionary
+        self._imap = OrderedDict([(v, k) for k, v in self._map.items()])
+
+        # Merge forward and backward lookups into single dict for convenience
+        self._allmap = OrderedDict()
+        self._allmap.update(self._map)
+        self._allmap.update(self._imap)
+
+        assert len(self._allmap) == (len(self._map) + len(self._imap)), \
+            &#34;Merged vocabulary size is not equal to sum of both.&#34;
+
+    def sent_to_idxs(self,
+                     line: str,
+                     explicit_bos: bool = False,
+                     explicit_eos: bool = True) -&gt; List[int]:
+        &#34;&#34;&#34;Returns a list of integers representing the given sentence.
+
+        Args:
+            line: A string representing a sentence.
+            explicit_bos: Optional; if True, a special `&lt;bos&gt;` token will be
+                prepended to the mapped sequence.
+            explicit_eos: Optional; If True, a special `&lt;eos&gt;` token will be
+                appended to the mapped sequence.
+        &#34;&#34;&#34;
+
+        tidxs = []
+
+        if explicit_bos and self.has_bos:
+            tidxs.append(self._TOKENS[&#34;&lt;bos&gt;&#34;])
+
+        if self.has_unk:
+            for tok in line.split():
+                tidxs.append(self._map.get(tok, self._TOKENS[&#34;&lt;unk&gt;&#34;]))
+        else:
+            # Remove unknown tokens from the words
+            for tok in line.split():
+                try:
+                    tidxs.append(self._map[tok])
+                except KeyError:
+                    # make this verbose and repetitive as this should be
+                    # used cautiously only for some specific models
+                    logger.info(&#39;No &lt;unk&gt; token, removing word from sentence&#39;)
+
+        if explicit_eos and self.has_eos:
+            tidxs.append(self._TOKENS[&#34;&lt;eos&gt;&#34;])
+
+        return tidxs
+
+    def idxs_to_sent(self,
+                     idxs: List[int],
+                     debug: bool = False) -&gt; str:
+        &#34;&#34;&#34;Converts a list of integers to its space-delimited string representation.
+
+        Args:
+            idxs: A list of integers as previously mapped using `sent_to_idxs()`.
+            debug: Optional; If True, the string representation
+                will not be truncated when `&lt;eos&gt;` is hit.
+
+        Returns:
+            A whitespace separated string representing the given list of integers.
+
+        &#34;&#34;&#34;
+        result = []
+        for idx in idxs:
+            if not debug and self.has_eos and idx == self._TOKENS[&#34;&lt;eos&gt;&#34;]:
+                break
+            result.append(self._imap.get(idx, self._TOKENS[&#34;&lt;unk&gt;&#34;]))
+
+        return &#34; &#34;.join(result)
+
+    def list_of_idxs_to_sents(self,
+                              lidxs: List[List[int]]) -&gt; List[str]:
+        &#34;&#34;&#34;Converts a list of list of integers to their respective string
+        representations. This is handy for batched conversion after beam search for example.
+
+        Args:
+            lidxs: A list containing multiple lists of integers as
+                previously mapped from string tokens by this instance.
+
+        Returns:
+            A list of whitespace separated strings representing the given input.
+
+        &#34;&#34;&#34;
+        results = []
+        unk = self._TOKENS[&#34;&lt;unk&gt;&#34;]
+        for idxs in lidxs:
+            result = []
+            for idx in idxs:
+                if idx == self._TOKENS[&#34;&lt;eos&gt;&#34;]:
+                    break
+                result.append(self._imap.get(idx, unk))
+            results.append(&#34; &#34;.join(result))
+        return results
+
+    def __getitem__(self, key):
+        return self._allmap[key]
+
+    def __len__(self):
+        return len(self._map)
+
+    def __repr__(self):
+        return f&#34;Vocabulary of {self.n_tokens} items ({self.vocab.name!r})&#34;</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="pysimt.vocabulary.Vocabulary"><code class="flex name class">
+<span>class <span class="ident">Vocabulary</span></span>
+<span>(</span><span>fname: str, short_list: int = 0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Vocabulary class for integer&lt;-&gt;token mapping.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>fname</code></strong></dt>
+<dd>The filename of the JSON vocabulary file created by
+<code>pysimt-build-vocab</code> script.</dd>
+<dt><strong><code>short_list</code></strong></dt>
+<dd>Optional; If &gt; 0, only the most frequent <code>short_list</code>
+items will be kept in the vocabulary.</dd>
+</dl>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>vocab</code></strong> :&ensp;<code>pathlib.Path</code></dt>
+<dd>The filepath of the .json vocabulary file.</dd>
+<dt><strong><code>short_list</code></strong> :&ensp;<code>int</code></dt>
+<dd>Short-list threshold.</dd>
+<dt><strong><code>freqs</code></strong> :&ensp;<code>dict</code></dt>
+<dd>A dictionary which maps vocabulary strings to their
+normalized frequency across the training set.</dd>
+<dt><strong><code>counts</code></strong> :&ensp;<code>dict</code></dt>
+<dd>A dictionary which maps vocabulary strings to their
+occurrence counts across the training set.</dd>
+<dt><strong><code>n_tokens</code></strong> :&ensp;<code>int</code></dt>
+<dd>The final number of elements in the vocabulary.</dd>
+<dt><strong><code>has_bos</code></strong> :&ensp;<code>bool</code></dt>
+<dd><code>True</code> if the vocabulary has <bos> token.</dd>
+<dt><strong><code>has_eos</code></strong> :&ensp;<code>bool</code></dt>
+<dd><code>True</code> if the vocabulary has <eos> token.</dd>
+<dt><strong><code>has_pad</code></strong> :&ensp;<code>bool</code></dt>
+<dd><code>True</code> if the vocabulary has <pad> token.</dd>
+<dt><strong><code>has_unk</code></strong> :&ensp;<code>bool</code></dt>
+<dd><code>True</code> if the vocabulary has <unk> token.</dd>
+</dl>
+<h2 id="note">Note</h2>
+<p>The final instance can be easily queried in both directions with
+bracket notation using integers and strings.</p>
+<h2 id="example">Example</h2>
+<pre><code class="language-python-repl">&gt;&gt;&gt; vocab = Vocabulary('train.vocab.en')
+&gt;&gt;&gt; vocab
+Vocabulary of 9797 items ('train.vocab.en')
+&gt;&gt;&gt; vocab['woman']
+14
+&gt;&gt;&gt; vocab[14]
+'woman'
+&gt;&gt;&gt; vocab.sent_to_idxs('hello world .')
+[4226, 1708, 5, 2]
+&gt;&gt;&gt; vocab.sent_to_idxs('hello world .', explicit_eos=False)
+[4226, 1708, 5]
+&gt;&gt;&gt; vocab.idxs_to_sent([4226, 1708, 5, 2])
+'hello world .'
+&gt;&gt;&gt; vocab.idxs_to_sent([4226, 1708, 5, 2], debug=True)
+'hello world . &lt;eos&gt;'
+&gt;&gt;&gt; vocab.list_of_idxs_to_sents([[4226, 1708], [4226, 1708, 5]])
+['hello world', 'hello world .']
+</code></pre>
+<h2 id="returns">Returns</h2>
+<p>A <code><a title="pysimt.vocabulary.Vocabulary" href="#pysimt.vocabulary.Vocabulary">Vocabulary</a></code> instance.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Vocabulary:
+    r&#34;&#34;&#34;Vocabulary class for integer&lt;-&gt;token mapping.
+
+    Args:
+        fname: The filename of the JSON vocabulary file created by
+            `pysimt-build-vocab` script.
+
+        short_list: Optional; If &gt; 0, only the most frequent `short_list`
+            items will be kept in the vocabulary.
+
+    Attributes:
+        vocab (pathlib.Path): The filepath of the .json vocabulary file.
+        short_list (int): Short-list threshold.
+        freqs (dict): A dictionary which maps vocabulary strings to their
+            normalized frequency across the training set.
+        counts (dict): A dictionary which maps vocabulary strings to their
+            occurrence counts across the training set.
+        n_tokens (int): The final number of elements in the vocabulary.
+        has_bos (bool): `True` if the vocabulary has &lt;bos&gt; token.
+        has_eos (bool): `True` if the vocabulary has &lt;eos&gt; token.
+        has_pad (bool): `True` if the vocabulary has &lt;pad&gt; token.
+        has_unk (bool): `True` if the vocabulary has &lt;unk&gt; token.
+
+    Note:
+        The final instance can be easily queried in both directions with
+        bracket notation using integers and strings.
+
+    Example:
+        &gt;&gt;&gt; vocab = Vocabulary(&#39;train.vocab.en&#39;)
+        &gt;&gt;&gt; vocab
+        Vocabulary of 9797 items (&#39;train.vocab.en&#39;)
+        &gt;&gt;&gt; vocab[&#39;woman&#39;]
+        14
+        &gt;&gt;&gt; vocab[14]
+        &#39;woman&#39;
+        &gt;&gt;&gt; vocab.sent_to_idxs(&#39;hello world .&#39;)
+        [4226, 1708, 5, 2]
+        &gt;&gt;&gt; vocab.sent_to_idxs(&#39;hello world .&#39;, explicit_eos=False)
+        [4226, 1708, 5]
+        &gt;&gt;&gt; vocab.idxs_to_sent([4226, 1708, 5, 2])
+        &#39;hello world .&#39;
+        &gt;&gt;&gt; vocab.idxs_to_sent([4226, 1708, 5, 2], debug=True)
+        &#39;hello world . &lt;eos&gt;&#39;
+        &gt;&gt;&gt; vocab.list_of_idxs_to_sents([[4226, 1708], [4226, 1708, 5]])
+        [&#39;hello world&#39;, &#39;hello world .&#39;]
+
+    Returns:
+        A `Vocabulary` instance.
+    &#34;&#34;&#34;
+
+    _TOKENS = {&#34;&lt;pad&gt;&#34;: 0, &#34;&lt;bos&gt;&#34;: 1, &#34;&lt;eos&gt;&#34;: 2, &#34;&lt;unk&gt;&#34;: 3}
+
+    def __init__(self, fname: str, short_list: int = 0):
+        self.vocab = pathlib.Path(fname).expanduser()
+        self.short_list = short_list
+        self._map = None
+        self._imap = None
+        self.freqs = None
+        self.counts = None
+        self._allmap = None
+        self.n_tokens = None
+
+        self.has_pad = False
+        self.has_bos = False
+        self.has_eos = False
+        self.has_unk = False
+
+        # Load file
+        with open(self.vocab) as f:
+            data = json.load(f)
+
+        if self.short_list &gt; 0:
+            # Get a slice of most frequent `short_list` items
+            data = dict(list(data.items())[:self.short_list])
+
+        self._map = {k: int(v.split()[0]) for k, v in data.items()}
+        self.counts = {k: int(v.split()[1]) for k, v in data.items()}
+
+        total_count = sum(self.counts.values())
+        self.freqs = {k: v / total_count for k, v in self.counts.items()}
+
+        # Sanity check for placeholder tokens
+        for tok, idx in self._TOKENS.items():
+            if self._map.get(tok, -1) != idx:
+                logger.info(f&#39;{tok} not found in {self.vocab.name!r}&#39;)
+                setattr(self, f&#39;has_{tok[1:-1]}&#39;, False)
+            else:
+                setattr(self, f&#39;has_{tok[1:-1]}&#39;, True)
+
+        # Set # of tokens
+        self.n_tokens = len(self._map)
+
+        # Invert dictionary
+        self._imap = OrderedDict([(v, k) for k, v in self._map.items()])
+
+        # Merge forward and backward lookups into single dict for convenience
+        self._allmap = OrderedDict()
+        self._allmap.update(self._map)
+        self._allmap.update(self._imap)
+
+        assert len(self._allmap) == (len(self._map) + len(self._imap)), \
+            &#34;Merged vocabulary size is not equal to sum of both.&#34;
+
+    def sent_to_idxs(self,
+                     line: str,
+                     explicit_bos: bool = False,
+                     explicit_eos: bool = True) -&gt; List[int]:
+        &#34;&#34;&#34;Returns a list of integers representing the given sentence.
+
+        Args:
+            line: A string representing a sentence.
+            explicit_bos: Optional; if True, a special `&lt;bos&gt;` token will be
+                prepended to the mapped sequence.
+            explicit_eos: Optional; If True, a special `&lt;eos&gt;` token will be
+                appended to the mapped sequence.
+        &#34;&#34;&#34;
+
+        tidxs = []
+
+        if explicit_bos and self.has_bos:
+            tidxs.append(self._TOKENS[&#34;&lt;bos&gt;&#34;])
+
+        if self.has_unk:
+            for tok in line.split():
+                tidxs.append(self._map.get(tok, self._TOKENS[&#34;&lt;unk&gt;&#34;]))
+        else:
+            # Remove unknown tokens from the words
+            for tok in line.split():
+                try:
+                    tidxs.append(self._map[tok])
+                except KeyError:
+                    # make this verbose and repetitive as this should be
+                    # used cautiously only for some specific models
+                    logger.info(&#39;No &lt;unk&gt; token, removing word from sentence&#39;)
+
+        if explicit_eos and self.has_eos:
+            tidxs.append(self._TOKENS[&#34;&lt;eos&gt;&#34;])
+
+        return tidxs
+
+    def idxs_to_sent(self,
+                     idxs: List[int],
+                     debug: bool = False) -&gt; str:
+        &#34;&#34;&#34;Converts a list of integers to its space-delimited string representation.
+
+        Args:
+            idxs: A list of integers as previously mapped using `sent_to_idxs()`.
+            debug: Optional; If True, the string representation
+                will not be truncated when `&lt;eos&gt;` is hit.
+
+        Returns:
+            A whitespace separated string representing the given list of integers.
+
+        &#34;&#34;&#34;
+        result = []
+        for idx in idxs:
+            if not debug and self.has_eos and idx == self._TOKENS[&#34;&lt;eos&gt;&#34;]:
+                break
+            result.append(self._imap.get(idx, self._TOKENS[&#34;&lt;unk&gt;&#34;]))
+
+        return &#34; &#34;.join(result)
+
+    def list_of_idxs_to_sents(self,
+                              lidxs: List[List[int]]) -&gt; List[str]:
+        &#34;&#34;&#34;Converts a list of list of integers to their respective string
+        representations. This is handy for batched conversion after beam search for example.
+
+        Args:
+            lidxs: A list containing multiple lists of integers as
+                previously mapped from string tokens by this instance.
+
+        Returns:
+            A list of whitespace separated strings representing the given input.
+
+        &#34;&#34;&#34;
+        results = []
+        unk = self._TOKENS[&#34;&lt;unk&gt;&#34;]
+        for idxs in lidxs:
+            result = []
+            for idx in idxs:
+                if idx == self._TOKENS[&#34;&lt;eos&gt;&#34;]:
+                    break
+                result.append(self._imap.get(idx, unk))
+            results.append(&#34; &#34;.join(result))
+        return results
+
+    def __getitem__(self, key):
+        return self._allmap[key]
+
+    def __len__(self):
+        return len(self._map)
+
+    def __repr__(self):
+        return f&#34;Vocabulary of {self.n_tokens} items ({self.vocab.name!r})&#34;</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="pysimt.vocabulary.Vocabulary.idxs_to_sent"><code class="name flex">
+<span>def <span class="ident">idxs_to_sent</span></span>(<span>self, idxs: List[int], debug: bool = False) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Converts a list of integers to its space-delimited string representation.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>idxs</code></strong></dt>
+<dd>A list of integers as previously mapped using <code>sent_to_idxs()</code>.</dd>
+<dt><strong><code>debug</code></strong></dt>
+<dd>Optional; If True, the string representation
+will not be truncated when <code>&lt;eos&gt;</code> is hit.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>A whitespace separated string representing the given list of integers.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def idxs_to_sent(self,
+                 idxs: List[int],
+                 debug: bool = False) -&gt; str:
+    &#34;&#34;&#34;Converts a list of integers to its space-delimited string representation.
+
+    Args:
+        idxs: A list of integers as previously mapped using `sent_to_idxs()`.
+        debug: Optional; If True, the string representation
+            will not be truncated when `&lt;eos&gt;` is hit.
+
+    Returns:
+        A whitespace separated string representing the given list of integers.
+
+    &#34;&#34;&#34;
+    result = []
+    for idx in idxs:
+        if not debug and self.has_eos and idx == self._TOKENS[&#34;&lt;eos&gt;&#34;]:
+            break
+        result.append(self._imap.get(idx, self._TOKENS[&#34;&lt;unk&gt;&#34;]))
+
+    return &#34; &#34;.join(result)</code></pre>
+</details>
+</dd>
+<dt id="pysimt.vocabulary.Vocabulary.list_of_idxs_to_sents"><code class="name flex">
+<span>def <span class="ident">list_of_idxs_to_sents</span></span>(<span>self, lidxs: List[List[int]]) ‑> List[str]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Converts a list of list of integers to their respective string
+representations. This is handy for batched conversion after beam search for example.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>lidxs</code></strong></dt>
+<dd>A list containing multiple lists of integers as
+previously mapped from string tokens by this instance.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>A list of whitespace separated strings representing the given input.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def list_of_idxs_to_sents(self,
+                          lidxs: List[List[int]]) -&gt; List[str]:
+    &#34;&#34;&#34;Converts a list of list of integers to their respective string
+    representations. This is handy for batched conversion after beam search for example.
+
+    Args:
+        lidxs: A list containing multiple lists of integers as
+            previously mapped from string tokens by this instance.
+
+    Returns:
+        A list of whitespace separated strings representing the given input.
+
+    &#34;&#34;&#34;
+    results = []
+    unk = self._TOKENS[&#34;&lt;unk&gt;&#34;]
+    for idxs in lidxs:
+        result = []
+        for idx in idxs:
+            if idx == self._TOKENS[&#34;&lt;eos&gt;&#34;]:
+                break
+            result.append(self._imap.get(idx, unk))
+        results.append(&#34; &#34;.join(result))
+    return results</code></pre>
+</details>
+</dd>
+<dt id="pysimt.vocabulary.Vocabulary.sent_to_idxs"><code class="name flex">
+<span>def <span class="ident">sent_to_idxs</span></span>(<span>self, line: str, explicit_bos: bool = False, explicit_eos: bool = True) ‑> List[int]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns a list of integers representing the given sentence.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>line</code></strong></dt>
+<dd>A string representing a sentence.</dd>
+<dt><strong><code>explicit_bos</code></strong></dt>
+<dd>Optional; if True, a special <code>&lt;bos&gt;</code> token will be
+prepended to the mapped sequence.</dd>
+<dt><strong><code>explicit_eos</code></strong></dt>
+<dd>Optional; If True, a special <code>&lt;eos&gt;</code> token will be
+appended to the mapped sequence.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def sent_to_idxs(self,
+                 line: str,
+                 explicit_bos: bool = False,
+                 explicit_eos: bool = True) -&gt; List[int]:
+    &#34;&#34;&#34;Returns a list of integers representing the given sentence.
+
+    Args:
+        line: A string representing a sentence.
+        explicit_bos: Optional; if True, a special `&lt;bos&gt;` token will be
+            prepended to the mapped sequence.
+        explicit_eos: Optional; If True, a special `&lt;eos&gt;` token will be
+            appended to the mapped sequence.
+    &#34;&#34;&#34;
+
+    tidxs = []
+
+    if explicit_bos and self.has_bos:
+        tidxs.append(self._TOKENS[&#34;&lt;bos&gt;&#34;])
+
+    if self.has_unk:
+        for tok in line.split():
+            tidxs.append(self._map.get(tok, self._TOKENS[&#34;&lt;unk&gt;&#34;]))
+    else:
+        # Remove unknown tokens from the words
+        for tok in line.split():
+            try:
+                tidxs.append(self._map[tok])
+            except KeyError:
+                # make this verbose and repetitive as this should be
+                # used cautiously only for some specific models
+                logger.info(&#39;No &lt;unk&gt; token, removing word from sentence&#39;)
+
+    if explicit_eos and self.has_eos:
+        tidxs.append(self._TOKENS[&#34;&lt;eos&gt;&#34;])
+
+    return tidxs</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="pysimt" href="index.html">pysimt</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="pysimt.vocabulary.Vocabulary" href="#pysimt.vocabulary.Vocabulary">Vocabulary</a></code></h4>
+<ul class="">
+<li><code><a title="pysimt.vocabulary.Vocabulary.idxs_to_sent" href="#pysimt.vocabulary.Vocabulary.idxs_to_sent">idxs_to_sent</a></code></li>
+<li><code><a title="pysimt.vocabulary.Vocabulary.list_of_idxs_to_sents" href="#pysimt.vocabulary.Vocabulary.list_of_idxs_to_sents">list_of_idxs_to_sents</a></code></li>
+<li><code><a title="pysimt.vocabulary.Vocabulary.sent_to_idxs" href="#pysimt.vocabulary.Vocabulary.sent_to_idxs">sent_to_idxs</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

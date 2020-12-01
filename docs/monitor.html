@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>pysimt.monitor API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>pysimt.monitor</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+from collections import defaultdict
+
+import torch
+
+from .utils.io import FileRotator
+from .utils.misc import load_pt_file
+from .metrics import beam_metrics, metric_info
+
+
+class Monitor:
+    &#34;&#34;&#34;Class that tracks training progress. The following informations are
+    kept as object attributes:
+        self.ectr:       # of epochs done so far
+        self.uctr:       # of updates, i.e. mini-batches done so far
+        self.vctr:       # of evaluations done on val_set so far
+        self.early_bad:  # of consecutive evaluations where the model did not improve
+        self.train_loss: List of training losses
+        self.val_scores: Dict of lists keeping tracking of validation metrics
+    &#34;&#34;&#34;
+    # Variables to save
+    VARS = [&#39;uctr&#39;, &#39;ectr&#39;, &#39;vctr&#39;, &#39;early_bad&#39;, &#39;train_loss&#39;, &#39;val_scores&#39;]
+
+    def __init__(self, save_path, exp_id,
+                 model, logger, patience, eval_metrics, history=None,
+                 save_best_metrics=False, n_checkpoints=0):
+        self.print = logger.info
+        self.save_path = save_path
+        self.exp_id = exp_id
+        self.model = model
+        self.patience = patience
+        self.eval_metrics = [e.strip() for e in eval_metrics.upper().split(&#39;,&#39;)]
+        self.save_best_metrics = save_best_metrics
+        self.optimizer = None
+        self.checkpoints = FileRotator(n_checkpoints)
+        self.beam_metrics = None
+
+        if history is None:
+            history = {}
+
+        self.uctr = history.pop(&#39;uctr&#39;, 0)
+        self.ectr = history.pop(&#39;ectr&#39;, 1)
+        self.vctr = history.pop(&#39;vctr&#39;, 0)
+        self.early_bad = history.pop(&#39;early_bad&#39;, 0)
+        self.train_loss = history.pop(&#39;train_loss&#39;, [])
+        self.val_scores = history.pop(&#39;val_scores&#39;, defaultdict(list))
+
+        if len(self.eval_metrics) &gt; 0:
+            # To keep current best metric validation id and score
+            self.cur_bests = {}
+
+            # First metric is considered to be early-stopping metric
+            self.early_metric = self.eval_metrics[0]
+
+            # Will be used by optimizer
+            self.lr_decay_mode = metric_info[self.early_metric]
+
+            # Get metrics requiring beam_search
+            bms = set(self.eval_metrics).intersection(beam_metrics)
+            if len(bms) &gt; 0:
+                self.beam_metrics = list(bms)
+
+    @staticmethod
+    def best_score(scores):
+        &#34;&#34;&#34;Returns the best validation id and score for that.&#34;&#34;&#34;
+        idx, score = sorted(enumerate(scores), key=lambda e: e[1],
+                            reverse=scores[0].higher_better)[0]
+        return (idx + 1, score)
+
+    def set_optimizer(self, optimizer):
+        &#34;&#34;&#34;Sets the optimizer to save its parameters.&#34;&#34;&#34;
+        self.optimizer = optimizer
+
+    def state_dict(self):
+        &#34;&#34;&#34;Returns a dictionary of stateful variables.&#34;&#34;&#34;
+        return {k: getattr(self, k) for k in self.VARS}
+
+    def val_summary(self):
+        &#34;&#34;&#34;Prints a summary of validation results.&#34;&#34;&#34;
+        self.print(&#39;--&gt; This is model: {}&#39;.format(self.exp_id))
+        for name, (vctr, score) in self.cur_bests.items():
+            self.print(&#39;--&gt; Best {} so far: {:.2f} @ validation {}&#39;.format(
+                name, score.score, vctr))
+
+    def save_checkpoint(self):
+        &#34;&#34;&#34;Saves a checkpoint by keeping track of file rotation.&#34;&#34;&#34;
+        self.checkpoints.push(
+            self.save_model(suffix=&#39;update{}&#39;.format(self.uctr)))
+
+    def reload_previous_best(self):
+        &#34;&#34;&#34;Reloads the parameters from the previous best checkpoint.&#34;&#34;&#34;
+        fname = self.save_path / &#34;{}.best.{}.ckpt&#34;.format(
+            self.exp_id, self.early_metric.lower())
+        data = load_pt_file(fname)
+        self.model.load_state_dict(data[&#39;model&#39;], strict=True)
+
+    def save_model(self, metric=None, suffix=&#39;&#39;, do_symlink=False):
+        &#34;&#34;&#34;Saves a checkpoint with arbitrary suffix(es) appended.&#34;&#34;&#34;
+        # Construct file name
+        fname = self.exp_id
+        if metric:
+            self.print(&#39;Saving best model based on {}&#39;.format(metric.name))
+            fname += &#34;-val{:03d}.best.{}_{:.3f}&#34;.format(
+                self.vctr, metric.name.lower(), metric.score)
+        if suffix:
+            fname += &#34;-{}&#34;.format(suffix)
+        fname = self.save_path / (fname + &#34;.ckpt&#34;)
+
+        # Save the file
+        model_dict = {
+            &#39;opts&#39;: self.model.opts.to_dict(),
+            &#39;model&#39;: self.model.state_dict(),
+            &#39;history&#39;: self.state_dict(),
+        }
+
+        # Add optimizer states
+        if self.optimizer is not None:
+            model_dict[&#39;optimizer&#39;] = self.optimizer.state_dict()
+
+        torch.save(model_dict, fname)
+
+        # Also create a symbolic link to the above checkpoint for the metric
+        if metric and do_symlink:
+            symlink = &#34;{}.best.{}.ckpt&#34;.format(self.exp_id, metric.name.lower())
+            symlink = self.save_path / symlink
+            if symlink.exists():
+                old_ckpt = symlink.resolve()
+                symlink.unlink()
+                old_ckpt.unlink()
+            symlink.symlink_to(fname.name)
+
+        return fname
+
+    def update_scores(self, results):
+        &#34;&#34;&#34;Updates score lists and current bests.&#34;&#34;&#34;
+        for metric in results:
+            self.print(&#39;Validation {} -&gt; {}&#39;.format(self.vctr, metric))
+            self.val_scores[metric.name].append(metric)
+            self.cur_bests[metric.name] = self.best_score(
+                self.val_scores[metric.name])
+
+    def get_last_eval_score(self):
+        return self.cur_bests[self.early_metric][-1].score
+
+    def save_models(self):
+        cur_bests = self.cur_bests.copy()
+
+        # Let&#39;s start with early-stopping metric
+        vctr, metric = cur_bests.pop(self.early_metric)
+        if vctr == self.vctr:
+            self.early_bad = 0
+            self.save_model(metric=metric, do_symlink=True)
+        else:
+            # Increment counter
+            self.early_bad += 1
+
+        # If requested, save all best metric snapshots
+        if self.save_best_metrics and cur_bests:
+            for (vctr, metric) in cur_bests.values():
+                if metric.name in self.eval_metrics and vctr == self.vctr:
+                    self.save_model(metric=metric, do_symlink=True)
+
+        self.print(&#39;Early stopping patience: {}&#39;.format(
+            self.patience - self.early_bad))</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="pysimt.monitor.Monitor"><code class="flex name class">
+<span>class <span class="ident">Monitor</span></span>
+<span>(</span><span>save_path, exp_id, model, logger, patience, eval_metrics, history=None, save_best_metrics=False, n_checkpoints=0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Class that tracks training progress. The following informations are
+kept as object attributes:
+self.ectr:
+# of epochs done so far
+self.uctr:
+# of updates, i.e. mini-batches done so far
+self.vctr:
+# of evaluations done on val_set so far
+self.early_bad:
+# of consecutive evaluations where the model did not improve
+self.train_loss: List of training losses
+self.val_scores: Dict of lists keeping tracking of validation metrics</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Monitor:
+    &#34;&#34;&#34;Class that tracks training progress. The following informations are
+    kept as object attributes:
+        self.ectr:       # of epochs done so far
+        self.uctr:       # of updates, i.e. mini-batches done so far
+        self.vctr:       # of evaluations done on val_set so far
+        self.early_bad:  # of consecutive evaluations where the model did not improve
+        self.train_loss: List of training losses
+        self.val_scores: Dict of lists keeping tracking of validation metrics
+    &#34;&#34;&#34;
+    # Variables to save
+    VARS = [&#39;uctr&#39;, &#39;ectr&#39;, &#39;vctr&#39;, &#39;early_bad&#39;, &#39;train_loss&#39;, &#39;val_scores&#39;]
+
+    def __init__(self, save_path, exp_id,
+                 model, logger, patience, eval_metrics, history=None,
+                 save_best_metrics=False, n_checkpoints=0):
+        self.print = logger.info
+        self.save_path = save_path
+        self.exp_id = exp_id
+        self.model = model
+        self.patience = patience
+        self.eval_metrics = [e.strip() for e in eval_metrics.upper().split(&#39;,&#39;)]
+        self.save_best_metrics = save_best_metrics
+        self.optimizer = None
+        self.checkpoints = FileRotator(n_checkpoints)
+        self.beam_metrics = None
+
+        if history is None:
+            history = {}
+
+        self.uctr = history.pop(&#39;uctr&#39;, 0)
+        self.ectr = history.pop(&#39;ectr&#39;, 1)
+        self.vctr = history.pop(&#39;vctr&#39;, 0)
+        self.early_bad = history.pop(&#39;early_bad&#39;, 0)
+        self.train_loss = history.pop(&#39;train_loss&#39;, [])
+        self.val_scores = history.pop(&#39;val_scores&#39;, defaultdict(list))
+
+        if len(self.eval_metrics) &gt; 0:
+            # To keep current best metric validation id and score
+            self.cur_bests = {}
+
+            # First metric is considered to be early-stopping metric
+            self.early_metric = self.eval_metrics[0]
+
+            # Will be used by optimizer
+            self.lr_decay_mode = metric_info[self.early_metric]
+
+            # Get metrics requiring beam_search
+            bms = set(self.eval_metrics).intersection(beam_metrics)
+            if len(bms) &gt; 0:
+                self.beam_metrics = list(bms)
+
+    @staticmethod
+    def best_score(scores):
+        &#34;&#34;&#34;Returns the best validation id and score for that.&#34;&#34;&#34;
+        idx, score = sorted(enumerate(scores), key=lambda e: e[1],
+                            reverse=scores[0].higher_better)[0]
+        return (idx + 1, score)
+
+    def set_optimizer(self, optimizer):
+        &#34;&#34;&#34;Sets the optimizer to save its parameters.&#34;&#34;&#34;
+        self.optimizer = optimizer
+
+    def state_dict(self):
+        &#34;&#34;&#34;Returns a dictionary of stateful variables.&#34;&#34;&#34;
+        return {k: getattr(self, k) for k in self.VARS}
+
+    def val_summary(self):
+        &#34;&#34;&#34;Prints a summary of validation results.&#34;&#34;&#34;
+        self.print(&#39;--&gt; This is model: {}&#39;.format(self.exp_id))
+        for name, (vctr, score) in self.cur_bests.items():
+            self.print(&#39;--&gt; Best {} so far: {:.2f} @ validation {}&#39;.format(
+                name, score.score, vctr))
+
+    def save_checkpoint(self):
+        &#34;&#34;&#34;Saves a checkpoint by keeping track of file rotation.&#34;&#34;&#34;
+        self.checkpoints.push(
+            self.save_model(suffix=&#39;update{}&#39;.format(self.uctr)))
+
+    def reload_previous_best(self):
+        &#34;&#34;&#34;Reloads the parameters from the previous best checkpoint.&#34;&#34;&#34;
+        fname = self.save_path / &#34;{}.best.{}.ckpt&#34;.format(
+            self.exp_id, self.early_metric.lower())
+        data = load_pt_file(fname)
+        self.model.load_state_dict(data[&#39;model&#39;], strict=True)
+
+    def save_model(self, metric=None, suffix=&#39;&#39;, do_symlink=False):
+        &#34;&#34;&#34;Saves a checkpoint with arbitrary suffix(es) appended.&#34;&#34;&#34;
+        # Construct file name
+        fname = self.exp_id
+        if metric:
+            self.print(&#39;Saving best model based on {}&#39;.format(metric.name))
+            fname += &#34;-val{:03d}.best.{}_{:.3f}&#34;.format(
+                self.vctr, metric.name.lower(), metric.score)
+        if suffix:
+            fname += &#34;-{}&#34;.format(suffix)
+        fname = self.save_path / (fname + &#34;.ckpt&#34;)
+
+        # Save the file
+        model_dict = {
+            &#39;opts&#39;: self.model.opts.to_dict(),
+            &#39;model&#39;: self.model.state_dict(),
+            &#39;history&#39;: self.state_dict(),
+        }
+
+        # Add optimizer states
+        if self.optimizer is not None:
+            model_dict[&#39;optimizer&#39;] = self.optimizer.state_dict()
+
+        torch.save(model_dict, fname)
+
+        # Also create a symbolic link to the above checkpoint for the metric
+        if metric and do_symlink:
+            symlink = &#34;{}.best.{}.ckpt&#34;.format(self.exp_id, metric.name.lower())
+            symlink = self.save_path / symlink
+            if symlink.exists():
+                old_ckpt = symlink.resolve()
+                symlink.unlink()
+                old_ckpt.unlink()
+            symlink.symlink_to(fname.name)
+
+        return fname
+
+    def update_scores(self, results):
+        &#34;&#34;&#34;Updates score lists and current bests.&#34;&#34;&#34;
+        for metric in results:
+            self.print(&#39;Validation {} -&gt; {}&#39;.format(self.vctr, metric))
+            self.val_scores[metric.name].append(metric)
+            self.cur_bests[metric.name] = self.best_score(
+                self.val_scores[metric.name])
+
+    def get_last_eval_score(self):
+        return self.cur_bests[self.early_metric][-1].score
+
+    def save_models(self):
+        cur_bests = self.cur_bests.copy()
+
+        # Let&#39;s start with early-stopping metric
+        vctr, metric = cur_bests.pop(self.early_metric)
+        if vctr == self.vctr:
+            self.early_bad = 0
+            self.save_model(metric=metric, do_symlink=True)
+        else:
+            # Increment counter
+            self.early_bad += 1
+
+        # If requested, save all best metric snapshots
+        if self.save_best_metrics and cur_bests:
+            for (vctr, metric) in cur_bests.values():
+                if metric.name in self.eval_metrics and vctr == self.vctr:
+                    self.save_model(metric=metric, do_symlink=True)
+
+        self.print(&#39;Early stopping patience: {}&#39;.format(
+            self.patience - self.early_bad))</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="pysimt.monitor.Monitor.VARS"><code class="name">var <span class="ident">VARS</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Static methods</h3>
+<dl>
+<dt id="pysimt.monitor.Monitor.best_score"><code class="name flex">
+<span>def <span class="ident">best_score</span></span>(<span>scores)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the best validation id and score for that.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def best_score(scores):
+    &#34;&#34;&#34;Returns the best validation id and score for that.&#34;&#34;&#34;
+    idx, score = sorted(enumerate(scores), key=lambda e: e[1],
+                        reverse=scores[0].higher_better)[0]
+    return (idx + 1, score)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="pysimt.monitor.Monitor.get_last_eval_score"><code class="name flex">
+<span>def <span class="ident">get_last_eval_score</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_last_eval_score(self):
+    return self.cur_bests[self.early_metric][-1].score</code></pre>
+</details>
+</dd>
+<dt id="pysimt.monitor.Monitor.reload_previous_best"><code class="name flex">
+<span>def <span class="ident">reload_previous_best</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reloads the parameters from the previous best checkpoint.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def reload_previous_best(self):
+    &#34;&#34;&#34;Reloads the parameters from the previous best checkpoint.&#34;&#34;&#34;
+    fname = self.save_path / &#34;{}.best.{}.ckpt&#34;.format(
+        self.exp_id, self.early_metric.lower())
+    data = load_pt_file(fname)
+    self.model.load_state_dict(data[&#39;model&#39;], strict=True)</code></pre>
+</details>
+</dd>
+<dt id="pysimt.monitor.Monitor.save_checkpoint"><code class="name flex">
+<span>def <span class="ident">save_checkpoint</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Saves a checkpoint by keeping track of file rotation.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def save_checkpoint(self):
+    &#34;&#34;&#34;Saves a checkpoint by keeping track of file rotation.&#34;&#34;&#34;
+    self.checkpoints.push(
+        self.save_model(suffix=&#39;update{}&#39;.format(self.uctr)))</code></pre>
+</details>
+</dd>
+<dt id="pysimt.monitor.Monitor.save_model"><code class="name flex">
+<span>def <span class="ident">save_model</span></span>(<span>self, metric=None, suffix='', do_symlink=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Saves a checkpoint with arbitrary suffix(es) appended.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def save_model(self, metric=None, suffix=&#39;&#39;, do_symlink=False):
+    &#34;&#34;&#34;Saves a checkpoint with arbitrary suffix(es) appended.&#34;&#34;&#34;
+    # Construct file name
+    fname = self.exp_id
+    if metric:
+        self.print(&#39;Saving best model based on {}&#39;.format(metric.name))
+        fname += &#34;-val{:03d}.best.{}_{:.3f}&#34;.format(
+            self.vctr, metric.name.lower(), metric.score)
+    if suffix:
+        fname += &#34;-{}&#34;.format(suffix)
+    fname = self.save_path / (fname + &#34;.ckpt&#34;)
+
+    # Save the file
+    model_dict = {
+        &#39;opts&#39;: self.model.opts.to_dict(),
+        &#39;model&#39;: self.model.state_dict(),
+        &#39;history&#39;: self.state_dict(),
+    }
+
+    # Add optimizer states
+    if self.optimizer is not None:
+        model_dict[&#39;optimizer&#39;] = self.optimizer.state_dict()
+
+    torch.save(model_dict, fname)
+
+    # Also create a symbolic link to the above checkpoint for the metric
+    if metric and do_symlink:
+        symlink = &#34;{}.best.{}.ckpt&#34;.format(self.exp_id, metric.name.lower())
+        symlink = self.save_path / symlink
+        if symlink.exists():
+            old_ckpt = symlink.resolve()
+            symlink.unlink()
+            old_ckpt.unlink()
+        symlink.symlink_to(fname.name)
+
+    return fname</code></pre>
+</details>
+</dd>
+<dt id="pysimt.monitor.Monitor.save_models"><code class="name flex">
+<span>def <span class="ident">save_models</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def save_models(self):
+    cur_bests = self.cur_bests.copy()
+
+    # Let&#39;s start with early-stopping metric
+    vctr, metric = cur_bests.pop(self.early_metric)
+    if vctr == self.vctr:
+        self.early_bad = 0
+        self.save_model(metric=metric, do_symlink=True)
+    else:
+        # Increment counter
+        self.early_bad += 1
+
+    # If requested, save all best metric snapshots
+    if self.save_best_metrics and cur_bests:
+        for (vctr, metric) in cur_bests.values():
+            if metric.name in self.eval_metrics and vctr == self.vctr:
+                self.save_model(metric=metric, do_symlink=True)
+
+    self.print(&#39;Early stopping patience: {}&#39;.format(
+        self.patience - self.early_bad))</code></pre>
+</details>
+</dd>
+<dt id="pysimt.monitor.Monitor.set_optimizer"><code class="name flex">
+<span>def <span class="ident">set_optimizer</span></span>(<span>self, optimizer)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the optimizer to save its parameters.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_optimizer(self, optimizer):
+    &#34;&#34;&#34;Sets the optimizer to save its parameters.&#34;&#34;&#34;
+    self.optimizer = optimizer</code></pre>
+</details>
+</dd>
+<dt id="pysimt.monitor.Monitor.state_dict"><code class="name flex">
+<span>def <span class="ident">state_dict</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns a dictionary of stateful variables.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def state_dict(self):
+    &#34;&#34;&#34;Returns a dictionary of stateful variables.&#34;&#34;&#34;
+    return {k: getattr(self, k) for k in self.VARS}</code></pre>
+</details>
+</dd>
+<dt id="pysimt.monitor.Monitor.update_scores"><code class="name flex">
+<span>def <span class="ident">update_scores</span></span>(<span>self, results)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Updates score lists and current bests.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_scores(self, results):
+    &#34;&#34;&#34;Updates score lists and current bests.&#34;&#34;&#34;
+    for metric in results:
+        self.print(&#39;Validation {} -&gt; {}&#39;.format(self.vctr, metric))
+        self.val_scores[metric.name].append(metric)
+        self.cur_bests[metric.name] = self.best_score(
+            self.val_scores[metric.name])</code></pre>
+</details>
+</dd>
+<dt id="pysimt.monitor.Monitor.val_summary"><code class="name flex">
+<span>def <span class="ident">val_summary</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Prints a summary of validation results.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def val_summary(self):
+    &#34;&#34;&#34;Prints a summary of validation results.&#34;&#34;&#34;
+    self.print(&#39;--&gt; This is model: {}&#39;.format(self.exp_id))
+    for name, (vctr, score) in self.cur_bests.items():
+        self.print(&#39;--&gt; Best {} so far: {:.2f} @ validation {}&#39;.format(
+            name, score.score, vctr))</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="pysimt" href="index.html">pysimt</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="pysimt.monitor.Monitor" href="#pysimt.monitor.Monitor">Monitor</a></code></h4>
+<ul class="">
+<li><code><a title="pysimt.monitor.Monitor.VARS" href="#pysimt.monitor.Monitor.VARS">VARS</a></code></li>
+<li><code><a title="pysimt.monitor.Monitor.best_score" href="#pysimt.monitor.Monitor.best_score">best_score</a></code></li>
+<li><code><a title="pysimt.monitor.Monitor.get_last_eval_score" href="#pysimt.monitor.Monitor.get_last_eval_score">get_last_eval_score</a></code></li>
+<li><code><a title="pysimt.monitor.Monitor.reload_previous_best" href="#pysimt.monitor.Monitor.reload_previous_best">reload_previous_best</a></code></li>
+<li><code><a title="pysimt.monitor.Monitor.save_checkpoint" href="#pysimt.monitor.Monitor.save_checkpoint">save_checkpoint</a></code></li>
+<li><code><a title="pysimt.monitor.Monitor.save_model" href="#pysimt.monitor.Monitor.save_model">save_model</a></code></li>
+<li><code><a title="pysimt.monitor.Monitor.save_models" href="#pysimt.monitor.Monitor.save_models">save_models</a></code></li>
+<li><code><a title="pysimt.monitor.Monitor.set_optimizer" href="#pysimt.monitor.Monitor.set_optimizer">set_optimizer</a></code></li>
+<li><code><a title="pysimt.monitor.Monitor.state_dict" href="#pysimt.monitor.Monitor.state_dict">state_dict</a></code></li>
+<li><code><a title="pysimt.monitor.Monitor.update_scores" href="#pysimt.monitor.Monitor.update_scores">update_scores</a></code></li>
+<li><code><a title="pysimt.monitor.Monitor.val_summary" href="#pysimt.monitor.Monitor.val_summary">val_summary</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

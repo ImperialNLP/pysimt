@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>pysimt.datasets.multimodal API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>pysimt.datasets.multimodal</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+import logging
+from torch.utils.data import Dataset
+from torch.utils.data.sampler import BatchSampler, SequentialSampler, RandomSampler
+
+from . import get_dataset
+from .collate import get_collate
+from ..samplers import get_sampler
+
+logger = logging.getLogger(&#39;pysimt&#39;)
+
+
+class MultimodalDataset(Dataset):
+    &#34;&#34;&#34;Returns a Dataset for parallel multimodal corpora
+
+    Arguments:
+        data(dict): [data] section&#39;s relevant split dictionary
+        mode(str): One of train/eval/beam.
+        batch_size(int): Batch size.
+        vocabs(dict): dictionary mapping keys to Vocabulary() objects
+        topology(Topology): A topology object.
+        bucket_by(str): String identifier of the modality which will define how
+            the batches will be bucketed, i.e. sort key. If `None`, no
+            bucketing will be performed but the layers and models should
+            support packing/padding/masking for this to work.
+        max_len(int, optional): Maximum sequence length for ``bucket_by``
+            modality to reject batches with long sequences. Does not have an effect
+            if mode != &#39;train&#39;.
+        bucket_order (str, optional): ``ascending`` or ``descending`` to
+            perform length-based curriculum learning. Default is ``None``
+            which shuffles bucket order. Does not have an effect if mode != &#39;train&#39;.
+        sampler_type(str, optional): &#39;bucket&#39; or &#39;approximate&#39; (Default: &#39;bucket&#39;)
+        kwargs (dict): Additional arguments to pass to the dataset constructors.
+    &#34;&#34;&#34;
+    def __init__(self, data, mode, batch_size, vocabs, topology,
+                 bucket_by, bucket_order=None, max_len=None,
+                 sampler_type=&#39;bucket&#39;, **kwargs):
+        self.datasets = {}
+        self.mode = mode
+        self.vocabs = vocabs
+        self.batch_size = batch_size
+        self.topology = topology
+        self.bucket_by = bucket_by
+        self.sampler_type = sampler_type
+
+        # Disable filtering if not training
+        self.max_len = max_len if self.mode == &#39;train&#39; else None
+
+        # This is only useful for training
+        self.bucket_order = bucket_order if self.mode == &#39;train&#39; else None
+
+        # Collect dataset sizes
+        self.size_dict = {}
+
+        # For old models to work, set it to the first source
+        if self.bucket_by is None:
+            logger.info(
+                &#39;WARNING: Bucketing disabled. It is up to the model &#39;
+                &#39;to take care of packing/padding/masking if any.&#39;)
+
+        for key, ds in self.topology.all.items():
+            if self.mode == &#39;beam&#39; and ds.trg:
+                # Skip target streams for beam-search
+                logger.info(&#34;Skipping &#39;{}&#39; as target&#34;.format(key))
+                continue
+
+            try:
+                # Get the relevant dataset class
+                dataset_constructor = get_dataset(ds._type)
+            except KeyError:
+                raise RuntimeError(f&#34;Unknown dataset type {ds._type!r}&#34;)
+
+            logger.info(&#34;Initializing dataset for &#39;{}&#39;...&#34;.format(ds))
+            if key in data:
+                # Force &lt;eos&gt; for target side, relax it for source side
+                kwargs[&#39;eos&#39;] = kwargs.get(&#39;eos&#39;, True) or ds.trg
+                # Construct the dataset
+                self.datasets[ds] = dataset_constructor(
+                    fname=data[key],
+                    vocab=vocabs.get(key, None), bos=ds.trg, **kwargs)
+                self.size_dict[ds] = len(self.datasets[ds])
+            else:
+                logger.info(&#34;  Skipping as &#39;{}&#39; not defined. This may be an issue.&#34;.format(key))
+
+        # Set dataset size
+        if len(set(self.size_dict.values())) &gt; 1:
+            raise RuntimeError(&#34;Underlying datasets are not parallel!&#34;)
+        else:
+            self.size = list(self.size_dict.values())[0]
+
+        # Set list of available datasets
+        self.keys = list(self.datasets.keys())
+
+        # Get collator
+        self.collate_fn = get_collate(self.keys)
+
+        if self.bucket_by in self.datasets:
+            self.sort_lens = self.datasets[self.bucket_by].lengths
+            assert self.sort_lens is not None
+
+            # Get a batch sampler
+            self.sampler = get_sampler(self.sampler_type)(
+                batch_size=self.batch_size,
+                sort_lens=self.sort_lens,
+                max_len=self.max_len,
+                store_indices=self.mode != &#39;train&#39;,
+                order=self.bucket_order)
+        else:
+            # bucket_by was only valid for training
+            if self.bucket_by:
+                self.bucket_by = None
+                logger.info(&#39;Disabling bucketing for data loader.&#39;)
+            # No modality provided to bucket sequential batches
+            # Used for beam-search in image-&gt;text tasks
+            if self.mode == &#39;beam&#39;:
+                sampler = SequentialSampler(self)
+                self.sampler_type = &#39;sequential&#39;
+            else:
+                sampler = RandomSampler(self)
+                self.sampler_type = &#39;random&#39;
+            # Create a batch sampler
+            self.sampler = BatchSampler(
+                sampler, batch_size=self.batch_size, drop_last=False)
+
+        # Set some metadata
+        self.n_sources = len([k for k in self.keys if k.src])
+        self.n_targets = len([k for k in self.keys if k.trg])
+
+    def __getitem__(self, idx):
+        return {k: self.datasets[k][idx] for k in self.keys}
+
+    def __len__(self):
+        return self.size
+
+    def __repr__(self):
+        s = &#34;{} - ({} source(s) / {} target(s))\n&#34;.format(
+            self.__class__.__name__, self.n_sources, self.n_targets)
+        s += &#34;  Sampler type: {}, bucket_by: {}\n&#34;.format(
+            self.sampler_type, self.bucket_by)
+
+        if self.n_sources &gt; 0:
+            s += &#34;  Sources:\n&#34;
+            for name in filter(lambda k: k.src, self.keys):
+                dstr = self.datasets[name].__repr__()
+                s += f&#39;    --&gt; {dstr}\n&#39;
+        if self.n_targets &gt; 0:
+            s += &#34;  Targets:\n&#34;
+            for name in filter(lambda k: k.trg, self.keys):
+                dstr = self.datasets[name].__repr__()
+                s += f&#39;    --&gt; {dstr}\n&#39;
+        return s</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="pysimt.datasets.multimodal.MultimodalDataset"><code class="flex name class">
+<span>class <span class="ident">MultimodalDataset</span></span>
+<span>(</span><span>data, mode, batch_size, vocabs, topology, bucket_by, bucket_order=None, max_len=None, sampler_type='bucket', **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns a Dataset for parallel multimodal corpora</p>
+<h2 id="arguments">Arguments</h2>
+<p>data(dict): [data] section's relevant split dictionary
+mode(str): One of train/eval/beam.
+batch_size(int): Batch size.
+vocabs(dict): dictionary mapping keys to Vocabulary() objects
+topology(Topology): A topology object.
+bucket_by(str): String identifier of the modality which will define how
+the batches will be bucketed, i.e. sort key. If <code>None</code>, no
+bucketing will be performed but the layers and models should
+support packing/padding/masking for this to work.
+max_len(int, optional): Maximum sequence length for <code>bucket_by</code>
+modality to reject batches with long sequences. Does not have an effect
+if mode != 'train'.
+bucket_order (str, optional): <code>ascending</code> or <code>descending</code> to
+perform length-based curriculum learning. Default is <code>None</code>
+which shuffles bucket order. Does not have an effect if mode != 'train'.
+sampler_type(str, optional): 'bucket' or 'approximate' (Default: 'bucket')
+kwargs (dict): Additional arguments to pass to the dataset constructors.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class MultimodalDataset(Dataset):
+    &#34;&#34;&#34;Returns a Dataset for parallel multimodal corpora
+
+    Arguments:
+        data(dict): [data] section&#39;s relevant split dictionary
+        mode(str): One of train/eval/beam.
+        batch_size(int): Batch size.
+        vocabs(dict): dictionary mapping keys to Vocabulary() objects
+        topology(Topology): A topology object.
+        bucket_by(str): String identifier of the modality which will define how
+            the batches will be bucketed, i.e. sort key. If `None`, no
+            bucketing will be performed but the layers and models should
+            support packing/padding/masking for this to work.
+        max_len(int, optional): Maximum sequence length for ``bucket_by``
+            modality to reject batches with long sequences. Does not have an effect
+            if mode != &#39;train&#39;.
+        bucket_order (str, optional): ``ascending`` or ``descending`` to
+            perform length-based curriculum learning. Default is ``None``
+            which shuffles bucket order. Does not have an effect if mode != &#39;train&#39;.
+        sampler_type(str, optional): &#39;bucket&#39; or &#39;approximate&#39; (Default: &#39;bucket&#39;)
+        kwargs (dict): Additional arguments to pass to the dataset constructors.
+    &#34;&#34;&#34;
+    def __init__(self, data, mode, batch_size, vocabs, topology,
+                 bucket_by, bucket_order=None, max_len=None,
+                 sampler_type=&#39;bucket&#39;, **kwargs):
+        self.datasets = {}
+        self.mode = mode
+        self.vocabs = vocabs
+        self.batch_size = batch_size
+        self.topology = topology
+        self.bucket_by = bucket_by
+        self.sampler_type = sampler_type
+
+        # Disable filtering if not training
+        self.max_len = max_len if self.mode == &#39;train&#39; else None
+
+        # This is only useful for training
+        self.bucket_order = bucket_order if self.mode == &#39;train&#39; else None
+
+        # Collect dataset sizes
+        self.size_dict = {}
+
+        # For old models to work, set it to the first source
+        if self.bucket_by is None:
+            logger.info(
+                &#39;WARNING: Bucketing disabled. It is up to the model &#39;
+                &#39;to take care of packing/padding/masking if any.&#39;)
+
+        for key, ds in self.topology.all.items():
+            if self.mode == &#39;beam&#39; and ds.trg:
+                # Skip target streams for beam-search
+                logger.info(&#34;Skipping &#39;{}&#39; as target&#34;.format(key))
+                continue
+
+            try:
+                # Get the relevant dataset class
+                dataset_constructor = get_dataset(ds._type)
+            except KeyError:
+                raise RuntimeError(f&#34;Unknown dataset type {ds._type!r}&#34;)
+
+            logger.info(&#34;Initializing dataset for &#39;{}&#39;...&#34;.format(ds))
+            if key in data:
+                # Force &lt;eos&gt; for target side, relax it for source side
+                kwargs[&#39;eos&#39;] = kwargs.get(&#39;eos&#39;, True) or ds.trg
+                # Construct the dataset
+                self.datasets[ds] = dataset_constructor(
+                    fname=data[key],
+                    vocab=vocabs.get(key, None), bos=ds.trg, **kwargs)
+                self.size_dict[ds] = len(self.datasets[ds])
+            else:
+                logger.info(&#34;  Skipping as &#39;{}&#39; not defined. This may be an issue.&#34;.format(key))
+
+        # Set dataset size
+        if len(set(self.size_dict.values())) &gt; 1:
+            raise RuntimeError(&#34;Underlying datasets are not parallel!&#34;)
+        else:
+            self.size = list(self.size_dict.values())[0]
+
+        # Set list of available datasets
+        self.keys = list(self.datasets.keys())
+
+        # Get collator
+        self.collate_fn = get_collate(self.keys)
+
+        if self.bucket_by in self.datasets:
+            self.sort_lens = self.datasets[self.bucket_by].lengths
+            assert self.sort_lens is not None
+
+            # Get a batch sampler
+            self.sampler = get_sampler(self.sampler_type)(
+                batch_size=self.batch_size,
+                sort_lens=self.sort_lens,
+                max_len=self.max_len,
+                store_indices=self.mode != &#39;train&#39;,
+                order=self.bucket_order)
+        else:
+            # bucket_by was only valid for training
+            if self.bucket_by:
+                self.bucket_by = None
+                logger.info(&#39;Disabling bucketing for data loader.&#39;)
+            # No modality provided to bucket sequential batches
+            # Used for beam-search in image-&gt;text tasks
+            if self.mode == &#39;beam&#39;:
+                sampler = SequentialSampler(self)
+                self.sampler_type = &#39;sequential&#39;
+            else:
+                sampler = RandomSampler(self)
+                self.sampler_type = &#39;random&#39;
+            # Create a batch sampler
+            self.sampler = BatchSampler(
+                sampler, batch_size=self.batch_size, drop_last=False)
+
+        # Set some metadata
+        self.n_sources = len([k for k in self.keys if k.src])
+        self.n_targets = len([k for k in self.keys if k.trg])
+
+    def __getitem__(self, idx):
+        return {k: self.datasets[k][idx] for k in self.keys}
+
+    def __len__(self):
+        return self.size
+
+    def __repr__(self):
+        s = &#34;{} - ({} source(s) / {} target(s))\n&#34;.format(
+            self.__class__.__name__, self.n_sources, self.n_targets)
+        s += &#34;  Sampler type: {}, bucket_by: {}\n&#34;.format(
+            self.sampler_type, self.bucket_by)
+
+        if self.n_sources &gt; 0:
+            s += &#34;  Sources:\n&#34;
+            for name in filter(lambda k: k.src, self.keys):
+                dstr = self.datasets[name].__repr__()
+                s += f&#39;    --&gt; {dstr}\n&#39;
+        if self.n_targets &gt; 0:
+            s += &#34;  Targets:\n&#34;
+            for name in filter(lambda k: k.trg, self.keys):
+                dstr = self.datasets[name].__repr__()
+                s += f&#39;    --&gt; {dstr}\n&#39;
+        return s</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>torch.utils.data.dataset.Dataset</li>
+<li>typing.Generic</li>
+</ul>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="pysimt.datasets" href="index.html">pysimt.datasets</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="pysimt.datasets.multimodal.MultimodalDataset" href="#pysimt.datasets.multimodal.MultimodalDataset">MultimodalDataset</a></code></h4>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>pysimt.utils.nn API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>pysimt.utils.nn</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from typing import List
+
+import numpy as np
+
+import torch
+import torch.nn.functional as F
+from torch import nn
+
+
+class LabelSmoothingLoss(nn.Module):
+    def __init__(self, trg_vocab_size, label_smoothing=0.1, reduction=&#39;mean&#39;, with_logits=True, ignore_index=0):
+        &#34;&#34;&#34;
+        Creates a Label Smoothing Loss.
+        Based on: https://github.com/OpenNMT/OpenNMT-py/blob/master/onmt/utils/loss.py#L194
+        :param trg_vocab_size: The target vocabulary size.
+        :param label_smoothing: The label smoothing value. Default: 0.1.
+        :param reduction: The loss reduction. Default: &#39;mean&#39;.
+        :param with_logits: Whether the predictions are logits. Default: True.
+        :param ignore_index: The value to be ignored by the loss. Can be used to ignore padding tokens. Default 0.
+        &#34;&#34;&#34;
+        super(LabelSmoothingLoss, self).__init__()
+        self.with_logits = with_logits
+        self.ignore_index = ignore_index
+        self.kl_divergence = nn.KLDivLoss(reduction=reduction)
+
+        self._create_one_hot(label_smoothing, trg_vocab_size)
+        self.confidence = 1.0 - label_smoothing
+
+    def forward(self, predictions, target):
+        &#34;&#34;&#34;
+        Computes the loss.
+        :param predictions: The predictions of shape (N, C) where C is the number of classes.
+                            If with_logits is True, a log_softmax will be applied to obtain valid probabilities.
+        :param target: The target values of shape (N).
+        :return: The computed loss.
+        &#34;&#34;&#34;
+        if self.with_logits is True:
+            predictions = F.log_softmax(predictions, dim=-1)
+        model_prob = self.one_hot.repeat(target.size(0), 1)
+        model_prob.scatter_(1, target.unsqueeze(1), self.confidence)
+        self._apply_mask(model_prob, target)
+
+        return self.kl_divergence(predictions, model_prob)
+
+    def _create_one_hot(self, label_smoothing, trg_vocab_size):
+        smoothing_value = label_smoothing / (trg_vocab_size - 2)
+        one_hot = torch.full((trg_vocab_size,), smoothing_value)
+        one_hot[self.ignore_index] = 0
+        self.register_buffer(&#39;one_hot&#39;, one_hot.unsqueeze(0))
+
+    def _apply_mask(self, model_prob, target):
+        mask = (target == self.ignore_index).unsqueeze(1)
+        model_prob.masked_fill_(mask, 0)
+
+
+def get_activation_fn(name: str):
+    &#34;&#34;&#34;Returns a callable activation function from `torch`.&#34;&#34;&#34;
+    if name in (None, &#39;linear&#39;):
+        return lambda x: x
+    elif name in (&#39;sigmoid&#39;, &#39;tanh&#39;):
+        return getattr(torch, name)
+    else:
+        return getattr(F, name)
+
+
+def generate_default_mask(data, dim1=None):
+    &#34;&#34;&#34;
+    Returns a default mask which allows the model to attend over all positions.
+    :param data: The data of shape (sequence_len, batch_size)
+    :param dim1: The first dimension of the mask. If none, it is equal to sequence_len.
+    :return:
+    &#34;&#34;&#34;
+    batch_size = data.size(1)
+    sequence_len = data.size(0)
+    if dim1 is None:
+        dim1 = sequence_len
+    return torch.zeros(batch_size, dim1, sequence_len).bool().to(data.device)
+
+
+def generate_visual_features_padding_masks(data, pad_value=0):
+    &#34;&#34;&#34;
+    Returns a mask based on the data. For values of the padding token=0, the mask will contain 1, indicating the
+    model cannot attend over these positions.
+    :param data: The data of shape (sequence_len, batch_size, feature_dim)
+    :param pad_value: The value of the padding. Default: 0.
+    :return: The respective mask of shape (batch_size, 1, sequence_len)
+    &#34;&#34;&#34;
+    with torch.no_grad():
+        return (data == pad_value).all(dim=-1).t().to(data.device).unsqueeze(1)
+
+
+def generate_padding_masks(data, pad_value=0):
+    &#34;&#34;&#34;
+    Returns a mask based on the data. For values of the padding token=0, the mask will contain 1, indicating the
+    model cannot attend over these positions.
+    :param data: The data of shape (sequence_len, batch_size)
+    :param pad_value: The value of the padding. Default: 0.
+    :return: The respective mask of shape (batch_size, 1, sequence_len)
+    &#34;&#34;&#34;
+    with torch.no_grad():
+        mask = (data == pad_value).to(data.device).t().unsqueeze(1)
+    return mask
+
+
+def generate_lookahead_mask(data, k=1, dim1=None):
+    &#34;&#34;&#34;
+    Generates a lookahead mask, preventing the decoder from attending to previous positions when computing the
+    attention. The mask will contain 1 for positions which should not be attended to.
+    :param data: The data of shape (sequence_len, batch_size).
+    :param k: The offset for the lookahead mask. By default it&#39;s 0. Example: In the decoder self-attention, each decoder
+              word can use only itself and all previous words.
+    :param dim1: The first dimension of the mask. If none, it is equal to sequence_len.
+    :return: The lookahead mask of shape (1, dim1, sequence_len)
+    &#34;&#34;&#34;
+    sequence_len = data.size(0)
+    if dim1 is None:
+        dim1 = sequence_len
+
+    lookahead_mask = torch.triu(torch.ones((1, dim1, sequence_len)), diagonal=k)
+
+    return lookahead_mask.to(data.device).bool()
+
+
+def generate_combined_mask(data, k=1):
+    &#34;&#34;&#34;
+    Generates a combined padding and lookahead mask.
+    The mask will contain 1 for positions which should not be attended to.
+    :param data: The data of shape (sequence_len, batch_size).
+    :param k: The offset for the lookahead mask. By default it&#39;s 1, allowing the decoder to observe the &lt;bos&gt; token.
+    :return: Combined padding and lookahead mask.
+    &#34;&#34;&#34;
+    padding_mask = generate_padding_masks(data)
+    lookahead_mask = generate_lookahead_mask(data, k)
+    combined_mask = padding_mask | lookahead_mask
+
+    return combined_mask
+
+
+def readable_size(n: int) -&gt; str:
+    &#34;&#34;&#34;Return a readable size string.&#34;&#34;&#34;
+    sizes = [&#39;K&#39;, &#39;M&#39;, &#39;G&#39;]
+    fmt = &#39;&#39;
+    size = n
+    for i, s in enumerate(sizes):
+        nn = n / (1000 ** (i + 1))
+        if nn &gt;= 1:
+            size = nn
+            fmt = sizes[i]
+        else:
+            break
+    return &#39;%.2f%s&#39; % (size, fmt)
+
+
+def get_module_groups(layer_names: List[str]) -&gt; List[str]:
+    groups = set()
+    for name in layer_names:
+        if &#39;.weight&#39; in name:
+            groups.add(name.split(&#39;.weight&#39;)[0])
+        elif &#39;.bias&#39; in name:
+            groups.add(name.split(&#39;.bias&#39;)[0])
+    return sorted(list(groups))
+
+
+def get_n_params(module):
+    n_param_learnable = 0
+    n_param_frozen = 0
+
+    for param in module.parameters():
+        if param.requires_grad:
+            n_param_learnable += np.cumprod(param.data.size())[-1]
+        else:
+            n_param_frozen += np.cumprod(param.data.size())[-1]
+
+    n_param_all = n_param_learnable + n_param_frozen
+    return &#34;# parameters: {} ({} learnable)&#34;.format(
+        readable_size(n_param_all), readable_size(n_param_learnable))</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="pysimt.utils.nn.generate_combined_mask"><code class="name flex">
+<span>def <span class="ident">generate_combined_mask</span></span>(<span>data, k=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generates a combined padding and lookahead mask.
+The mask will contain 1 for positions which should not be attended to.
+:param data: The data of shape (sequence_len, batch_size).
+:param k: The offset for the lookahead mask. By default it's 1, allowing the decoder to observe the <bos> token.
+:return: Combined padding and lookahead mask.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def generate_combined_mask(data, k=1):
+    &#34;&#34;&#34;
+    Generates a combined padding and lookahead mask.
+    The mask will contain 1 for positions which should not be attended to.
+    :param data: The data of shape (sequence_len, batch_size).
+    :param k: The offset for the lookahead mask. By default it&#39;s 1, allowing the decoder to observe the &lt;bos&gt; token.
+    :return: Combined padding and lookahead mask.
+    &#34;&#34;&#34;
+    padding_mask = generate_padding_masks(data)
+    lookahead_mask = generate_lookahead_mask(data, k)
+    combined_mask = padding_mask | lookahead_mask
+
+    return combined_mask</code></pre>
+</details>
+</dd>
+<dt id="pysimt.utils.nn.generate_default_mask"><code class="name flex">
+<span>def <span class="ident">generate_default_mask</span></span>(<span>data, dim1=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns a default mask which allows the model to attend over all positions.
+:param data: The data of shape (sequence_len, batch_size)
+:param dim1: The first dimension of the mask. If none, it is equal to sequence_len.
+:return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def generate_default_mask(data, dim1=None):
+    &#34;&#34;&#34;
+    Returns a default mask which allows the model to attend over all positions.
+    :param data: The data of shape (sequence_len, batch_size)
+    :param dim1: The first dimension of the mask. If none, it is equal to sequence_len.
+    :return:
+    &#34;&#34;&#34;
+    batch_size = data.size(1)
+    sequence_len = data.size(0)
+    if dim1 is None:
+        dim1 = sequence_len
+    return torch.zeros(batch_size, dim1, sequence_len).bool().to(data.device)</code></pre>
+</details>
+</dd>
+<dt id="pysimt.utils.nn.generate_lookahead_mask"><code class="name flex">
+<span>def <span class="ident">generate_lookahead_mask</span></span>(<span>data, k=1, dim1=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generates a lookahead mask, preventing the decoder from attending to previous positions when computing the
+attention. The mask will contain 1 for positions which should not be attended to.
+:param data: The data of shape (sequence_len, batch_size).
+:param k: The offset for the lookahead mask. By default it's 0. Example: In the decoder self-attention, each decoder
+word can use only itself and all previous words.
+:param dim1: The first dimension of the mask. If none, it is equal to sequence_len.
+:return: The lookahead mask of shape (1, dim1, sequence_len)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def generate_lookahead_mask(data, k=1, dim1=None):
+    &#34;&#34;&#34;
+    Generates a lookahead mask, preventing the decoder from attending to previous positions when computing the
+    attention. The mask will contain 1 for positions which should not be attended to.
+    :param data: The data of shape (sequence_len, batch_size).
+    :param k: The offset for the lookahead mask. By default it&#39;s 0. Example: In the decoder self-attention, each decoder
+              word can use only itself and all previous words.
+    :param dim1: The first dimension of the mask. If none, it is equal to sequence_len.
+    :return: The lookahead mask of shape (1, dim1, sequence_len)
+    &#34;&#34;&#34;
+    sequence_len = data.size(0)
+    if dim1 is None:
+        dim1 = sequence_len
+
+    lookahead_mask = torch.triu(torch.ones((1, dim1, sequence_len)), diagonal=k)
+
+    return lookahead_mask.to(data.device).bool()</code></pre>
+</details>
+</dd>
+<dt id="pysimt.utils.nn.generate_padding_masks"><code class="name flex">
+<span>def <span class="ident">generate_padding_masks</span></span>(<span>data, pad_value=0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns a mask based on the data. For values of the padding token=0, the mask will contain 1, indicating the
+model cannot attend over these positions.
+:param data: The data of shape (sequence_len, batch_size)
+:param pad_value: The value of the padding. Default: 0.
+:return: The respective mask of shape (batch_size, 1, sequence_len)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def generate_padding_masks(data, pad_value=0):
+    &#34;&#34;&#34;
+    Returns a mask based on the data. For values of the padding token=0, the mask will contain 1, indicating the
+    model cannot attend over these positions.
+    :param data: The data of shape (sequence_len, batch_size)
+    :param pad_value: The value of the padding. Default: 0.
+    :return: The respective mask of shape (batch_size, 1, sequence_len)
+    &#34;&#34;&#34;
+    with torch.no_grad():
+        mask = (data == pad_value).to(data.device).t().unsqueeze(1)
+    return mask</code></pre>
+</details>
+</dd>
+<dt id="pysimt.utils.nn.generate_visual_features_padding_masks"><code class="name flex">
+<span>def <span class="ident">generate_visual_features_padding_masks</span></span>(<span>data, pad_value=0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns a mask based on the data. For values of the padding token=0, the mask will contain 1, indicating the
+model cannot attend over these positions.
+:param data: The data of shape (sequence_len, batch_size, feature_dim)
+:param pad_value: The value of the padding. Default: 0.
+:return: The respective mask of shape (batch_size, 1, sequence_len)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def generate_visual_features_padding_masks(data, pad_value=0):
+    &#34;&#34;&#34;
+    Returns a mask based on the data. For values of the padding token=0, the mask will contain 1, indicating the
+    model cannot attend over these positions.
+    :param data: The data of shape (sequence_len, batch_size, feature_dim)
+    :param pad_value: The value of the padding. Default: 0.
+    :return: The respective mask of shape (batch_size, 1, sequence_len)
+    &#34;&#34;&#34;
+    with torch.no_grad():
+        return (data == pad_value).all(dim=-1).t().to(data.device).unsqueeze(1)</code></pre>
+</details>
+</dd>
+<dt id="pysimt.utils.nn.get_activation_fn"><code class="name flex">
+<span>def <span class="ident">get_activation_fn</span></span>(<span>name: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns a callable activation function from <code>torch</code>.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_activation_fn(name: str):
+    &#34;&#34;&#34;Returns a callable activation function from `torch`.&#34;&#34;&#34;
+    if name in (None, &#39;linear&#39;):
+        return lambda x: x
+    elif name in (&#39;sigmoid&#39;, &#39;tanh&#39;):
+        return getattr(torch, name)
+    else:
+        return getattr(F, name)</code></pre>
+</details>
+</dd>
+<dt id="pysimt.utils.nn.get_module_groups"><code class="name flex">
+<span>def <span class="ident">get_module_groups</span></span>(<span>layer_names: List[str]) ‑> List[str]</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_module_groups(layer_names: List[str]) -&gt; List[str]:
+    groups = set()
+    for name in layer_names:
+        if &#39;.weight&#39; in name:
+            groups.add(name.split(&#39;.weight&#39;)[0])
+        elif &#39;.bias&#39; in name:
+            groups.add(name.split(&#39;.bias&#39;)[0])
+    return sorted(list(groups))</code></pre>
+</details>
+</dd>
+<dt id="pysimt.utils.nn.get_n_params"><code class="name flex">
+<span>def <span class="ident">get_n_params</span></span>(<span>module)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_n_params(module):
+    n_param_learnable = 0
+    n_param_frozen = 0
+
+    for param in module.parameters():
+        if param.requires_grad:
+            n_param_learnable += np.cumprod(param.data.size())[-1]
+        else:
+            n_param_frozen += np.cumprod(param.data.size())[-1]
+
+    n_param_all = n_param_learnable + n_param_frozen
+    return &#34;# parameters: {} ({} learnable)&#34;.format(
+        readable_size(n_param_all), readable_size(n_param_learnable))</code></pre>
+</details>
+</dd>
+<dt id="pysimt.utils.nn.readable_size"><code class="name flex">
+<span>def <span class="ident">readable_size</span></span>(<span>n: int) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a readable size string.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def readable_size(n: int) -&gt; str:
+    &#34;&#34;&#34;Return a readable size string.&#34;&#34;&#34;
+    sizes = [&#39;K&#39;, &#39;M&#39;, &#39;G&#39;]
+    fmt = &#39;&#39;
+    size = n
+    for i, s in enumerate(sizes):
+        nn = n / (1000 ** (i + 1))
+        if nn &gt;= 1:
+            size = nn
+            fmt = sizes[i]
+        else:
+            break
+    return &#39;%.2f%s&#39; % (size, fmt)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="pysimt.utils.nn.LabelSmoothingLoss"><code class="flex name class">
+<span>class <span class="ident">LabelSmoothingLoss</span></span>
+<span>(</span><span>trg_vocab_size, label_smoothing=0.1, reduction='mean', with_logits=True, ignore_index=0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Base class for all neural network modules.</p>
+<p>Your models should also subclass this class.</p>
+<p>Modules can also contain other Modules, allowing to nest them in
+a tree structure. You can assign the submodules as regular attributes::</p>
+<pre><code>import torch.nn as nn
+import torch.nn.functional as F
+
+class Model(nn.Module):
+    def __init__(self):
+        super(Model, self).__init__()
+        self.conv1 = nn.Conv2d(1, 20, 5)
+        self.conv2 = nn.Conv2d(20, 20, 5)
+
+    def forward(self, x):
+        x = F.relu(self.conv1(x))
+        return F.relu(self.conv2(x))
+</code></pre>
+<p>Submodules assigned in this way will be registered, and will have their
+parameters converted too when you call :meth:<code>to</code>, etc.</p>
+<p>:ivar training: Boolean represents whether this module is in training or
+evaluation mode.
+:vartype training: bool</p>
+<p>Creates a Label Smoothing Loss.
+Based on: <a href="https://github.com/OpenNMT/OpenNMT-py/blob/master/onmt/utils/loss.py#L194">https://github.com/OpenNMT/OpenNMT-py/blob/master/onmt/utils/loss.py#L194</a>
+:param trg_vocab_size: The target vocabulary size.
+:param label_smoothing: The label smoothing value. Default: 0.1.
+:param reduction: The loss reduction. Default: 'mean'.
+:param with_logits: Whether the predictions are logits. Default: True.
+:param ignore_index: The value to be ignored by the loss. Can be used to ignore padding tokens. Default 0.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class LabelSmoothingLoss(nn.Module):
+    def __init__(self, trg_vocab_size, label_smoothing=0.1, reduction=&#39;mean&#39;, with_logits=True, ignore_index=0):
+        &#34;&#34;&#34;
+        Creates a Label Smoothing Loss.
+        Based on: https://github.com/OpenNMT/OpenNMT-py/blob/master/onmt/utils/loss.py#L194
+        :param trg_vocab_size: The target vocabulary size.
+        :param label_smoothing: The label smoothing value. Default: 0.1.
+        :param reduction: The loss reduction. Default: &#39;mean&#39;.
+        :param with_logits: Whether the predictions are logits. Default: True.
+        :param ignore_index: The value to be ignored by the loss. Can be used to ignore padding tokens. Default 0.
+        &#34;&#34;&#34;
+        super(LabelSmoothingLoss, self).__init__()
+        self.with_logits = with_logits
+        self.ignore_index = ignore_index
+        self.kl_divergence = nn.KLDivLoss(reduction=reduction)
+
+        self._create_one_hot(label_smoothing, trg_vocab_size)
+        self.confidence = 1.0 - label_smoothing
+
+    def forward(self, predictions, target):
+        &#34;&#34;&#34;
+        Computes the loss.
+        :param predictions: The predictions of shape (N, C) where C is the number of classes.
+                            If with_logits is True, a log_softmax will be applied to obtain valid probabilities.
+        :param target: The target values of shape (N).
+        :return: The computed loss.
+        &#34;&#34;&#34;
+        if self.with_logits is True:
+            predictions = F.log_softmax(predictions, dim=-1)
+        model_prob = self.one_hot.repeat(target.size(0), 1)
+        model_prob.scatter_(1, target.unsqueeze(1), self.confidence)
+        self._apply_mask(model_prob, target)
+
+        return self.kl_divergence(predictions, model_prob)
+
+    def _create_one_hot(self, label_smoothing, trg_vocab_size):
+        smoothing_value = label_smoothing / (trg_vocab_size - 2)
+        one_hot = torch.full((trg_vocab_size,), smoothing_value)
+        one_hot[self.ignore_index] = 0
+        self.register_buffer(&#39;one_hot&#39;, one_hot.unsqueeze(0))
+
+    def _apply_mask(self, model_prob, target):
+        mask = (target == self.ignore_index).unsqueeze(1)
+        model_prob.masked_fill_(mask, 0)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>torch.nn.modules.module.Module</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="pysimt.utils.nn.LabelSmoothingLoss.dump_patches"><code class="name">var <span class="ident">dump_patches</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pysimt.utils.nn.LabelSmoothingLoss.training"><code class="name">var <span class="ident">training</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="pysimt.utils.nn.LabelSmoothingLoss.forward"><code class="name flex">
+<span>def <span class="ident">forward</span></span>(<span>self, predictions, target) ‑> Callable[..., Any]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes the loss.
+:param predictions: The predictions of shape (N, C) where C is the number of classes.
+If with_logits is True, a log_softmax will be applied to obtain valid probabilities.
+:param target: The target values of shape (N).
+:return: The computed loss.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def forward(self, predictions, target):
+    &#34;&#34;&#34;
+    Computes the loss.
+    :param predictions: The predictions of shape (N, C) where C is the number of classes.
+                        If with_logits is True, a log_softmax will be applied to obtain valid probabilities.
+    :param target: The target values of shape (N).
+    :return: The computed loss.
+    &#34;&#34;&#34;
+    if self.with_logits is True:
+        predictions = F.log_softmax(predictions, dim=-1)
+    model_prob = self.one_hot.repeat(target.size(0), 1)
+    model_prob.scatter_(1, target.unsqueeze(1), self.confidence)
+    self._apply_mask(model_prob, target)
+
+    return self.kl_divergence(predictions, model_prob)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="pysimt.utils" href="index.html">pysimt.utils</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="pysimt.utils.nn.generate_combined_mask" href="#pysimt.utils.nn.generate_combined_mask">generate_combined_mask</a></code></li>
+<li><code><a title="pysimt.utils.nn.generate_default_mask" href="#pysimt.utils.nn.generate_default_mask">generate_default_mask</a></code></li>
+<li><code><a title="pysimt.utils.nn.generate_lookahead_mask" href="#pysimt.utils.nn.generate_lookahead_mask">generate_lookahead_mask</a></code></li>
+<li><code><a title="pysimt.utils.nn.generate_padding_masks" href="#pysimt.utils.nn.generate_padding_masks">generate_padding_masks</a></code></li>
+<li><code><a title="pysimt.utils.nn.generate_visual_features_padding_masks" href="#pysimt.utils.nn.generate_visual_features_padding_masks">generate_visual_features_padding_masks</a></code></li>
+<li><code><a title="pysimt.utils.nn.get_activation_fn" href="#pysimt.utils.nn.get_activation_fn">get_activation_fn</a></code></li>
+<li><code><a title="pysimt.utils.nn.get_module_groups" href="#pysimt.utils.nn.get_module_groups">get_module_groups</a></code></li>
+<li><code><a title="pysimt.utils.nn.get_n_params" href="#pysimt.utils.nn.get_n_params">get_n_params</a></code></li>
+<li><code><a title="pysimt.utils.nn.readable_size" href="#pysimt.utils.nn.readable_size">readable_size</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="pysimt.utils.nn.LabelSmoothingLoss" href="#pysimt.utils.nn.LabelSmoothingLoss">LabelSmoothingLoss</a></code></h4>
+<ul class="">
+<li><code><a title="pysimt.utils.nn.LabelSmoothingLoss.dump_patches" href="#pysimt.utils.nn.LabelSmoothingLoss.dump_patches">dump_patches</a></code></li>
+<li><code><a title="pysimt.utils.nn.LabelSmoothingLoss.forward" href="#pysimt.utils.nn.LabelSmoothingLoss.forward">forward</a></code></li>
+<li><code><a title="pysimt.utils.nn.LabelSmoothingLoss.training" href="#pysimt.utils.nn.LabelSmoothingLoss.training">training</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

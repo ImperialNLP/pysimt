@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>pysimt.models.snmt_tf API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>pysimt.models.snmt_tf</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from torch import nn
+
+from ..layers import TFEncoder, TFDecoder
+from ..utils.nn import LabelSmoothingLoss
+from . import SimultaneousNMT
+
+
+class SimultaneousTFNMT(SimultaneousNMT):
+
+    def __init__(self, opts):
+        &#34;&#34;&#34;
+        Creates a SimultaneousNMTTransformer.
+        :param opts: The options.
+        &#34;&#34;&#34;
+        self.defaults = None
+        super().__init__(opts)
+
+        # These will be initialized in the setup method, similarly to other models.
+        self.encoders = {}
+        self.dec = None
+        self.loss = None
+        self.current_batch = None
+
+    def setup(self, is_train=True):
+        &#34;&#34;&#34;
+        Initialises the necessary model components.
+        :param is_train: Whether the model is in training mode or not.
+        &#34;&#34;&#34;
+        encoders = {}
+        for key in self.topology.srcs.keys():
+            encoders[key] = getattr(self, f&#39;_create_{key}_encoder&#39;)()
+        self.encoders = nn.ModuleDict(encoders)
+        self.dec = self._create_decoder()
+
+        self.loss = LabelSmoothingLoss(
+            trg_vocab_size=self.n_trg_vocab, reduction=&#39;sum&#39;, ignore_index=0,
+            with_logits=False)
+
+        # Share encoder and decoder weights
+        if self.opts.model[&#39;tied_emb&#39;] == &#39;3way&#39;:
+            assert self.n_src_vocab == self.n_trg_vocab, \
+                &#34;The vocabulary sizes do not match for 3way tied embeddings.&#34;
+            self.encoders[str(self.sl)].src_embedding.weight = self.dec.trg_embedding.weight
+
+    def reset_parameters(self):
+        &#34;&#34;&#34;
+        Initialize the model parameters.
+        &#34;&#34;&#34;
+        for param in self.parameters():
+            if param.requires_grad and param.dim() &gt; 1:
+                nn.init.xavier_uniform_(param)
+
+    def set_defaults(self):
+        self.defaults = {
+            &#39;model_dim&#39;: 512,           # Source and target embedding sizes,
+            &#39;num_heads&#39;: 8,             # The number of attention heads
+            &#39;direction&#39;: None,          # Network directionality, i.e. en-&gt;de
+            &#39;max_len&#39;: 80,              # Reject sentences where &#39;bucket_by&#39; length &gt; 80
+            &#39;bucket_by&#39;: None,          # A key like &#39;en&#39; to define w.r.t which dataset
+                                        # the batches will be sorted
+            &#39;bucket_order&#39;: None,       # Curriculum: ascending/descending/None
+            &#39;sampler_type&#39;: &#39;bucket&#39;,   # bucket or approximate
+            &#39;short_list&#39;: 0,            # Short list vocabularies (0: disabled)
+            &#39;enc_n_layers&#39;: 6,          # The number of encoder layers
+            &#39;dec_n_layers&#39;: 6,          # The number of decoder layers
+            &#39;enc_ff_dim&#39;: 2048,         # The number of encoder feed forward dimensions
+            &#39;dec_ff_dim&#39;: 2048,         # The number of decoder feed forward dimensions
+            &#39;enc_bidirectional&#39;: False,  # Whether the encoder is bidirectional or unidirectional.
+            &#39;tied_emb&#39;: False,          # Whether the embedding should be tied.
+            &#39;ff_activ&#39;: &#39;gelu&#39;,         # The feed forward layer activation function. Default &#39;gelu&#39;.
+            &#39;dropout&#39;: 0.1,             # The dropout.
+            &#39;attn_dropout&#39;: 0.0,        # The attention dropout.
+            &#39;pre_norm&#39;: True,           # Indicates whether to use pre_norm (recent) or post_norm (original) layers.
+            # Visual features (optional)
+            &#39;feat_mode&#39;: None,
+            &#39;aux_dim&#39;: None,            # Auxiliary features dim (# channels for conv features)
+            &#39;aux_dropout&#39;: 0.0,         # Auxiliary features dropout
+            &#39;aux_lnorm&#39;: False,         # layer-norm
+            &#39;aux_l2norm&#39;: False,        # L2-normalize
+            &#39;aux_proj_dim&#39;: None,       # Projection layer for features
+            &#39;aux_proj_activ&#39;: None,     # Projection layer non-linearity
+            &#39;img_boxes_dim&#39;: None,      # The vector dimension for the boxes, associated with a region.
+            &#39;num_regions&#39;: 36,          # The number of regions to use. Valid only for OD features. Default: 36.
+            &#39;mm_fusion_op&#39;: None,       # fusion type
+            &#39;mm_fusion_dropout&#39;: 0.0,   # fusion dropout
+            &#39;tf_dec_img_attn&#39;: None,    # The decoder visual attention; could be: &#39;serial&#39;, &#39;parallel&#39; or None.
+            &#39;tf_n_mm_hier_heads&#39;: 8,    # Used with hierarchical image attention to specify the number of hierarchical heads. Default 8.
+                                        # Default: None.
+            # Decoding/training simultaneous NMT args
+            &#39;translator_type&#39;: &#39;gs&#39;,   # This model implements plain unidirectional MT
+                                        # so the decoding is normal greedy-search
+            &#39;translator_args&#39;: {},      # No extra arguments to translator
+        }
+
+    def _create_src_encoder(self):
+        &#34;&#34;&#34;
+        Returns a transformer encoder.
+        :return: a transformer encoder.
+        &#34;&#34;&#34;
+        return TFEncoder(
+            model_dim=self.opts.model[&#34;model_dim&#34;],
+            n_heads=self.opts.model[&#34;num_heads&#34;],
+            ff_dim=self.opts.model[&#34;enc_ff_dim&#34;],
+            n_layers=self.opts.model[&#34;enc_n_layers&#34;],
+            num_embeddings=self.n_src_vocab,
+            ff_activ=self.opts.model[&#34;ff_activ&#34;],
+            dropout=self.opts.model[&#34;dropout&#34;],
+            attn_dropout=self.opts.model[&#34;attn_dropout&#34;],
+            pre_norm=self.opts.model[&#34;pre_norm&#34;],
+            enc_bidirectional=self.opts.model[&#34;enc_bidirectional&#34;]
+        )
+
+    def _create_decoder(self):
+        &#34;&#34;&#34;
+        Returns a transformer decoder.
+        :return: a transformer decoder.
+        &#34;&#34;&#34;
+        return TFDecoder(
+            model_dim=self.opts.model[&#34;model_dim&#34;],
+            n_heads=self.opts.model[&#34;num_heads&#34;],
+            ff_dim=self.opts.model[&#34;dec_ff_dim&#34;],
+            n_layers=self.opts.model[&#34;dec_n_layers&#34;],
+            num_embeddings=self.n_trg_vocab,
+            tied_emb=self.opts.model[&#34;tied_emb&#34;],
+            ff_activ=self.opts.model[&#34;ff_activ&#34;],
+            dropout=self.opts.model[&#34;dropout&#34;],
+            attn_dropout=self.opts.model[&#34;attn_dropout&#34;],
+            pre_norm=self.opts.model[&#34;pre_norm&#34;],
+            img_attn=self.opts.model[&#34;tf_dec_img_attn&#34;],
+            n_mm_hier_heads=self.opts.model[&#34;tf_n_mm_hier_heads&#34;],
+        )
+
+    def get_attention_weights(self):
+        return {
+            &#39;encoder_src&#39;: self.encoders[&#39;src&#39;].get_attention_weights(),
+            &#39;decoder&#39;: self.dec.get_attention_weights()
+        }
+
+    def cache_enc_states(self, batch, **kwargs):
+        if self.opts.model[&#34;enc_bidirectional&#34;]:
+            # It is tricky to cache the encoder&#39;s states if it&#39;s bidirectional,
+            # as they are dependent on future positions due to the
+            # self-attention module. Therefore, we are just going to cache the data
+            # and perform the forward pass in get_enc_state_dict.
+            self.current_batch = batch
+        else:
+            for key, enc in self.encoders.items():
+                _ = enc(batch[key])
+
+    def get_enc_state_dict(self, up_to=int(1e6)):
+        &#34;&#34;&#34;Encodes the batch optionally by partial encoding up to `up_to`
+        words for derived simultaneous NMT classes. By default, the value
+        is large enough to leave it as vanilla NMT. &#34;&#34;&#34;
+        if self.opts.model[&#34;enc_bidirectional&#34;]:
+            # In the bidirectional case, perform a forward pass through the encoder.
+            return {str(key): encoder(self.current_batch[key][:up_to, :]) for key, encoder in self.encoders.items()}
+        else:
+            return super().get_enc_state_dict(up_to=up_to)
+
+    def forward(self, batch, **kwargs):
+        self.cache_enc_states(batch)
+        encoded_src = self.get_enc_state_dict()
+
+        # The input to the transformer should include the &lt;bos&gt; token but not the &lt;eos&gt; token.
+        target_input = batch[self.tl][:-1, :]
+
+        # The actual values should not have the &lt;bos&gt; token but should include the &lt;eos&gt;
+        target_real = batch[self.tl][1:, :]
+
+        result, _ = self.dec(encoded_src, target_input, **kwargs)
+
+        total_loss = self.loss(
+            result.contiguous().view(-1, result.size(-1)), target_real.contiguous().view(-1))
+
+        return {
+            &#39;loss&#39;: total_loss,
+            &#39;n_items&#39;: target_real.nonzero(as_tuple=False).size(0),
+        }</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="pysimt.models.snmt_tf.SimultaneousTFNMT"><code class="flex name class">
+<span>class <span class="ident">SimultaneousTFNMT</span></span>
+<span>(</span><span>opts)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Base class for all neural network modules.</p>
+<p>Your models should also subclass this class.</p>
+<p>Modules can also contain other Modules, allowing to nest them in
+a tree structure. You can assign the submodules as regular attributes::</p>
+<pre><code>import torch.nn as nn
+import torch.nn.functional as F
+
+class Model(nn.Module):
+    def __init__(self):
+        super(Model, self).__init__()
+        self.conv1 = nn.Conv2d(1, 20, 5)
+        self.conv2 = nn.Conv2d(20, 20, 5)
+
+    def forward(self, x):
+        x = F.relu(self.conv1(x))
+        return F.relu(self.conv2(x))
+</code></pre>
+<p>Submodules assigned in this way will be registered, and will have their
+parameters converted too when you call :meth:<code>to</code>, etc.</p>
+<p>:ivar training: Boolean represents whether this module is in training or
+evaluation mode.
+:vartype training: bool</p>
+<p>Creates a SimultaneousNMTTransformer.
+:param opts: The options.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class SimultaneousTFNMT(SimultaneousNMT):
+
+    def __init__(self, opts):
+        &#34;&#34;&#34;
+        Creates a SimultaneousNMTTransformer.
+        :param opts: The options.
+        &#34;&#34;&#34;
+        self.defaults = None
+        super().__init__(opts)
+
+        # These will be initialized in the setup method, similarly to other models.
+        self.encoders = {}
+        self.dec = None
+        self.loss = None
+        self.current_batch = None
+
+    def setup(self, is_train=True):
+        &#34;&#34;&#34;
+        Initialises the necessary model components.
+        :param is_train: Whether the model is in training mode or not.
+        &#34;&#34;&#34;
+        encoders = {}
+        for key in self.topology.srcs.keys():
+            encoders[key] = getattr(self, f&#39;_create_{key}_encoder&#39;)()
+        self.encoders = nn.ModuleDict(encoders)
+        self.dec = self._create_decoder()
+
+        self.loss = LabelSmoothingLoss(
+            trg_vocab_size=self.n_trg_vocab, reduction=&#39;sum&#39;, ignore_index=0,
+            with_logits=False)
+
+        # Share encoder and decoder weights
+        if self.opts.model[&#39;tied_emb&#39;] == &#39;3way&#39;:
+            assert self.n_src_vocab == self.n_trg_vocab, \
+                &#34;The vocabulary sizes do not match for 3way tied embeddings.&#34;
+            self.encoders[str(self.sl)].src_embedding.weight = self.dec.trg_embedding.weight
+
+    def reset_parameters(self):
+        &#34;&#34;&#34;
+        Initialize the model parameters.
+        &#34;&#34;&#34;
+        for param in self.parameters():
+            if param.requires_grad and param.dim() &gt; 1:
+                nn.init.xavier_uniform_(param)
+
+    def set_defaults(self):
+        self.defaults = {
+            &#39;model_dim&#39;: 512,           # Source and target embedding sizes,
+            &#39;num_heads&#39;: 8,             # The number of attention heads
+            &#39;direction&#39;: None,          # Network directionality, i.e. en-&gt;de
+            &#39;max_len&#39;: 80,              # Reject sentences where &#39;bucket_by&#39; length &gt; 80
+            &#39;bucket_by&#39;: None,          # A key like &#39;en&#39; to define w.r.t which dataset
+                                        # the batches will be sorted
+            &#39;bucket_order&#39;: None,       # Curriculum: ascending/descending/None
+            &#39;sampler_type&#39;: &#39;bucket&#39;,   # bucket or approximate
+            &#39;short_list&#39;: 0,            # Short list vocabularies (0: disabled)
+            &#39;enc_n_layers&#39;: 6,          # The number of encoder layers
+            &#39;dec_n_layers&#39;: 6,          # The number of decoder layers
+            &#39;enc_ff_dim&#39;: 2048,         # The number of encoder feed forward dimensions
+            &#39;dec_ff_dim&#39;: 2048,         # The number of decoder feed forward dimensions
+            &#39;enc_bidirectional&#39;: False,  # Whether the encoder is bidirectional or unidirectional.
+            &#39;tied_emb&#39;: False,          # Whether the embedding should be tied.
+            &#39;ff_activ&#39;: &#39;gelu&#39;,         # The feed forward layer activation function. Default &#39;gelu&#39;.
+            &#39;dropout&#39;: 0.1,             # The dropout.
+            &#39;attn_dropout&#39;: 0.0,        # The attention dropout.
+            &#39;pre_norm&#39;: True,           # Indicates whether to use pre_norm (recent) or post_norm (original) layers.
+            # Visual features (optional)
+            &#39;feat_mode&#39;: None,
+            &#39;aux_dim&#39;: None,            # Auxiliary features dim (# channels for conv features)
+            &#39;aux_dropout&#39;: 0.0,         # Auxiliary features dropout
+            &#39;aux_lnorm&#39;: False,         # layer-norm
+            &#39;aux_l2norm&#39;: False,        # L2-normalize
+            &#39;aux_proj_dim&#39;: None,       # Projection layer for features
+            &#39;aux_proj_activ&#39;: None,     # Projection layer non-linearity
+            &#39;img_boxes_dim&#39;: None,      # The vector dimension for the boxes, associated with a region.
+            &#39;num_regions&#39;: 36,          # The number of regions to use. Valid only for OD features. Default: 36.
+            &#39;mm_fusion_op&#39;: None,       # fusion type
+            &#39;mm_fusion_dropout&#39;: 0.0,   # fusion dropout
+            &#39;tf_dec_img_attn&#39;: None,    # The decoder visual attention; could be: &#39;serial&#39;, &#39;parallel&#39; or None.
+            &#39;tf_n_mm_hier_heads&#39;: 8,    # Used with hierarchical image attention to specify the number of hierarchical heads. Default 8.
+                                        # Default: None.
+            # Decoding/training simultaneous NMT args
+            &#39;translator_type&#39;: &#39;gs&#39;,   # This model implements plain unidirectional MT
+                                        # so the decoding is normal greedy-search
+            &#39;translator_args&#39;: {},      # No extra arguments to translator
+        }
+
+    def _create_src_encoder(self):
+        &#34;&#34;&#34;
+        Returns a transformer encoder.
+        :return: a transformer encoder.
+        &#34;&#34;&#34;
+        return TFEncoder(
+            model_dim=self.opts.model[&#34;model_dim&#34;],
+            n_heads=self.opts.model[&#34;num_heads&#34;],
+            ff_dim=self.opts.model[&#34;enc_ff_dim&#34;],
+            n_layers=self.opts.model[&#34;enc_n_layers&#34;],
+            num_embeddings=self.n_src_vocab,
+            ff_activ=self.opts.model[&#34;ff_activ&#34;],
+            dropout=self.opts.model[&#34;dropout&#34;],
+            attn_dropout=self.opts.model[&#34;attn_dropout&#34;],
+            pre_norm=self.opts.model[&#34;pre_norm&#34;],
+            enc_bidirectional=self.opts.model[&#34;enc_bidirectional&#34;]
+        )
+
+    def _create_decoder(self):
+        &#34;&#34;&#34;
+        Returns a transformer decoder.
+        :return: a transformer decoder.
+        &#34;&#34;&#34;
+        return TFDecoder(
+            model_dim=self.opts.model[&#34;model_dim&#34;],
+            n_heads=self.opts.model[&#34;num_heads&#34;],
+            ff_dim=self.opts.model[&#34;dec_ff_dim&#34;],
+            n_layers=self.opts.model[&#34;dec_n_layers&#34;],
+            num_embeddings=self.n_trg_vocab,
+            tied_emb=self.opts.model[&#34;tied_emb&#34;],
+            ff_activ=self.opts.model[&#34;ff_activ&#34;],
+            dropout=self.opts.model[&#34;dropout&#34;],
+            attn_dropout=self.opts.model[&#34;attn_dropout&#34;],
+            pre_norm=self.opts.model[&#34;pre_norm&#34;],
+            img_attn=self.opts.model[&#34;tf_dec_img_attn&#34;],
+            n_mm_hier_heads=self.opts.model[&#34;tf_n_mm_hier_heads&#34;],
+        )
+
+    def get_attention_weights(self):
+        return {
+            &#39;encoder_src&#39;: self.encoders[&#39;src&#39;].get_attention_weights(),
+            &#39;decoder&#39;: self.dec.get_attention_weights()
+        }
+
+    def cache_enc_states(self, batch, **kwargs):
+        if self.opts.model[&#34;enc_bidirectional&#34;]:
+            # It is tricky to cache the encoder&#39;s states if it&#39;s bidirectional,
+            # as they are dependent on future positions due to the
+            # self-attention module. Therefore, we are just going to cache the data
+            # and perform the forward pass in get_enc_state_dict.
+            self.current_batch = batch
+        else:
+            for key, enc in self.encoders.items():
+                _ = enc(batch[key])
+
+    def get_enc_state_dict(self, up_to=int(1e6)):
+        &#34;&#34;&#34;Encodes the batch optionally by partial encoding up to `up_to`
+        words for derived simultaneous NMT classes. By default, the value
+        is large enough to leave it as vanilla NMT. &#34;&#34;&#34;
+        if self.opts.model[&#34;enc_bidirectional&#34;]:
+            # In the bidirectional case, perform a forward pass through the encoder.
+            return {str(key): encoder(self.current_batch[key][:up_to, :]) for key, encoder in self.encoders.items()}
+        else:
+            return super().get_enc_state_dict(up_to=up_to)
+
+    def forward(self, batch, **kwargs):
+        self.cache_enc_states(batch)
+        encoded_src = self.get_enc_state_dict()
+
+        # The input to the transformer should include the &lt;bos&gt; token but not the &lt;eos&gt; token.
+        target_input = batch[self.tl][:-1, :]
+
+        # The actual values should not have the &lt;bos&gt; token but should include the &lt;eos&gt;
+        target_real = batch[self.tl][1:, :]
+
+        result, _ = self.dec(encoded_src, target_input, **kwargs)
+
+        total_loss = self.loss(
+            result.contiguous().view(-1, result.size(-1)), target_real.contiguous().view(-1))
+
+        return {
+            &#39;loss&#39;: total_loss,
+            &#39;n_items&#39;: target_real.nonzero(as_tuple=False).size(0),
+        }</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="pysimt.models.snmt_rnn.SimultaneousNMT" href="snmt_rnn.html#pysimt.models.snmt_rnn.SimultaneousNMT">SimultaneousNMT</a></li>
+<li>torch.nn.modules.module.Module</li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="pysimt.models.snmt_tf_waitk.SimultaneousTFWaitKNMT" href="snmt_tf_waitk.html#pysimt.models.snmt_tf_waitk.SimultaneousTFWaitKNMT">SimultaneousTFWaitKNMT</a></li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="pysimt.models.snmt_tf.SimultaneousTFNMT.dump_patches"><code class="name">var <span class="ident">dump_patches</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pysimt.models.snmt_tf.SimultaneousTFNMT.training"><code class="name">var <span class="ident">training</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="pysimt.models.snmt_tf.SimultaneousTFNMT.get_attention_weights"><code class="name flex">
+<span>def <span class="ident">get_attention_weights</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_attention_weights(self):
+    return {
+        &#39;encoder_src&#39;: self.encoders[&#39;src&#39;].get_attention_weights(),
+        &#39;decoder&#39;: self.dec.get_attention_weights()
+    }</code></pre>
+</details>
+</dd>
+<dt id="pysimt.models.snmt_tf.SimultaneousTFNMT.reset_parameters"><code class="name flex">
+<span>def <span class="ident">reset_parameters</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Initialize the model parameters.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def reset_parameters(self):
+    &#34;&#34;&#34;
+    Initialize the model parameters.
+    &#34;&#34;&#34;
+    for param in self.parameters():
+        if param.requires_grad and param.dim() &gt; 1:
+            nn.init.xavier_uniform_(param)</code></pre>
+</details>
+</dd>
+<dt id="pysimt.models.snmt_tf.SimultaneousTFNMT.set_defaults"><code class="name flex">
+<span>def <span class="ident">set_defaults</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_defaults(self):
+    self.defaults = {
+        &#39;model_dim&#39;: 512,           # Source and target embedding sizes,
+        &#39;num_heads&#39;: 8,             # The number of attention heads
+        &#39;direction&#39;: None,          # Network directionality, i.e. en-&gt;de
+        &#39;max_len&#39;: 80,              # Reject sentences where &#39;bucket_by&#39; length &gt; 80
+        &#39;bucket_by&#39;: None,          # A key like &#39;en&#39; to define w.r.t which dataset
+                                    # the batches will be sorted
+        &#39;bucket_order&#39;: None,       # Curriculum: ascending/descending/None
+        &#39;sampler_type&#39;: &#39;bucket&#39;,   # bucket or approximate
+        &#39;short_list&#39;: 0,            # Short list vocabularies (0: disabled)
+        &#39;enc_n_layers&#39;: 6,          # The number of encoder layers
+        &#39;dec_n_layers&#39;: 6,          # The number of decoder layers
+        &#39;enc_ff_dim&#39;: 2048,         # The number of encoder feed forward dimensions
+        &#39;dec_ff_dim&#39;: 2048,         # The number of decoder feed forward dimensions
+        &#39;enc_bidirectional&#39;: False,  # Whether the encoder is bidirectional or unidirectional.
+        &#39;tied_emb&#39;: False,          # Whether the embedding should be tied.
+        &#39;ff_activ&#39;: &#39;gelu&#39;,         # The feed forward layer activation function. Default &#39;gelu&#39;.
+        &#39;dropout&#39;: 0.1,             # The dropout.
+        &#39;attn_dropout&#39;: 0.0,        # The attention dropout.
+        &#39;pre_norm&#39;: True,           # Indicates whether to use pre_norm (recent) or post_norm (original) layers.
+        # Visual features (optional)
+        &#39;feat_mode&#39;: None,
+        &#39;aux_dim&#39;: None,            # Auxiliary features dim (# channels for conv features)
+        &#39;aux_dropout&#39;: 0.0,         # Auxiliary features dropout
+        &#39;aux_lnorm&#39;: False,         # layer-norm
+        &#39;aux_l2norm&#39;: False,        # L2-normalize
+        &#39;aux_proj_dim&#39;: None,       # Projection layer for features
+        &#39;aux_proj_activ&#39;: None,     # Projection layer non-linearity
+        &#39;img_boxes_dim&#39;: None,      # The vector dimension for the boxes, associated with a region.
+        &#39;num_regions&#39;: 36,          # The number of regions to use. Valid only for OD features. Default: 36.
+        &#39;mm_fusion_op&#39;: None,       # fusion type
+        &#39;mm_fusion_dropout&#39;: 0.0,   # fusion dropout
+        &#39;tf_dec_img_attn&#39;: None,    # The decoder visual attention; could be: &#39;serial&#39;, &#39;parallel&#39; or None.
+        &#39;tf_n_mm_hier_heads&#39;: 8,    # Used with hierarchical image attention to specify the number of hierarchical heads. Default 8.
+                                    # Default: None.
+        # Decoding/training simultaneous NMT args
+        &#39;translator_type&#39;: &#39;gs&#39;,   # This model implements plain unidirectional MT
+                                    # so the decoding is normal greedy-search
+        &#39;translator_args&#39;: {},      # No extra arguments to translator
+    }</code></pre>
+</details>
+</dd>
+<dt id="pysimt.models.snmt_tf.SimultaneousTFNMT.setup"><code class="name flex">
+<span>def <span class="ident">setup</span></span>(<span>self, is_train=True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Initialises the necessary model components.
+:param is_train: Whether the model is in training mode or not.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def setup(self, is_train=True):
+    &#34;&#34;&#34;
+    Initialises the necessary model components.
+    :param is_train: Whether the model is in training mode or not.
+    &#34;&#34;&#34;
+    encoders = {}
+    for key in self.topology.srcs.keys():
+        encoders[key] = getattr(self, f&#39;_create_{key}_encoder&#39;)()
+    self.encoders = nn.ModuleDict(encoders)
+    self.dec = self._create_decoder()
+
+    self.loss = LabelSmoothingLoss(
+        trg_vocab_size=self.n_trg_vocab, reduction=&#39;sum&#39;, ignore_index=0,
+        with_logits=False)
+
+    # Share encoder and decoder weights
+    if self.opts.model[&#39;tied_emb&#39;] == &#39;3way&#39;:
+        assert self.n_src_vocab == self.n_trg_vocab, \
+            &#34;The vocabulary sizes do not match for 3way tied embeddings.&#34;
+        self.encoders[str(self.sl)].src_embedding.weight = self.dec.trg_embedding.weight</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="pysimt.models.snmt_rnn.SimultaneousNMT" href="snmt_rnn.html#pysimt.models.snmt_rnn.SimultaneousNMT">SimultaneousNMT</a></b></code>:
+<ul class="hlist">
+<li><code><a title="pysimt.models.snmt_rnn.SimultaneousNMT.cache_enc_states" href="snmt_rnn.html#pysimt.models.snmt_rnn.SimultaneousNMT.cache_enc_states">cache_enc_states</a></code></li>
+<li><code><a title="pysimt.models.snmt_rnn.SimultaneousNMT.create_decoder" href="snmt_rnn.html#pysimt.models.snmt_rnn.SimultaneousNMT.create_decoder">create_decoder</a></code></li>
+<li><code><a title="pysimt.models.snmt_rnn.SimultaneousNMT.create_image_encoder" href="snmt_rnn.html#pysimt.models.snmt_rnn.SimultaneousNMT.create_image_encoder">create_image_encoder</a></code></li>
+<li><code><a title="pysimt.models.snmt_rnn.SimultaneousNMT.create_src_encoder" href="snmt_rnn.html#pysimt.models.snmt_rnn.SimultaneousNMT.create_src_encoder">create_src_encoder</a></code></li>
+<li><code><a title="pysimt.models.snmt_rnn.SimultaneousNMT.forward" href="snmt_rnn.html#pysimt.models.snmt_rnn.SimultaneousNMT.forward">forward</a></code></li>
+<li><code><a title="pysimt.models.snmt_rnn.SimultaneousNMT.get_bos" href="snmt_rnn.html#pysimt.models.snmt_rnn.SimultaneousNMT.get_bos">get_bos</a></code></li>
+<li><code><a title="pysimt.models.snmt_rnn.SimultaneousNMT.get_enc_state_dict" href="snmt_rnn.html#pysimt.models.snmt_rnn.SimultaneousNMT.get_enc_state_dict">get_enc_state_dict</a></code></li>
+<li><code><a title="pysimt.models.snmt_rnn.SimultaneousNMT.load_data" href="snmt_rnn.html#pysimt.models.snmt_rnn.SimultaneousNMT.load_data">load_data</a></code></li>
+<li><code><a title="pysimt.models.snmt_rnn.SimultaneousNMT.register_tensorboard" href="snmt_rnn.html#pysimt.models.snmt_rnn.SimultaneousNMT.register_tensorboard">register_tensorboard</a></code></li>
+<li><code><a title="pysimt.models.snmt_rnn.SimultaneousNMT.test_performance" href="snmt_rnn.html#pysimt.models.snmt_rnn.SimultaneousNMT.test_performance">test_performance</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="pysimt.models" href="index.html">pysimt.models</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="pysimt.models.snmt_tf.SimultaneousTFNMT" href="#pysimt.models.snmt_tf.SimultaneousTFNMT">SimultaneousTFNMT</a></code></h4>
+<ul class="">
+<li><code><a title="pysimt.models.snmt_tf.SimultaneousTFNMT.dump_patches" href="#pysimt.models.snmt_tf.SimultaneousTFNMT.dump_patches">dump_patches</a></code></li>
+<li><code><a title="pysimt.models.snmt_tf.SimultaneousTFNMT.get_attention_weights" href="#pysimt.models.snmt_tf.SimultaneousTFNMT.get_attention_weights">get_attention_weights</a></code></li>
+<li><code><a title="pysimt.models.snmt_tf.SimultaneousTFNMT.reset_parameters" href="#pysimt.models.snmt_tf.SimultaneousTFNMT.reset_parameters">reset_parameters</a></code></li>
+<li><code><a title="pysimt.models.snmt_tf.SimultaneousTFNMT.set_defaults" href="#pysimt.models.snmt_tf.SimultaneousTFNMT.set_defaults">set_defaults</a></code></li>
+<li><code><a title="pysimt.models.snmt_tf.SimultaneousTFNMT.setup" href="#pysimt.models.snmt_tf.SimultaneousTFNMT.setup">setup</a></code></li>
+<li><code><a title="pysimt.models.snmt_tf.SimultaneousTFNMT.training" href="#pysimt.models.snmt_tf.SimultaneousTFNMT.training">training</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>pysimt.layers.attention.multihead API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>pysimt.layers.attention.multihead</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import math
+
+import numpy as np
+
+import torch
+from torch import nn
+
+
+class MultiheadAttention(nn.Module):
+    &#34;&#34;&#34;General purpose multihead attention implementation.&#34;&#34;&#34;
+    def __init__(self, input_dim, proj_dim, n_heads=1, dropout=0.0,
+                 attn_type=&#39;cross&#39;, initializer=&#39;xavier_uniform&#39;):
+        assert proj_dim % n_heads == 0, &#34;proj_dim not divisible by n_heads.&#34;
+        super().__init__()
+
+        self.input_dim = input_dim
+        self.proj_dim = proj_dim
+        self.n_heads = n_heads
+        self.head_dim = self.proj_dim // self.n_heads
+        self.scale = math.sqrt(self.head_dim)
+        self.minus_inf = float(&#39;-inf&#39;)
+        self.attn_type = attn_type
+        self.initializer = initializer
+        self.p_dropout = dropout
+
+        self._apply_projections_and_reshape = getattr(
+            self, f&#39;_apply_projections_and_reshape_{self.attn_type}&#39;)
+
+        # dropout over attention probability
+        self.dropout = nn.Dropout(dropout) if dropout &gt; 0.0 else lambda x: x
+
+        self._create_layers()
+        self._reset_parameters(getattr(nn.init, f&#39;{initializer}_&#39;))
+
+    def __repr__(self):
+        s = f&#34;MultiheadAttention({self.input_dim} -&gt; {self.proj_dim}, {self.n_heads} heads, &#34;
+        s += f&#34;type={self.attn_type!r}, dropout={self.p_dropout})&#34;
+        return s
+
+    def view_as_headed(self, x):
+        &#34;&#34;&#34;Returns a view of shape `[bsz, n_heads, seq_len, head_dim]`
+        from `[bsz, seq_len, head_dim * n_heads]`.&#34;&#34;&#34;
+        return x.view(x.size(0), x.size(1), self.n_heads, -1).transpose(1, 2)
+
+    @staticmethod
+    def view_as_concat(x):
+        &#34;&#34;&#34;Returns a view of shape `[bsz, seq_len, head_dim * n_heads]`
+        from `[bsz, n_heads, seq_len, head_dim]`.&#34;&#34;&#34;
+        return x.transpose(1, 2).contiguous().view(x.size(0), x.size(2), -1)
+
+    def _reset_parameters(self, init_fn):
+        &#34;&#34;&#34;Reinitializes layer weights.&#34;&#34;&#34;
+        for param in self.parameters():
+            init_fn(param)
+
+    def _create_layers(self):
+        &#34;&#34;&#34;Create projection layer weights.&#34;&#34;&#34;
+        self.lin_o = nn.Parameter(torch.Tensor(self.proj_dim, self.proj_dim))
+        if self.attn_type != &#39;self&#39;:
+            self.lin_k = nn.Parameter(torch.Tensor(self.input_dim, self.proj_dim))
+            self.lin_q = nn.Parameter(torch.Tensor(self.input_dim, self.proj_dim))
+            self.lin_v = nn.Parameter(torch.Tensor(self.input_dim, self.proj_dim))
+        else:
+            self.lin_k = nn.Parameter(torch.Tensor(self.input_dim, 3 * self.proj_dim))
+
+    def _apply_projections_and_reshape_self(self, k, v=None, q=None):
+        &#34;&#34;&#34;Projects key, value and queries and returns multi-head view
+        for self-attention variant.
+
+        Args:
+            k: Tensor of shape `[batch_size, v_len, dim]`.
+            v: `None` for self-attention. This is not used.
+            q: `None` for self-attention. This is not used.
+
+        Returns:
+            A tuple of 3 tensors for k,v,q projections, each with shape
+            `[batch_size, n_heads, v_len, head_dim]`.
+        &#34;&#34;&#34;
+        return (
+            self.view_as_headed(t) for t in k.matmul(self.lin_k).chunk(3, dim=-1))
+
+    def _apply_projections_and_reshape_cross(self, k, v, q):
+        &#34;&#34;&#34;Projects key, value and queries and returns multi-head view
+        for cross-attention variant.
+
+        Args:
+            k: Tensor of shape `[batch_size, v_len, dim]`.
+            v: Tensor of shape `[batch_size, v_len, dim]`.
+            q: Tensor of shape `[batch_size, q_len, dim]`.
+
+        Returns:
+            A tuple of 3 tensors for k,v,q projections, each with shape
+            `[batch_size, n_heads, (v|q)_len, head_dim]`.
+        &#34;&#34;&#34;
+        return (self.view_as_headed(k.matmul(self.lin_k)),
+                self.view_as_headed(v.matmul(self.lin_v)),
+                self.view_as_headed(q.matmul(self.lin_q)))
+
+    def _compute_scores(self, query, key, k_mask=None):
+        &#34;&#34;&#34;Computes normalized scaled dot-product scores between query and key.
+
+        Args:
+            query: Tensor of shape `[batch_size, n_heads, q_len, dim]`.
+            key: Tensor of shape `[batch_size, n_heads, v_len, dim]`.
+            k_mask: Tensor of shape `[batch_size, v_len]`.
+
+        Returns:
+            Tensor of shape `[batch_size, n_heads, q_len, v_len]` with
+                normalized attention weights.
+        &#34;&#34;&#34;
+        scores = torch.matmul(query.div(self.scale), key.transpose(-2, -1))
+        if k_mask is not None:
+            # mask &lt;pad&gt;&#39;ded positions
+            scores.masked_fill_(k_mask[:, None, None, :], self.minus_inf)
+        return self.dropout(scores.softmax(dim=-1))
+
+    def _apply_scores(self, p, value, q_mask=None):
+        &#34;&#34;&#34;Applies normalized attention weights on `value`. `q_mask`
+        is used to zero padded positions afterwards.
+
+        Args:
+            p: Tensor of shape `[batch_size, n_heads, q_len, v_len]`.
+            value: Tensor of shape `[batch_size, n_heads, v_len, dim]`.
+            q_mask: Tensor of shape `[batch_size, q_len]`.
+
+        Returns:
+            Tensor of shape `[batch_size, n_heads, v_len, dim]`.
+        &#34;&#34;&#34;
+        ctx = torch.matmul(p, value)
+        if q_mask is not None:
+            # zero out &lt;pad&gt;&#39;ded positions
+            ctx.mul_(q_mask[:, None, :, None].logical_not())
+        return ctx
+
+    def forward(self, k, v=None, q=None, k_mask=None, q_mask=None):
+        kp, vp, qp = self._apply_projections_and_reshape(k, v, q)
+
+        # Get normalized scores
+        alpha = self._compute_scores(qp, kp, k_mask)
+
+        # Get weighted contexts for each head -&gt; concat -&gt; project
+        return self.view_as_concat(
+            self._apply_scores(alpha, vp, q_mask)).matmul(self.lin_o)
+
+
+def get_upstream_impl(dim, n_heads):
+    mha = nn.MultiheadAttention(dim, n_heads, bias=False)
+    nn.init.eye_(mha.out_proj.weight.data)
+    list(map(lambda i: nn.init.eye_(i), mha.in_proj_weight.data.chunk(3, dim=0)))
+    nn.init.eye_(mha.in_proj_weight.data[:dim])
+    nn.init.eye_(mha.in_proj_weight.data[dim:2*dim])
+    nn.init.eye_(mha.in_proj_weight.data[-dim:])
+    return mha
+
+
+def get_own_self_impl(i_dim, p_dim, n_heads):
+    self_att = MultiheadAttention(input_dim=i_dim, proj_dim=p_dim, n_heads=n_heads, attn_type=&#39;self&#39;)
+    print(self_att)
+    nn.init.eye_(self_att.lin_o.data)
+    list(map(lambda x: nn.init.eye_(x), self_att.lin_k.data.chunk(3, dim=-1)))
+    return self_att
+
+
+def get_own_cross_impl(i_dim, p_dim, n_heads):
+    cross_att = MultiheadAttention(input_dim=i_dim, proj_dim=p_dim, n_heads=n_heads)
+    print(cross_att)
+    nn.init.eye_(cross_att.lin_o.data)
+    nn.init.eye_(cross_att.lin_k.data)
+    nn.init.eye_(cross_att.lin_q.data)
+    nn.init.eye_(cross_att.lin_v.data)
+    return cross_att
+
+
+def main():
+    np.random.seed(2)
+    torch.manual_seed(3)
+    torch.cuda.manual_seed(4)
+
+    input_dim = 512
+    batch_size = 100
+    vocab_size = 1000
+
+    # Create the embeddings
+    embs = nn.Embedding(vocab_size, embedding_dim=input_dim, padding_idx=0)
+
+    # Sample sequence lengths
+    src_seq_lens = np.random.normal(6, 1, size=(batch_size,)).astype(&#39;int&#39;)
+    trg_seq_lens = np.random.normal(6, 1, size=(batch_size,)).astype(&#39;int&#39;)
+
+    # Sample random vocab IDs
+    src_idxs = torch.randint(
+        low=1, high=vocab_size, size=(batch_size, src_seq_lens.max()))
+    trg_idxs = torch.randint(
+        low=1, high=vocab_size, size=(batch_size, trg_seq_lens.max()))
+
+    # pad short sequences
+    for seq, seqlen in enumerate(src_seq_lens):
+        src_idxs[seq, seqlen:].fill_(0)
+
+    for seq, seqlen in enumerate(trg_seq_lens):
+        trg_idxs[seq, seqlen:].fill_(0)
+
+    # masks with `True` for padded positions
+    src_padding_mask = src_idxs.eq(0)
+    trg_padding_mask = trg_idxs.eq(0)
+
+    # Verify lengths
+    assert np.allclose(src_seq_lens, src_idxs.ne(0).sum(1))
+    assert np.allclose(trg_seq_lens, trg_idxs.ne(0).sum(1))
+
+    # get embeddings
+    x = embs(src_idxs)
+    y = embs(trg_idxs)
+
+    # Verify lengths using embeddings
+    assert np.allclose(src_seq_lens, x.sum(-1).ne(0.0).sum(1))
+    assert np.allclose(trg_seq_lens, y.sum(-1).ne(0.0).sum(1))
+
+    mha = get_upstream_impl(input_dim, 1)
+    xp = x.transpose(0, 1)
+    yp = y.transpose(0, 1)
+
+    h_mha_self, p_mha_self = mha(
+        query=xp, key=xp, value=xp, key_padding_mask=src_padding_mask)
+    h_mha_cross, p_mha_cross = mha(
+        query=yp, key=xp, value=xp, key_padding_mask=src_padding_mask)
+    h_mha_self.transpose_(0, 1)
+    h_mha_cross.transpose_(0, 1)
+
+    # self attention
+    # q_mask: src
+    self_att = get_own_self_impl(input_dim, input_dim, n_heads=1)
+    h_self = self_att(k=x, v=x, q=x, k_mask=src_padding_mask, q_mask=None)
+
+    assert torch.allclose(h_self, h_mha_self, atol=1e-1)
+
+    # self attention with identity projections should produce the query itself
+    assert torch.allclose(
+        self_att(x, x, x, src_padding_mask, src_padding_mask), x, atol=1e-1)
+
+    # cross attention
+    # q_mask: trg
+    cross_att = get_own_cross_impl(input_dim, input_dim, n_heads=1)
+    h_cross = cross_att(k=x, v=x, q=y, k_mask=src_padding_mask, q_mask=trg_padding_mask)
+
+    assert torch.allclose(
+        cross_att(x, x, y, src_padding_mask, None), h_mha_cross, atol=1e-1)
+
+    #################
+    # multi-head test
+    #################
+    for nh in (1, 2, 4, 8, 16, 32):
+        print(f&#39;# heads: {nh}&#39;)
+        self_att = get_own_self_impl(input_dim, input_dim, n_heads=nh)
+        cross_att = get_own_cross_impl(input_dim, input_dim, n_heads=nh)
+        torc_att = get_upstream_impl(input_dim, nh)
+
+        h_torc, p_torc = torc_att(xp, xp, xp, key_padding_mask=src_padding_mask)
+        h_torc.transpose_(0, 1)
+
+        h_self = self_att(k=x, k_mask=src_padding_mask, q_mask=None)
+        h_cross = cross_att(x, x, x, k_mask=src_padding_mask, q_mask=None)
+
+        assert torch.allclose(h_self, h_torc, atol=1e-1)
+        assert torch.allclose(h_cross, h_torc, atol=1e-1)
+
+    self_att = get_own_self_impl(input_dim, 256, n_heads=2)
+    cross_att = get_own_cross_impl(input_dim, 256, n_heads=2)
+    h_self = self_att(k=x, k_mask=src_padding_mask, q_mask=None)
+    h_cross = cross_att(x, x, x, k_mask=src_padding_mask, q_mask=None)
+
+
+if __name__ == &#39;__main__&#39;:
+    main()</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="pysimt.layers.attention.multihead.get_own_cross_impl"><code class="name flex">
+<span>def <span class="ident">get_own_cross_impl</span></span>(<span>i_dim, p_dim, n_heads)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_own_cross_impl(i_dim, p_dim, n_heads):
+    cross_att = MultiheadAttention(input_dim=i_dim, proj_dim=p_dim, n_heads=n_heads)
+    print(cross_att)
+    nn.init.eye_(cross_att.lin_o.data)
+    nn.init.eye_(cross_att.lin_k.data)
+    nn.init.eye_(cross_att.lin_q.data)
+    nn.init.eye_(cross_att.lin_v.data)
+    return cross_att</code></pre>
+</details>
+</dd>
+<dt id="pysimt.layers.attention.multihead.get_own_self_impl"><code class="name flex">
+<span>def <span class="ident">get_own_self_impl</span></span>(<span>i_dim, p_dim, n_heads)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_own_self_impl(i_dim, p_dim, n_heads):
+    self_att = MultiheadAttention(input_dim=i_dim, proj_dim=p_dim, n_heads=n_heads, attn_type=&#39;self&#39;)
+    print(self_att)
+    nn.init.eye_(self_att.lin_o.data)
+    list(map(lambda x: nn.init.eye_(x), self_att.lin_k.data.chunk(3, dim=-1)))
+    return self_att</code></pre>
+</details>
+</dd>
+<dt id="pysimt.layers.attention.multihead.get_upstream_impl"><code class="name flex">
+<span>def <span class="ident">get_upstream_impl</span></span>(<span>dim, n_heads)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_upstream_impl(dim, n_heads):
+    mha = nn.MultiheadAttention(dim, n_heads, bias=False)
+    nn.init.eye_(mha.out_proj.weight.data)
+    list(map(lambda i: nn.init.eye_(i), mha.in_proj_weight.data.chunk(3, dim=0)))
+    nn.init.eye_(mha.in_proj_weight.data[:dim])
+    nn.init.eye_(mha.in_proj_weight.data[dim:2*dim])
+    nn.init.eye_(mha.in_proj_weight.data[-dim:])
+    return mha</code></pre>
+</details>
+</dd>
+<dt id="pysimt.layers.attention.multihead.main"><code class="name flex">
+<span>def <span class="ident">main</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def main():
+    np.random.seed(2)
+    torch.manual_seed(3)
+    torch.cuda.manual_seed(4)
+
+    input_dim = 512
+    batch_size = 100
+    vocab_size = 1000
+
+    # Create the embeddings
+    embs = nn.Embedding(vocab_size, embedding_dim=input_dim, padding_idx=0)
+
+    # Sample sequence lengths
+    src_seq_lens = np.random.normal(6, 1, size=(batch_size,)).astype(&#39;int&#39;)
+    trg_seq_lens = np.random.normal(6, 1, size=(batch_size,)).astype(&#39;int&#39;)
+
+    # Sample random vocab IDs
+    src_idxs = torch.randint(
+        low=1, high=vocab_size, size=(batch_size, src_seq_lens.max()))
+    trg_idxs = torch.randint(
+        low=1, high=vocab_size, size=(batch_size, trg_seq_lens.max()))
+
+    # pad short sequences
+    for seq, seqlen in enumerate(src_seq_lens):
+        src_idxs[seq, seqlen:].fill_(0)
+
+    for seq, seqlen in enumerate(trg_seq_lens):
+        trg_idxs[seq, seqlen:].fill_(0)
+
+    # masks with `True` for padded positions
+    src_padding_mask = src_idxs.eq(0)
+    trg_padding_mask = trg_idxs.eq(0)
+
+    # Verify lengths
+    assert np.allclose(src_seq_lens, src_idxs.ne(0).sum(1))
+    assert np.allclose(trg_seq_lens, trg_idxs.ne(0).sum(1))
+
+    # get embeddings
+    x = embs(src_idxs)
+    y = embs(trg_idxs)
+
+    # Verify lengths using embeddings
+    assert np.allclose(src_seq_lens, x.sum(-1).ne(0.0).sum(1))
+    assert np.allclose(trg_seq_lens, y.sum(-1).ne(0.0).sum(1))
+
+    mha = get_upstream_impl(input_dim, 1)
+    xp = x.transpose(0, 1)
+    yp = y.transpose(0, 1)
+
+    h_mha_self, p_mha_self = mha(
+        query=xp, key=xp, value=xp, key_padding_mask=src_padding_mask)
+    h_mha_cross, p_mha_cross = mha(
+        query=yp, key=xp, value=xp, key_padding_mask=src_padding_mask)
+    h_mha_self.transpose_(0, 1)
+    h_mha_cross.transpose_(0, 1)
+
+    # self attention
+    # q_mask: src
+    self_att = get_own_self_impl(input_dim, input_dim, n_heads=1)
+    h_self = self_att(k=x, v=x, q=x, k_mask=src_padding_mask, q_mask=None)
+
+    assert torch.allclose(h_self, h_mha_self, atol=1e-1)
+
+    # self attention with identity projections should produce the query itself
+    assert torch.allclose(
+        self_att(x, x, x, src_padding_mask, src_padding_mask), x, atol=1e-1)
+
+    # cross attention
+    # q_mask: trg
+    cross_att = get_own_cross_impl(input_dim, input_dim, n_heads=1)
+    h_cross = cross_att(k=x, v=x, q=y, k_mask=src_padding_mask, q_mask=trg_padding_mask)
+
+    assert torch.allclose(
+        cross_att(x, x, y, src_padding_mask, None), h_mha_cross, atol=1e-1)
+
+    #################
+    # multi-head test
+    #################
+    for nh in (1, 2, 4, 8, 16, 32):
+        print(f&#39;# heads: {nh}&#39;)
+        self_att = get_own_self_impl(input_dim, input_dim, n_heads=nh)
+        cross_att = get_own_cross_impl(input_dim, input_dim, n_heads=nh)
+        torc_att = get_upstream_impl(input_dim, nh)
+
+        h_torc, p_torc = torc_att(xp, xp, xp, key_padding_mask=src_padding_mask)
+        h_torc.transpose_(0, 1)
+
+        h_self = self_att(k=x, k_mask=src_padding_mask, q_mask=None)
+        h_cross = cross_att(x, x, x, k_mask=src_padding_mask, q_mask=None)
+
+        assert torch.allclose(h_self, h_torc, atol=1e-1)
+        assert torch.allclose(h_cross, h_torc, atol=1e-1)
+
+    self_att = get_own_self_impl(input_dim, 256, n_heads=2)
+    cross_att = get_own_cross_impl(input_dim, 256, n_heads=2)
+    h_self = self_att(k=x, k_mask=src_padding_mask, q_mask=None)
+    h_cross = cross_att(x, x, x, k_mask=src_padding_mask, q_mask=None)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="pysimt.layers.attention.multihead.MultiheadAttention"><code class="flex name class">
+<span>class <span class="ident">MultiheadAttention</span></span>
+<span>(</span><span>input_dim, proj_dim, n_heads=1, dropout=0.0, attn_type='cross', initializer='xavier_uniform')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>General purpose multihead attention implementation.</p>
+<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class MultiheadAttention(nn.Module):
+    &#34;&#34;&#34;General purpose multihead attention implementation.&#34;&#34;&#34;
+    def __init__(self, input_dim, proj_dim, n_heads=1, dropout=0.0,
+                 attn_type=&#39;cross&#39;, initializer=&#39;xavier_uniform&#39;):
+        assert proj_dim % n_heads == 0, &#34;proj_dim not divisible by n_heads.&#34;
+        super().__init__()
+
+        self.input_dim = input_dim
+        self.proj_dim = proj_dim
+        self.n_heads = n_heads
+        self.head_dim = self.proj_dim // self.n_heads
+        self.scale = math.sqrt(self.head_dim)
+        self.minus_inf = float(&#39;-inf&#39;)
+        self.attn_type = attn_type
+        self.initializer = initializer
+        self.p_dropout = dropout
+
+        self._apply_projections_and_reshape = getattr(
+            self, f&#39;_apply_projections_and_reshape_{self.attn_type}&#39;)
+
+        # dropout over attention probability
+        self.dropout = nn.Dropout(dropout) if dropout &gt; 0.0 else lambda x: x
+
+        self._create_layers()
+        self._reset_parameters(getattr(nn.init, f&#39;{initializer}_&#39;))
+
+    def __repr__(self):
+        s = f&#34;MultiheadAttention({self.input_dim} -&gt; {self.proj_dim}, {self.n_heads} heads, &#34;
+        s += f&#34;type={self.attn_type!r}, dropout={self.p_dropout})&#34;
+        return s
+
+    def view_as_headed(self, x):
+        &#34;&#34;&#34;Returns a view of shape `[bsz, n_heads, seq_len, head_dim]`
+        from `[bsz, seq_len, head_dim * n_heads]`.&#34;&#34;&#34;
+        return x.view(x.size(0), x.size(1), self.n_heads, -1).transpose(1, 2)
+
+    @staticmethod
+    def view_as_concat(x):
+        &#34;&#34;&#34;Returns a view of shape `[bsz, seq_len, head_dim * n_heads]`
+        from `[bsz, n_heads, seq_len, head_dim]`.&#34;&#34;&#34;
+        return x.transpose(1, 2).contiguous().view(x.size(0), x.size(2), -1)
+
+    def _reset_parameters(self, init_fn):
+        &#34;&#34;&#34;Reinitializes layer weights.&#34;&#34;&#34;
+        for param in self.parameters():
+            init_fn(param)
+
+    def _create_layers(self):
+        &#34;&#34;&#34;Create projection layer weights.&#34;&#34;&#34;
+        self.lin_o = nn.Parameter(torch.Tensor(self.proj_dim, self.proj_dim))
+        if self.attn_type != &#39;self&#39;:
+            self.lin_k = nn.Parameter(torch.Tensor(self.input_dim, self.proj_dim))
+            self.lin_q = nn.Parameter(torch.Tensor(self.input_dim, self.proj_dim))
+            self.lin_v = nn.Parameter(torch.Tensor(self.input_dim, self.proj_dim))
+        else:
+            self.lin_k = nn.Parameter(torch.Tensor(self.input_dim, 3 * self.proj_dim))
+
+    def _apply_projections_and_reshape_self(self, k, v=None, q=None):
+        &#34;&#34;&#34;Projects key, value and queries and returns multi-head view
+        for self-attention variant.
+
+        Args:
+            k: Tensor of shape `[batch_size, v_len, dim]`.
+            v: `None` for self-attention. This is not used.
+            q: `None` for self-attention. This is not used.
+
+        Returns:
+            A tuple of 3 tensors for k,v,q projections, each with shape
+            `[batch_size, n_heads, v_len, head_dim]`.
+        &#34;&#34;&#34;
+        return (
+            self.view_as_headed(t) for t in k.matmul(self.lin_k).chunk(3, dim=-1))
+
+    def _apply_projections_and_reshape_cross(self, k, v, q):
+        &#34;&#34;&#34;Projects key, value and queries and returns multi-head view
+        for cross-attention variant.
+
+        Args:
+            k: Tensor of shape `[batch_size, v_len, dim]`.
+            v: Tensor of shape `[batch_size, v_len, dim]`.
+            q: Tensor of shape `[batch_size, q_len, dim]`.
+
+        Returns:
+            A tuple of 3 tensors for k,v,q projections, each with shape
+            `[batch_size, n_heads, (v|q)_len, head_dim]`.
+        &#34;&#34;&#34;
+        return (self.view_as_headed(k.matmul(self.lin_k)),
+                self.view_as_headed(v.matmul(self.lin_v)),
+                self.view_as_headed(q.matmul(self.lin_q)))
+
+    def _compute_scores(self, query, key, k_mask=None):
+        &#34;&#34;&#34;Computes normalized scaled dot-product scores between query and key.
+
+        Args:
+            query: Tensor of shape `[batch_size, n_heads, q_len, dim]`.
+            key: Tensor of shape `[batch_size, n_heads, v_len, dim]`.
+            k_mask: Tensor of shape `[batch_size, v_len]`.
+
+        Returns:
+            Tensor of shape `[batch_size, n_heads, q_len, v_len]` with
+                normalized attention weights.
+        &#34;&#34;&#34;
+        scores = torch.matmul(query.div(self.scale), key.transpose(-2, -1))
+        if k_mask is not None:
+            # mask &lt;pad&gt;&#39;ded positions
+            scores.masked_fill_(k_mask[:, None, None, :], self.minus_inf)
+        return self.dropout(scores.softmax(dim=-1))
+
+    def _apply_scores(self, p, value, q_mask=None):
+        &#34;&#34;&#34;Applies normalized attention weights on `value`. `q_mask`
+        is used to zero padded positions afterwards.
+
+        Args:
+            p: Tensor of shape `[batch_size, n_heads, q_len, v_len]`.
+            value: Tensor of shape `[batch_size, n_heads, v_len, dim]`.
+            q_mask: Tensor of shape `[batch_size, q_len]`.
+
+        Returns:
+            Tensor of shape `[batch_size, n_heads, v_len, dim]`.
+        &#34;&#34;&#34;
+        ctx = torch.matmul(p, value)
+        if q_mask is not None:
+            # zero out &lt;pad&gt;&#39;ded positions
+            ctx.mul_(q_mask[:, None, :, None].logical_not())
+        return ctx
+
+    def forward(self, k, v=None, q=None, k_mask=None, q_mask=None):
+        kp, vp, qp = self._apply_projections_and_reshape(k, v, q)
+
+        # Get normalized scores
+        alpha = self._compute_scores(qp, kp, k_mask)
+
+        # Get weighted contexts for each head -&gt; concat -&gt; project
+        return self.view_as_concat(
+            self._apply_scores(alpha, vp, q_mask)).matmul(self.lin_o)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>torch.nn.modules.module.Module</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="pysimt.layers.attention.multihead.MultiheadAttention.dump_patches"><code class="name">var <span class="ident">dump_patches</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pysimt.layers.attention.multihead.MultiheadAttention.training"><code class="name">var <span class="ident">training</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Static methods</h3>
+<dl>
+<dt id="pysimt.layers.attention.multihead.MultiheadAttention.view_as_concat"><code class="name flex">
+<span>def <span class="ident">view_as_concat</span></span>(<span>x)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns a view of shape <code>[bsz, seq_len, head_dim * n_heads]</code>
+from <code>[bsz, n_heads, seq_len, head_dim]</code>.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def view_as_concat(x):
+    &#34;&#34;&#34;Returns a view of shape `[bsz, seq_len, head_dim * n_heads]`
+    from `[bsz, n_heads, seq_len, head_dim]`.&#34;&#34;&#34;
+    return x.transpose(1, 2).contiguous().view(x.size(0), x.size(2), -1)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="pysimt.layers.attention.multihead.MultiheadAttention.forward"><code class="name flex">
+<span>def <span class="ident">forward</span></span>(<span>self, k, v=None, q=None, k_mask=None, q_mask=None) ‑> Callable[..., Any]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the :class:<code>Module</code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def forward(self, k, v=None, q=None, k_mask=None, q_mask=None):
+    kp, vp, qp = self._apply_projections_and_reshape(k, v, q)
+
+    # Get normalized scores
+    alpha = self._compute_scores(qp, kp, k_mask)
+
+    # Get weighted contexts for each head -&gt; concat -&gt; project
+    return self.view_as_concat(
+        self._apply_scores(alpha, vp, q_mask)).matmul(self.lin_o)</code></pre>
+</details>
+</dd>
+<dt id="pysimt.layers.attention.multihead.MultiheadAttention.view_as_headed"><code class="name flex">
+<span>def <span class="ident">view_as_headed</span></span>(<span>self, x)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns a view of shape <code>[bsz, n_heads, seq_len, head_dim]</code>
+from <code>[bsz, seq_len, head_dim * n_heads]</code>.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def view_as_headed(self, x):
+    &#34;&#34;&#34;Returns a view of shape `[bsz, n_heads, seq_len, head_dim]`
+    from `[bsz, seq_len, head_dim * n_heads]`.&#34;&#34;&#34;
+    return x.view(x.size(0), x.size(1), self.n_heads, -1).transpose(1, 2)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="pysimt.layers.attention" href="index.html">pysimt.layers.attention</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="pysimt.layers.attention.multihead.get_own_cross_impl" href="#pysimt.layers.attention.multihead.get_own_cross_impl">get_own_cross_impl</a></code></li>
+<li><code><a title="pysimt.layers.attention.multihead.get_own_self_impl" href="#pysimt.layers.attention.multihead.get_own_self_impl">get_own_self_impl</a></code></li>
+<li><code><a title="pysimt.layers.attention.multihead.get_upstream_impl" href="#pysimt.layers.attention.multihead.get_upstream_impl">get_upstream_impl</a></code></li>
+<li><code><a title="pysimt.layers.attention.multihead.main" href="#pysimt.layers.attention.multihead.main">main</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="pysimt.layers.attention.multihead.MultiheadAttention" href="#pysimt.layers.attention.multihead.MultiheadAttention">MultiheadAttention</a></code></h4>
+<ul class="">
+<li><code><a title="pysimt.layers.attention.multihead.MultiheadAttention.dump_patches" href="#pysimt.layers.attention.multihead.MultiheadAttention.dump_patches">dump_patches</a></code></li>
+<li><code><a title="pysimt.layers.attention.multihead.MultiheadAttention.forward" href="#pysimt.layers.attention.multihead.MultiheadAttention.forward">forward</a></code></li>
+<li><code><a title="pysimt.layers.attention.multihead.MultiheadAttention.training" href="#pysimt.layers.attention.multihead.MultiheadAttention.training">training</a></code></li>
+<li><code><a title="pysimt.layers.attention.multihead.MultiheadAttention.view_as_concat" href="#pysimt.layers.attention.multihead.MultiheadAttention.view_as_concat">view_as_concat</a></code></li>
+<li><code><a title="pysimt.layers.attention.multihead.MultiheadAttention.view_as_headed" href="#pysimt.layers.attention.multihead.MultiheadAttention.view_as_headed">view_as_headed</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>
