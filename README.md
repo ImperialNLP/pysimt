@@ -1,7 +1,9 @@
-# pysimt
+![pysimt](https://github.com/ImperialNLP/pysimt/blob/master/docs/logo.png?raw=true "pysimt")
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.7](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-370/)
 
 This repository holds the codes and experiment configurations for the [Simultaneous Machine Translation with Visual Context](https://www.aclweb.org/anthology/2020.emnlp-main.184.pdf) paper.
-The code will hopefully be here in the following weeks.
 
 ## Citation
 
