@@ -1,3 +1,7 @@
+from typing import List
+
+import numpy as np
+
 import torch
 import torch.nn.functional as F
 from torch import nn
@@ -130,3 +134,43 @@ def generate_combined_mask(data, k=1):
     combined_mask = padding_mask | lookahead_mask
 
     return combined_mask
+
+
+def readable_size(n: int) -> str:
+    """Return a readable size string."""
+    sizes = ['K', 'M', 'G']
+    fmt = ''
+    size = n
+    for i, s in enumerate(sizes):
+        nn = n / (1000 ** (i + 1))
+        if nn >= 1:
+            size = nn
+            fmt = sizes[i]
+        else:
+            break
+    return '%.2f%s' % (size, fmt)
+
+
+def get_module_groups(layer_names: List[str]) -> List[str]:
+    groups = set()
+    for name in layer_names:
+        if '.weight' in name:
+            groups.add(name.split('.weight')[0])
+        elif '.bias' in name:
+            groups.add(name.split('.bias')[0])
+    return sorted(list(groups))
+
+
+def get_n_params(module):
+    n_param_learnable = 0
+    n_param_frozen = 0
+
+    for param in module.parameters():
+        if param.requires_grad:
+            n_param_learnable += np.cumprod(param.data.size())[-1]
+        else:
+            n_param_frozen += np.cumprod(param.data.size())[-1]
+
+    n_param_all = n_param_learnable + n_param_frozen
+    return "# parameters: {} ({} learnable)".format(
+        readable_size(n_param_all), readable_size(n_param_learnable))

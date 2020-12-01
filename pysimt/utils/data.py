@@ -1,6 +1,3 @@
-from typing import List
-
-import torch
 from torch.utils.data import DataLoader
 
 
@@ -17,6 +14,3 @@ def make_dataloader(dataset, pin_memory=False, num_workers=0):
         dataset, batch_sampler=dataset.sampler,
         collate_fn=dataset.collate_fn,
         pin_memory=pin_memory, num_workers=num_workers)
-
-
-

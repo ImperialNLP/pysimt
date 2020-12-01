@@ -1,9 +1,12 @@
+import os
 import bz2
 import gzip
 import lzma
 import pathlib
+import tempfile
 
 from collections import deque
+from typing import List
 
 import numpy as np
 from tqdm import tqdm
@@ -105,4 +108,3 @@ def get_temp_file(delete=False, close=False):
 
 def pbar(iterator, unit='it'):
     return tqdm(iterator, unit=unit, ncols=70, smoothing=0)
-
