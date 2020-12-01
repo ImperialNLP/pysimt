@@ -39,7 +39,7 @@ class GreedySearch:
         # Dump raw ones (BPE/SPM etc.)
         self.dump_lines(hyps, suffix + '.raw')
         if self.filter_chain is not None:
-            self.dump_lines(self.filter_chain(hyps), suffix)
+            self.dump_lines(self.filter_chain.apply(hyps), suffix)
 
     def dump_lines(self, lines, suffix):
         fname = f'{self.out_prefix}.{suffix}'

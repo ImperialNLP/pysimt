@@ -16,10 +16,10 @@ class Evaluator:
             # Fallback to en (this is only relevant for METEOR)
             self.language = 'en'
 
-        self.filter = lambda s: s
+        self.filter = None
         if filters:
             self.filter = FilterChain(filters)
-            self.refs = self.filter(refs)
+            self.refs = self.filter.apply(refs)
 
         assert len(self.refs) > 0, "Number of reference files == 0"
 
@@ -32,7 +32,8 @@ class Evaluator:
         assert isinstance(hyps, list), "hyps should be a list."
 
         # Post-process if requested
-        hyps = self.filter(hyps)
+        if self.filter is not None:
+            hyps = self.filter.apply(hyps)
 
         results = []
         for key, scorer in self.scorers.items():

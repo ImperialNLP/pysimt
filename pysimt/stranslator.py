@@ -71,7 +71,7 @@ class STranslator:
 
         if self.disable_filters or not eval_filters:
             logger.info('Post-processing filters disabled.')
-            self.filter = lambda s: s
+            self.filter = None
         else:
             logger.info('Post-processing filters enabled.')
             self.filter = FilterChain(eval_filters)
