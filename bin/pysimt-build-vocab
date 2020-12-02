@@ -10,7 +10,7 @@ from collections import OrderedDict
 import numpy as np
 
 from pysimt.vocabulary import Vocabulary
-from pysimt.utils.io import pbar
+from pysimt.utils.io import progress_bar
 
 
 def freqs_to_dict(token_freqs, min_freq=0, max_items=0, exclude_symbols=False):
@@ -55,7 +55,7 @@ def get_freqs(filename, cumul_dict=None):
 
     print("Reading file %s" % filename)
     with open(filename) as fhandle:
-        for line in pbar(fhandle, unit='lines'):
+        for line in progress_bar(fhandle, unit='lines'):
             line = line.strip()
             if line:
                 # Collect frequencies
