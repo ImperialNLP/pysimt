@@ -80,7 +80,7 @@ def write_dict(fname, vocab):
 
 
 def main():
-    parser = argparse.ArgumentParser(prog='build-vocab')
+    parser = argparse.ArgumentParser(prog='pysimt-build-vocab')
     parser.add_argument('-o', '--output-dir', type=str, default='.',
                         help='Output directory')
     parser.add_argument('-s', '--single', type=str, default=None,
