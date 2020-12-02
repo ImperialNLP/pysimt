@@ -47,7 +47,7 @@ def validate_or_assert(option_name, option_value, valid_options):
 
 def get_meteor_jar(ver: str = '1.5'):
     root = pathlib.Path(os.getenv('HOME')) / '.pysimt' / 'meteor-data'
-    jar = root / 'meteor-1.5.jar'
+    jar = root / f'meteor-{ver}.jar'
     assert jar.exists(), "METEOR not installed, please run 'pysimt-install-extra'"
     return jar
 

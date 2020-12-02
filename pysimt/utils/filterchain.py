@@ -2,7 +2,8 @@ import re
 import pathlib
 from typing import List, Union
 
-from .io import get_temp_file, fopen
+from .resource_mgr import res_mgr
+from .io import fopen
 
 
 class FilterChain:
@@ -81,7 +82,7 @@ class FilterChain:
                 for line in f:
                     lines.append(line.strip())
                 f.close()
-                f = get_temp_file()
+                f = res_mgr.get_temp_file()
                 for line in self._apply(lines):
                     f.write(line + '\n')
                 f.close()

@@ -1,18 +1,13 @@
-import os
 import bz2
 import gzip
 import lzma
 import pathlib
-import tempfile
 
 from collections import deque
-from typing import List
+from typing import List, Iterable, Any
 
 import numpy as np
 from tqdm import tqdm
-
-
-from ..cleanup import cleanup
 
 
 class FileRotator:
@@ -91,20 +86,6 @@ def read_reference_files(*args) -> List[List[str]]:
     return all_lines
 
 
-def get_temp_file(delete=False, close=False):
-    """Creates a temporary file under a folder."""
-    root = pathlib.Path(os.environ.get('NMTPY_TMP', '/tmp'))
-    if not root.exists():
-        root.mkdir(parents=True, exist_ok=True)
-
-    prefix = str(root / "pysimt_{}".format(os.getpid()))
-    t = tempfile.NamedTemporaryFile(
-        mode='w', prefix=prefix, delete=delete)
-    cleanup.register_tmp_file(t.name)
-    if close:
-        t.close()
-    return t
-
-
-def pbar(iterator, unit='it'):
+def progress_bar(iterator: Iterable[Any], unit: str = 'it'):
+    """Wraps the given iterator into tqdm for progress bar rendering."""
     return tqdm(iterator, unit=unit, ncols=70, smoothing=0)
