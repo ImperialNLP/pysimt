@@ -16,7 +16,7 @@ for ckpt in `find -L -name '*simultaneouswaitk*.best.loss.ckpt'`; do
   if [ "$?" == "0" ]; then
     # check for the availability of one test set
     if [ ! -f "${prefix}.test_2017_flickr.wait${k}.gs" ]; then
-      pysimt stranslate -m 60 -s ${test_set} -b 1 -f wk --n-init-tokens "$k" \
+      pysimt translate -m 60 -s ${test_set} -b 1 -f wk --n-init-tokens "$k" \
         -o ${prefix} $ckpt
     fi
   fi
