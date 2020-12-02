@@ -1,5 +1,6 @@
 import logging
 from pathlib import Path
+from typing import Tuple, List
 
 import torch
 
@@ -27,11 +28,11 @@ class TextDataset(Dataset):
     def read_sentences(fname: str,
                        vocab: Vocabulary,
                        bos: bool = False,
-                       eos: bool = True):
+                       eos: bool = True) -> Tuple[List[List[int]], List[int]]:
         lines = []
         lens = []
         with fopen(fname) as f:
-            for idx, line in enumerate(pbar(f, unit='sents')):
+            for idx, line in enumerate(progress_bar(f, unit='sents')):
                 line = line.strip()
 
                 # Empty lines will cause a lot of headaches,

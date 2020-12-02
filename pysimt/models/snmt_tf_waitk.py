@@ -9,7 +9,7 @@ logger = logging.getLogger('pysimt')
    and Controllable Latency using Prefix-to-Prefix Framework, arXiv:1810.08398
 
 The only required parameter is the `k` argument for training. When decoding,
-pass the `k` argument explicitly to `pysimt stranslate`. A large enough `k`
+pass the `k` argument explicitly to `pysimt translate`. A large enough `k`
 should produce the same results as the `snmt.py` model.
 """
 

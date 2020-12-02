@@ -5,7 +5,7 @@ import itertools
 import torch
 
 from ..utils.device import DEVICE
-from ..utils.io import pbar
+from ..utils.io import progress_bar
 from ..utils.data import sort_predictions
 
 from .greedy import GreedySearch
@@ -133,7 +133,7 @@ class SimultaneousGreedySearch(GreedySearch):
         crit_fn = getattr(self, criterion)
 
         start = time.time()
-        for batch in pbar(self.data_loader, unit='batch'):
+        for batch in progress_bar(self.data_loader, unit='batch'):
             self.clear_states()
 
             batch.device(DEVICE)

@@ -4,7 +4,7 @@ import time
 from .sim_greedy import SimultaneousGreedySearch
 from ..utils.data import sort_predictions
 from ..utils.device import DEVICE
-from ..utils.io import pbar
+from ..utils.io import progress_bar
 
 logger = logging.getLogger('pysimt')
 
@@ -33,7 +33,7 @@ class SimultaneousWaitKGreedySearch(SimultaneousGreedySearch):
         translations = []
 
         start = time.time()
-        for batch in pbar(self.data_loader, unit='batch'):
+        for batch in progress_bar(self.data_loader, unit='batch'):
             self.clear_states()
 
             batch.device(DEVICE)

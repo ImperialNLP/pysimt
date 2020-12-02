@@ -4,7 +4,7 @@ import math
 import torch
 
 from ..utils.device import DEVICE
-from ..utils.io import pbar
+from ..utils.io import progress_bar
 from ..utils.data import sort_predictions
 
 logger = logging.getLogger('pysimt')
@@ -74,7 +74,7 @@ class GreedySearch:
         hyps = torch.zeros(
             (self.max_len, max_batch_size), dtype=torch.long, device=DEVICE)
 
-        for batch in pbar(self.data_loader, unit='batch'):
+        for batch in progress_bar(self.data_loader, unit='batch'):
             batch.device(DEVICE)
 
             # Reset hypotheses

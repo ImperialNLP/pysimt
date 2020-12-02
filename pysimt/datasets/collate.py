@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# This will eventually disappear as this only provides .size
-# which can be inferred if we guarantee that batch_dim is always at
-# a given position regardless of input/output feature/tensor types.
-
-
 class Batch(dict):
     """A custom dictionary representing a batch."""
     def __init__(self, *args, **kwargs):

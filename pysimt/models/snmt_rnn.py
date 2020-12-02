@@ -11,7 +11,7 @@ from ..utils.nn import get_n_params
 from ..utils.topology import Topology
 from ..utils.ml_metrics import Loss
 from ..utils.device import DEVICE
-from ..utils.io import pbar
+from ..utils.io import progress_bar
 from ..datasets import MultimodalDataset
 from ..metrics import Metric
 
@@ -22,7 +22,7 @@ you can decode translations from this model either using plain greedy-search
 or state-of-the-art simultanous decoding algorithms.
 
 # Pure greedy-search (by default batched)
-$ pysimt stranslate -s test_2016_flickr,test_2017_flickr \
+$ pysimt translate -s test_2016_flickr,test_2017_flickr \
     -f gs -o <output_prefix> <best model's .ckpt>
 
 """
@@ -279,7 +279,7 @@ class SimultaneousNMT(nn.Module):
         """Computes test set loss over the given DataLoader instance."""
         loss = Loss()
 
-        for batch in pbar(data_loader, unit='batch'):
+        for batch in progress_bar(data_loader, unit='batch'):
             batch.device(DEVICE)
             out = self.forward(batch)
             loss.update(out['loss'], out['n_items'])
