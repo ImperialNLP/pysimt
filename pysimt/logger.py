@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 import pathlib
 import logging
 
-from .cleanup import cleanup
+from .utils.resource_mgr import res_mgr
 
 
 def setup(opts=None):
@@ -23,5 +22,5 @@ def setup(opts=None):
         file_handler.setFormatter(formatter)
         logger.addHandler(file_handler)
 
-    cleanup.register_handler(logger)
+    res_mgr.register_handler(logger)
     return logger
