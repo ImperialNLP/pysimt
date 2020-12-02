@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.9.2" />
 <title>pysimt API documentation</title>
-<meta name="description" content="" />
+<meta name="description" content="`pysimt` is a `PyTorch`-based sequence-to-sequence (S2S) framework that facilitates
+research in unimodal and multi-modal machine translation. The …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -22,41 +23,210 @@
 <h1 class="title">Package <code>pysimt</code></h1>
 </header>
 <section id="section-intro">
+<p><code><a title="pysimt" href="#pysimt">pysimt</a></code> is a <code>PyTorch</code>-based sequence-to-sequence (S2S) framework that facilitates
+research in unimodal and multi-modal machine translation. The framework
+is especially geared towards a set of recent simultaneous MT approaches, including
+heuristics-based decoding and prefix-to-prefix training/decoding. Common metrics
+such as average proportion (AP), average lag (AL), and consecutive wait (CW)
+are provided through well-defined APIs as well.</p>
+<h2 id="features">Features</h2>
+<p><code><a title="pysimt" href="#pysimt">pysimt</a></code> includes two state-of-the-art S2S approaches to neural machine
+translation (NMT) to begin with:</p>
+<ul>
+<li><a href="http://arxiv.org/pdf/1409.0473">RNN-based attentive NMT (Bahdanau et al. 2014)</a></li>
+<li><a href="http://papers.nips.cc/paper/7181-attention-is-all-you-need.pdf">Self-attention based Transformers NMT (Vaswani et al. 2017)</a></li>
+</ul>
+<p>The toolkit mostly emphasizes on multimodal machine translation (MMT), and
+therefore the above models easily accomodate multiple source modalities
+through <a href="https://www.aclweb.org/anthology/2020.emnlp-main.184">encoder-side (Caglayan et al. 2020)</a> and <a href="http://arxiv.org/pdf/1609.03976">decoder-side multimodal attention (Caglayan et al. 2016)</a> approaches.</p>
+<h3 id="simultaneous-nmt">Simultaneous NMT</h3>
+<p>The following notable approaches in the simultaneous NMT field are implemented:</p>
+<ul>
+<li><a href="https://arxiv.org/pdf/1606.02012">Heuristics-based decoding approaches wait-if-diff and wait-if-worse (Cho and Esipova, 2016)</a></li>
+<li><a href="https://www.aclweb.org/anthology/P19-1289.pdf">Prefix-to-prefix training and decoding approach wait-k (Ma et al., 2019)</a></li>
+</ul>
+<h3 id="simultaneous-mmt">Simultaneous MMT</h3>
+<p>The toolkit includes the reference implementation for the following conference
+papers that initiated research in Simultaneous MMT:</p>
+<ul>
+<li><a href="https://www.aclweb.org/anthology/2020.emnlp-main.184.pdf">Simultaneous Machine Translation with Visual Context (Caglayan et al. 2020)</a></li>
+<li><a href="http://statmt.org/wmt20/pdf/2020.wmt-1.70.pdf">Towards Multimodal Simultaneous Neural Machine Translation (Imankulova et al. 2020)</a></li>
+</ul>
+<h3 id="other-features">Other features</h3>
+<ul>
+<li>CPU / (Single) GPU training of sequence-to-sequence frameworks</li>
+<li>Reproducible experimentation through well-defined configuration files</li>
+<li>Easy multimodal training with parallel corpora</li>
+<li>Logging training progress and validation performance to Tensorboard</li>
+<li>Text, Image Features and Speech encoders</li>
+<li>Early-stopping and model checkpointing using various criteria such as MultiBLEU,
+SacreBLEU, METEOR, word error rate (WER), character error rate (CER), etc.</li>
+<li>Ready-to-use latency metrics for simultaneous MT, including average proportion (AP),
+average lag (AL), and consecutive wait (CW)</li>
+<li>Beam search translation for consecutive, greedy search translation for simultaneous MT</li>
+<li>Utilities to produce reports for simultaneous MT performance</li>
+</ul>
+<h2 id="installation">Installation</h2>
+<p>Essentially, <code><a title="pysimt" href="#pysimt">pysimt</a></code> requires <code>Python&gt;=3.7</code> and <code>torch&gt;=1.7.0</code>. You can access
+the other dependencies in the provided <code>environment.yml</code> file.</p>
+<p>The following command will create an appropriate Anaconda environment with <code><a title="pysimt" href="#pysimt">pysimt</a></code>
+installed in editable mode. This will allow you to modify to code in the GIT
+checkout folder, and then run the experiments directly.</p>
+<pre><code>$ conda env create -f environment.yml
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you want to use the METEOR metric for early-stopping or the <code>pysimt-coco-metrics</code>
+script to evaluate your models' performance, you need to run the <code>pysimt-install-extra</code>
+script within the <strong>pysimt</strong> Anaconda environment. This will download and install
+the METEOR paraphrase files under the <code>~/.pysimt</code> folder.</p>
+</div>
+<h2 id="command-line-tools">Command-line tools</h2>
+<p>Once installed, you will have access to three command line utilities:</p>
+<h3 id="pysimt-build-vocab">pysimt-build-vocab</h3>
+<ul>
+<li>Since <code><a title="pysimt" href="#pysimt">pysimt</a></code> does not pre-process, tokenize, segment the given text files
+automagically, all these steps should be done by the user prior to training, and
+the relevant vocabulary files should be constructed using <code>pysimt-build-vocab</code>.</li>
+<li>Different vocabularies should be constructed for source and target language
+representations (unless <code>-s</code> is given).</li>
+<li>The resulting files are in <code>.json</code> format.</li>
+</ul>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><code>-o, --output-dir OUTPUT_DIR</code>: Output directory where the resulting vocabularies will be stored.</li>
+<li><code>-s, --single</code>: If given, a single vocabulary file for all the
+given training corpora files will be constructed. Useful for weight tying in embedding layers.</li>
+<li><code>-m, --min-freq</code>: If given an integer <code>M</code>, it will filter out tokens occuring <code>&lt; M</code> times.</li>
+<li><code>-M, --max-items</code>: If given an integer <code>M</code>, the final vocabulary will be limited to <code>M</code> most-frequent tokens.</li>
+<li><code>-x, --exclude-symbols</code>: If given, the vocabulary will <strong>not include special markers</strong> such as <code>&lt;bos&gt;, &lt;eos&gt;</code>.
+This should be used cautiously, and only for ad-hoc model implementations, as it may break the default models.</li>
+<li><code>files</code>: A variable number of training set corpora can be provided. If <code>-s</code> is not
+given, one vocabulary for each will be created.</li>
+</ul>
+<h3 id="pysimt-coco-metrics">pysimt-coco-metrics</h3>
+<p>This is a simple utility that computes BLEU, METEOR, CIDEr, and ROUGE-L
+using the well known <a href="https://github.com/tylin/coco-caption">coco-caption</a> library. The library is shipped within
+<code><a title="pysimt" href="#pysimt">pysimt</a></code> so that you do not have to install it separately.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><code>-l, --language</code>: If given a string <code>L</code>, the METEOR will be informed with that information.
+For languages not supported by METEOR, English will be assumed.</li>
+<li><code>-w, --write</code>: For every hypothesis file given as argument, a <code>&lt;hypothesis file&gt;.score</code> file
+will be created with the computed metrics inside for convenience.</li>
+<li><code>-r, --refs</code>: List of reference files for evaluation. The number of lines across multiple
+references should be <strong>equal</strong>.</li>
+<li><code>systems</code>: A variable number of hypotheses files that represent system outputs.</li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code>$ pysimt-coco-metrics -l de system1.hyps system2.hyps -r ref1
+$ pysimt-coco-metrics -l de system1.hyps system2.hyps -r ref1 ref2 ref3
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This utility requires <strong>tokenized</strong> hypotheses and references, as further
+tokenization is not applied by the internal metrics. Specifically for BLEU,
+if you are not evaluating your models for MMT or image captioning,
+you may want to use <code>sacreBLEU</code> for detokenized hypotheses and references.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The <code>Bleu_4</code> produced by this utility is equivalent to the output of
+<code>multi-bleu.perl</code> and <code>sacreBLEU</code> (when <code>--tokenize none</code> is given to the latter).</p>
+</div>
+<h3 id="pysimt">pysimt</h3>
+<p>This is the main entry point to the software. It supports two modes, namely
+<strong>pysimt train</strong> and <strong>pysimt translate</strong>.</p>
+<h4 id="training-a-model">Training a model</h4>
+<h4 id="translating-with-a-pre-trained-model">Translating with a pre-trained model</h4>
+<h2 id="configuring-an-experiment">Configuring An Experiment</h2>
+<h2 id="models">Models</h2>
+<ul>
+<li>A <code><a title="pysimt" href="#pysimt">pysimt</a></code> model derives from <code>torch.nn.Module</code> and implements specific API methods.</li>
+</ul>
+<h2 id="contributing">Contributing</h2>
+<p><code><a title="pysimt" href="#pysimt">pysimt</a></code> is <a href="https://github.com/ImperialNLP/pysimt">on GitHub</a>. Bug reports and pull requests are welcome.</p>
+<h2 id="citing-the-toolkit">Citing The Toolkit</h2>
+<p>As of now, you can cite the <a href="https://www.aclweb.org/anthology/2020.emnlp-main.184">following work</a> if you use this toolkit. We will
+update this section if the software paper is published elsewhere.</p>
+<pre><code>@inproceedings{caglayan-etal-2020-simultaneous,
+  title = &quot;Simultaneous Machine Translation with Visual Context&quot;,
+  author = {Caglayan, Ozan  and
+    Ive, Julia  and
+    Haralampieva, Veneta  and
+    Madhyastha, Pranava  and
+    Barrault, Lo{\&quot;\i}c  and
+    Specia, Lucia},
+  booktitle = &quot;Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)&quot;,
+  month = nov,
+  year = &quot;2020&quot;,
+  address = &quot;Online&quot;,
+  publisher = &quot;Association for Computational Linguistics&quot;,
+  url = &quot;https://www.aclweb.org/anthology/2020.emnlp-main.184&quot;,
+  pages = &quot;2350--2361&quot;,
+}
+</code></pre>
+<h2 id="license">License</h2>
+<p><code><a title="pysimt" href="#pysimt">pysimt</a></code> uses MIT License.</p>
+<pre><code>Copyright (c) 2020 NLP@Imperial
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+</code></pre>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">__version__ = &#39;1.0.0&#39;</code></pre>
+<pre><code class="python">&#34;&#34;&#34;
+`pysimt` is a `PyTorch`-based sequence-to-sequence (S2S) framework that facilitates
+research in unimodal and multi-modal machine translation. The framework
+is especially geared towards a set of recent simultaneous MT approaches, including
+heuristics-based decoding and prefix-to-prefix training/decoding. Common metrics
+such as average proportion (AP), average lag (AL), and consecutive wait (CW)
+are provided through well-defined APIs as well.
+
+
+.. include:: ./docs.md
+&#34;&#34;&#34;
+
+__version__ = &#39;1.0.0&#39;
+
+# Disable documentation generation for the following sub modules
+__pdoc__ = {
+    &#39;cocoeval&#39;: False,
+    &#39;config&#39;: False,
+    &#39;logger&#39;: False,
+}</code></pre>
 </details>
 </section>
 <section>
 <h2 class="section-title" id="header-submodules">Sub-modules</h2>
 <dl>
-<dt><code class="name"><a title="pysimt.cleanup" href="cleanup.html">pysimt.cleanup</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="pysimt.cocoeval" href="cocoeval/index.html">pysimt.cocoeval</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="pysimt.config" href="config.html">pysimt.config</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
 <dt><code class="name"><a title="pysimt.datasets" href="datasets/index.html">pysimt.datasets</a></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>A dataset in <code><a title="pysimt" href="#pysimt">pysimt</a></code> inherits from <code>torch.nn.Dataset</code> and is designed
+to read and expose a specific type of corpus …</p></div>
 </dd>
 <dt><code class="name"><a title="pysimt.evaluator" href="evaluator.html">pysimt.evaluator</a></code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 <dt><code class="name"><a title="pysimt.layers" href="layers/index.html">pysimt.layers</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="pysimt.logger" href="logger.html">pysimt.logger</a></code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
@@ -116,18 +286,37 @@
 <nav id="sidebar">
 <h1>Index</h1>
 <div class="toc">
-<ul></ul>
+<ul>
+<li><a href="#features">Features</a><ul>
+<li><a href="#simultaneous-nmt">Simultaneous NMT</a></li>
+<li><a href="#simultaneous-mmt">Simultaneous MMT</a></li>
+<li><a href="#other-features">Other features</a></li>
+</ul>
+</li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#command-line-tools">Command-line tools</a><ul>
+<li><a href="#pysimt-build-vocab">pysimt-build-vocab</a></li>
+<li><a href="#pysimt-coco-metrics">pysimt-coco-metrics</a></li>
+<li><a href="#pysimt">pysimt</a><ul>
+<li><a href="#training-a-model">Training a model</a></li>
+<li><a href="#translating-with-a-pre-trained-model">Translating with a pre-trained model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#configuring-an-experiment">Configuring an experiment</a></li>
+<li><a href="#models">Models</a></li>
+<li><a href="#contributing">Contributing</a></li>
+<li><a href="#citing-the-toolkit">Citing the toolkit</a></li>
+<li><a href="#license">License</a></li>
+</ul>
 </div>
 <ul id="index">
 <li><h3><a href="#header-submodules">Sub-modules</a></h3>
 <ul>
-<li><code><a title="pysimt.cleanup" href="cleanup.html">pysimt.cleanup</a></code></li>
-<li><code><a title="pysimt.cocoeval" href="cocoeval/index.html">pysimt.cocoeval</a></code></li>
-<li><code><a title="pysimt.config" href="config.html">pysimt.config</a></code></li>
 <li><code><a title="pysimt.datasets" href="datasets/index.html">pysimt.datasets</a></code></li>
 <li><code><a title="pysimt.evaluator" href="evaluator.html">pysimt.evaluator</a></code></li>
 <li><code><a title="pysimt.layers" href="layers/index.html">pysimt.layers</a></code></li>
-<li><code><a title="pysimt.logger" href="logger.html">pysimt.logger</a></code></li>
 <li><code><a title="pysimt.lr_scheduler" href="lr_scheduler.html">pysimt.lr_scheduler</a></code></li>
 <li><code><a title="pysimt.mainloop" href="mainloop.html">pysimt.mainloop</a></code></li>
 <li><code><a title="pysimt.metrics" href="metrics/index.html">pysimt.metrics</a></code></li>
