@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import logging
 from torch.utils.data import Dataset
 from torch.utils.data.sampler import BatchSampler, SequentialSampler, RandomSampler

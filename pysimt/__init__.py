@@ -14,7 +14,7 @@ __version__ = '1.0.0'
 
 # Disable documentation generation for the following sub modules
 __pdoc__ = {
-    'pysimt.cocoeval': False,
-    'pysimt.config': False,
-    'pysimt.logger': False,
+    'cocoeval': False,
+    'config': False,
+    'logger': False,
 }

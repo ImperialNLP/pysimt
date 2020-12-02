@@ -14,15 +14,38 @@ logger = logging.getLogger('pysimt')
 
 
 class TextDataset(Dataset):
-    r"""A PyTorch dataset for sentences.
+    """A convenience dataset for reading monolingual text files.
 
-    Arguments:
-        fname (str or Path): A string or ``pathlib.Path`` object giving
+    Args:
+        fname: A string or ``pathlib.Path`` object giving
             the corpus.
-        vocab (Vocabulary): A ``Vocabulary`` instance for the given corpus.
-        bos (bool, optional): If ``True``, a special beginning-of-sentence
-            "<bos>" marker will be prepended to sentences.
+        vocab: A ``Vocabulary`` instance for the given corpus.
+        bos: Optional; If ``True``, a special beginning-of-sentence
+            `<bos>` marker will be prepended to sequences.
+        eos: Optional; If ``True``, a special end-of-sentence
+            `<eos>` marker will be appended to sequences.
     """
+
+    def __init__(self, fname, vocab, bos=False, eos=True, **kwargs):
+        self.path = Path(fname)
+        self.vocab = vocab
+        self.bos = bos
+        self.eos = eos
+
+        # Detect glob patterns
+        self.fnames = sorted(self.path.parent.glob(self.path.name))
+
+        if len(self.fnames) == 0:
+            raise RuntimeError('{} does not exist.'.format(self.path))
+        elif len(self.fnames) > 1:
+            logger.info('Multiple files found, using first: {}'.format(self.fnames[0]))
+
+        # Read the sentences and map them to vocabulary
+        self.data, self.lengths = self.read_sentences(
+            self.fnames[0], self.vocab, bos=self.bos, eos=self.eos)
+
+        # Dataset size
+        self.size = len(self.data)
 
     @staticmethod
     def read_sentences(fname: str,
@@ -46,26 +69,6 @@ class TextDataset(Dataset):
 
         return lines, lens
 
-    def __init__(self, fname, vocab, bos=False, eos=True, **kwargs):
-        self.path = Path(fname)
-        self.vocab = vocab
-        self.bos = bos
-        self.eos = eos
-
-        # Detect glob patterns
-        self.fnames = sorted(self.path.parent.glob(self.path.name))
-
-        if len(self.fnames) == 0:
-            raise RuntimeError('{} does not exist.'.format(self.path))
-        elif len(self.fnames) > 1:
-            logger.info('Multiple files found, using first: {}'.format(self.fnames[0]))
-
-        # Read the sentences and map them to vocabulary
-        self.data, self.lengths = self.read_sentences(
-            self.fnames[0], self.vocab, bos=self.bos, eos=self.eos)
-
-        # Dataset size
-        self.size = len(self.data)
 
     @staticmethod
     def to_torch(batch, **kwargs):
