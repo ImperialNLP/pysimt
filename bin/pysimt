@@ -59,9 +59,9 @@ def main():
                               help="(section).key:value overrides for config")
 
     ####################
-    # stranslate command
+    # translate command
     ####################
-    parser_trans = subparsers.add_parser('stranslate', help='simultaneous translate help')
+    parser_trans = subparsers.add_parser('translate', help='simultaneous translate help')
     parser_trans.add_argument('-n', '--disable-filters', action='store_true',
                               help='Disable eval_filters given in config')
     parser_trans.add_argument('-b', '--batch-size', type=int, default=16,
@@ -117,7 +117,7 @@ def main():
     dev_mgr = DeviceManager(args.device_id)
 
     # translate entry point
-    if cmd == 'stranslate':
+    if cmd == 'translate':
         logger.setup()
         if not args.stochastic:
             fix_seed(1234)
