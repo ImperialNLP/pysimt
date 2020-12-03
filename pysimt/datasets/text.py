@@ -7,7 +7,7 @@ import torch
 from torch.utils.data import Dataset
 from torch.nn.utils.rnn import pad_sequence
 
-from ..utils.io import fopen
+from ..utils.io import fopen, progress_bar
 from ..vocabulary import Vocabulary
 
 logger = logging.getLogger('pysimt')
