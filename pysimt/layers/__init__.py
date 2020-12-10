@@ -6,7 +6,7 @@ from .residual import Residual
 from .selector import Selector
 from .positionwise_ff import PositionwiseFF
 
-from embedding import TFEmbedding, ProjectedEmbedding
+from .embedding import TFEmbedding, ProjectedEmbedding
 
 # Attention layers
 from .attention import DotAttention
