@@ -1,3 +1,5 @@
+"""Base Metric class to be derived from."""
+
 from functools import total_ordering
 
 
