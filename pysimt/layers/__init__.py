@@ -3,7 +3,7 @@ from .ff import FF
 from .pool import Pool
 from .fusion import Fusion
 from .residual import Residual
-from .argselect import ArgSelect
+from .selector import Selector
 from .positionwise_ff import PositionwiseFF
 
 # Position-aware Transformers embedding layer
