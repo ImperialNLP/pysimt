@@ -35,7 +35,7 @@ class Pool(torch.nn.Module):
         >>> torch.equal(p(x), x.select(1, -1).unsqueeze(0))
         True
     """
-    def __init__(self, operation, pool_dim, keepdim=True):
+    def __init__(self, operation: str, pool_dim: int, keepdim: bool = True):
         """"""
         super().__init__()
 
