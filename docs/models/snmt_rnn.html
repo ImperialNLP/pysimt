@@ -39,7 +39,7 @@ from ..utils.nn import get_n_params
 from ..utils.topology import Topology
 from ..utils.ml_metrics import Loss
 from ..utils.device import DEVICE
-from ..utils.io import pbar
+from ..utils.io import progress_bar
 from ..datasets import MultimodalDataset
 from ..metrics import Metric
 
@@ -50,7 +50,7 @@ you can decode translations from this model either using plain greedy-search
 or state-of-the-art simultanous decoding algorithms.
 
 # Pure greedy-search (by default batched)
-$ pysimt stranslate -s test_2016_flickr,test_2017_flickr \
+$ pysimt translate -s test_2016_flickr,test_2017_flickr \
     -f gs -o &lt;output_prefix&gt; &lt;best model&#39;s .ckpt&gt;
 
 &#34;&#34;&#34;
@@ -307,7 +307,7 @@ class SimultaneousNMT(nn.Module):
         &#34;&#34;&#34;Computes test set loss over the given DataLoader instance.&#34;&#34;&#34;
         loss = Loss()
 
-        for batch in pbar(data_loader, unit=&#39;batch&#39;):
+        for batch in progress_bar(data_loader, unit=&#39;batch&#39;):
             batch.device(DEVICE)
             out = self.forward(batch)
             loss.update(out[&#39;loss&#39;], out[&#39;n_items&#39;])
@@ -332,7 +332,7 @@ class SimultaneousNMT(nn.Module):
 you can decode translations from this model either using plain greedy-search
 or state-of-the-art simultanous decoding algorithms.</p>
 <h1 id="pure-greedy-search-by-default-batched">Pure greedy-search (by default batched)</h1>
-<p>$ pysimt stranslate -s test_2016_flickr,test_2017_flickr
+<p>$ pysimt translate -s test_2016_flickr,test_2017_flickr
 -f gs -o <output_prefix> <best model's .ckpt></p></div>
 </dd>
 </dl>
@@ -625,7 +625,7 @@ evaluation mode.
         &#34;&#34;&#34;Computes test set loss over the given DataLoader instance.&#34;&#34;&#34;
         loss = Loss()
 
-        for batch in pbar(data_loader, unit=&#39;batch&#39;):
+        for batch in progress_bar(data_loader, unit=&#39;batch&#39;):
             batch.device(DEVICE)
             out = self.forward(batch)
             loss.update(out[&#39;loss&#39;], out[&#39;n_items&#39;])
@@ -1006,7 +1006,7 @@ is large enough to leave it as vanilla NMT.</p></div>
     &#34;&#34;&#34;Computes test set loss over the given DataLoader instance.&#34;&#34;&#34;
     loss = Loss()
 
-    for batch in pbar(data_loader, unit=&#39;batch&#39;):
+    for batch in progress_bar(data_loader, unit=&#39;batch&#39;):
         batch.device(DEVICE)
         out = self.forward(batch)
         loss.update(out[&#39;loss&#39;], out[&#39;n_items&#39;])

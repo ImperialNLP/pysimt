@@ -26,21 +26,16 @@
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">import os
-import bz2
+<pre><code class="python">import bz2
 import gzip
 import lzma
 import pathlib
-import tempfile
 
 from collections import deque
-from typing import List
+from typing import List, Iterable, Any
 
 import numpy as np
 from tqdm import tqdm
-
-
-from ..cleanup import cleanup
 
 
 class FileRotator:
@@ -119,22 +114,8 @@ def read_reference_files(*args) -&gt; List[List[str]]:
     return all_lines
 
 
-def get_temp_file(delete=False, close=False):
-    &#34;&#34;&#34;Creates a temporary file under a folder.&#34;&#34;&#34;
-    root = pathlib.Path(os.environ.get(&#39;NMTPY_TMP&#39;, &#39;/tmp&#39;))
-    if not root.exists():
-        root.mkdir(parents=True, exist_ok=True)
-
-    prefix = str(root / &#34;pysimt_{}&#34;.format(os.getpid()))
-    t = tempfile.NamedTemporaryFile(
-        mode=&#39;w&#39;, prefix=prefix, delete=delete)
-    cleanup.register_tmp_file(t.name)
-    if close:
-        t.close()
-    return t
-
-
-def pbar(iterator, unit=&#39;it&#39;):
+def progress_bar(iterator: Iterable[Any], unit: str = &#39;it&#39;):
+    &#34;&#34;&#34;Wraps the given iterator into tqdm for progress bar rendering.&#34;&#34;&#34;
     return tqdm(iterator, unit=unit, ncols=70, smoothing=0)</code></pre>
 </details>
 </section>
@@ -176,40 +157,17 @@ def pbar(iterator, unit=&#39;it&#39;):
         return open(filename, &#39;r&#39;)</code></pre>
 </details>
 </dd>
-<dt id="pysimt.utils.io.get_temp_file"><code class="name flex">
-<span>def <span class="ident">get_temp_file</span></span>(<span>delete=False, close=False)</span>
+<dt id="pysimt.utils.io.progress_bar"><code class="name flex">
+<span>def <span class="ident">progress_bar</span></span>(<span>iterator: Iterable[Any], unit: str = 'it')</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Creates a temporary file under a folder.</p></div>
+<div class="desc"><p>Wraps the given iterator into tqdm for progress bar rendering.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def get_temp_file(delete=False, close=False):
-    &#34;&#34;&#34;Creates a temporary file under a folder.&#34;&#34;&#34;
-    root = pathlib.Path(os.environ.get(&#39;NMTPY_TMP&#39;, &#39;/tmp&#39;))
-    if not root.exists():
-        root.mkdir(parents=True, exist_ok=True)
-
-    prefix = str(root / &#34;pysimt_{}&#34;.format(os.getpid()))
-    t = tempfile.NamedTemporaryFile(
-        mode=&#39;w&#39;, prefix=prefix, delete=delete)
-    cleanup.register_tmp_file(t.name)
-    if close:
-        t.close()
-    return t</code></pre>
-</details>
-</dd>
-<dt id="pysimt.utils.io.pbar"><code class="name flex">
-<span>def <span class="ident">pbar</span></span>(<span>iterator, unit='it')</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def pbar(iterator, unit=&#39;it&#39;):
+<pre><code class="python">def progress_bar(iterator: Iterable[Any], unit: str = &#39;it&#39;):
+    &#34;&#34;&#34;Wraps the given iterator into tqdm for progress bar rendering.&#34;&#34;&#34;
     return tqdm(iterator, unit=unit, ncols=70, smoothing=0)</code></pre>
 </details>
 </dd>
@@ -344,8 +302,7 @@ the oldest one and removes it from disk.</p>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
 <li><code><a title="pysimt.utils.io.fopen" href="#pysimt.utils.io.fopen">fopen</a></code></li>
-<li><code><a title="pysimt.utils.io.get_temp_file" href="#pysimt.utils.io.get_temp_file">get_temp_file</a></code></li>
-<li><code><a title="pysimt.utils.io.pbar" href="#pysimt.utils.io.pbar">pbar</a></code></li>
+<li><code><a title="pysimt.utils.io.progress_bar" href="#pysimt.utils.io.progress_bar">progress_bar</a></code></li>
 <li><code><a title="pysimt.utils.io.read_hypothesis_file" href="#pysimt.utils.io.read_hypothesis_file">read_hypothesis_file</a></code></li>
 <li><code><a title="pysimt.utils.io.read_reference_files" href="#pysimt.utils.io.read_reference_files">read_reference_files</a></code></li>
 </ul>

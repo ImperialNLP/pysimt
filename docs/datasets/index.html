@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.9.2" />
 <title>pysimt.datasets API documentation</title>
-<meta name="description" content="" />
+<meta name="description" content="A dataset in `pysimt` inherits from `torch.nn.Dataset` and is designed
+to read and expose a specific type of corpus …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -22,11 +23,36 @@
 <h1 class="title">Module <code>pysimt.datasets</code></h1>
 </header>
 <section id="section-intro">
+<p>A dataset in <code><a title="pysimt" href="../index.html">pysimt</a></code> inherits from <code>torch.nn.Dataset</code> and is designed
+to read and expose a specific type of corpus.</p>
+<ul>
+<li>A dataset class name should end with the <code>Dataset</code> suffix.</li>
+<li>The <code>__init__</code> method should include <code>**kwargs</code> for other possible arguments.</li>
+<li>The <code>__getitem__</code> and <code>__len__</code> methods should be implemented.</li>
+<li>A static method <code>to_torch(batch, **kwargs)</code> is automatically used when
+preparing the batch tensor during forward-pass.</li>
+</ul>
+<p>Please see <code>pysimt.datasets.TextDataset</code> to get an idea on how to implement
+a new dataset.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python"># First the basic types
+<pre><code class="python">&#34;&#34;&#34;
+A dataset in `pysimt` inherits from `torch.nn.Dataset` and is designed
+to read and expose a specific type of corpus.
+
+* A dataset class name should end with the `Dataset` suffix.
+* The `__init__` method should include `**kwargs` for other possible arguments.
+* The `__getitem__` and `__len__` methods should be implemented.
+* A static method `to_torch(batch, **kwargs)` is automatically used when
+  preparing the batch tensor during forward-pass.
+
+Please see `pysimt.datasets.TextDataset` to get an idea on how to implement
+a new dataset.
+
+&#34;&#34;&#34;
+
 from .numpy import NumpyDataset
 from .text import TextDataset
 from .objdet import ObjectDetectionsDataset
@@ -42,13 +68,25 @@ def get_dataset(type_):
 
 
 # Should always be at the end
-from .multimodal import MultimodalDataset</code></pre>
+from .multimodal import MultimodalDataset   # noqa</code></pre>
 </details>
 </section>
 <section>
 <h2 class="section-title" id="header-submodules">Sub-modules</h2>
 <dl>
+<dt><code class="name"><a title="pysimt.datasets.base" href="base.html">pysimt.datasets.base</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
 <dt><code class="name"><a title="pysimt.datasets.collate" href="collate.html">pysimt.datasets.collate</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="pysimt.datasets.imagefolder" href="imagefolder.html">pysimt.datasets.imagefolder</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="pysimt.datasets.kaldi" href="kaldi.html">pysimt.datasets.kaldi</a></code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
@@ -110,7 +148,10 @@ from .multimodal import MultimodalDataset</code></pre>
 </li>
 <li><h3><a href="#header-submodules">Sub-modules</a></h3>
 <ul>
+<li><code><a title="pysimt.datasets.base" href="base.html">pysimt.datasets.base</a></code></li>
 <li><code><a title="pysimt.datasets.collate" href="collate.html">pysimt.datasets.collate</a></code></li>
+<li><code><a title="pysimt.datasets.imagefolder" href="imagefolder.html">pysimt.datasets.imagefolder</a></code></li>
+<li><code><a title="pysimt.datasets.kaldi" href="kaldi.html">pysimt.datasets.kaldi</a></code></li>
 <li><code><a title="pysimt.datasets.multimodal" href="multimodal.html">pysimt.datasets.multimodal</a></code></li>
 <li><code><a title="pysimt.datasets.numpy" href="numpy.html">pysimt.datasets.numpy</a></code></li>
 <li><code><a title="pysimt.datasets.objdet" href="objdet.html">pysimt.datasets.objdet</a></code></li>

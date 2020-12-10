@@ -31,11 +31,10 @@ from .ff import FF
 from .pool import Pool
 from .fusion import Fusion
 from .residual import Residual
-from .argselect import ArgSelect
+from .selector import Selector
 from .positionwise_ff import PositionwiseFF
 
-# Position-aware Transformers embedding layer
-from .tf_embedding import TFEmbedding
+from .embedding import TFEmbedding, ProjectedEmbedding
 
 # Attention layers
 from .attention import DotAttention
@@ -58,15 +57,15 @@ from .decoders import TFDecoder</code></pre>
 <section>
 <h2 class="section-title" id="header-submodules">Sub-modules</h2>
 <dl>
-<dt><code class="name"><a title="pysimt.layers.argselect" href="argselect.html">pysimt.layers.argselect</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
 <dt><code class="name"><a title="pysimt.layers.attention" href="attention/index.html">pysimt.layers.attention</a></code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 <dt><code class="name"><a title="pysimt.layers.decoders" href="decoders/index.html">pysimt.layers.decoders</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="pysimt.layers.embedding" href="embedding.html">pysimt.layers.embedding</a></code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
@@ -94,7 +93,7 @@ from .decoders import TFDecoder</code></pre>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt><code class="name"><a title="pysimt.layers.tf_embedding" href="tf_embedding.html">pysimt.layers.tf_embedding</a></code></dt>
+<dt><code class="name"><a title="pysimt.layers.selector" href="selector.html">pysimt.layers.selector</a></code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
@@ -124,16 +123,16 @@ from .decoders import TFDecoder</code></pre>
 </li>
 <li><h3><a href="#header-submodules">Sub-modules</a></h3>
 <ul>
-<li><code><a title="pysimt.layers.argselect" href="argselect.html">pysimt.layers.argselect</a></code></li>
 <li><code><a title="pysimt.layers.attention" href="attention/index.html">pysimt.layers.attention</a></code></li>
 <li><code><a title="pysimt.layers.decoders" href="decoders/index.html">pysimt.layers.decoders</a></code></li>
+<li><code><a title="pysimt.layers.embedding" href="embedding.html">pysimt.layers.embedding</a></code></li>
 <li><code><a title="pysimt.layers.encoders" href="encoders/index.html">pysimt.layers.encoders</a></code></li>
 <li><code><a title="pysimt.layers.ff" href="ff.html">pysimt.layers.ff</a></code></li>
 <li><code><a title="pysimt.layers.fusion" href="fusion.html">pysimt.layers.fusion</a></code></li>
 <li><code><a title="pysimt.layers.pool" href="pool.html">pysimt.layers.pool</a></code></li>
 <li><code><a title="pysimt.layers.positionwise_ff" href="positionwise_ff.html">pysimt.layers.positionwise_ff</a></code></li>
 <li><code><a title="pysimt.layers.residual" href="residual.html">pysimt.layers.residual</a></code></li>
-<li><code><a title="pysimt.layers.tf_embedding" href="tf_embedding.html">pysimt.layers.tf_embedding</a></code></li>
+<li><code><a title="pysimt.layers.selector" href="selector.html">pysimt.layers.selector</a></code></li>
 <li><code><a title="pysimt.layers.transformers" href="transformers/index.html">pysimt.layers.transformers</a></code></li>
 </ul>
 </li>

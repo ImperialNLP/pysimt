@@ -75,7 +75,7 @@ def validate_or_assert(option_name, option_value, valid_options):
 
 def get_meteor_jar(ver: str = &#39;1.5&#39;):
     root = pathlib.Path(os.getenv(&#39;HOME&#39;)) / &#39;.pysimt&#39; / &#39;meteor-data&#39;
-    jar = root / &#39;meteor-1.5.jar&#39;
+    jar = root / f&#39;meteor-{ver}.jar&#39;
     assert jar.exists(), &#34;METEOR not installed, please run &#39;pysimt-install-extra&#39;&#34;
     return jar
 
@@ -175,7 +175,7 @@ def flatten(llist) -&gt; List[Any]:
 </summary>
 <pre><code class="python">def get_meteor_jar(ver: str = &#39;1.5&#39;):
     root = pathlib.Path(os.getenv(&#39;HOME&#39;)) / &#39;.pysimt&#39; / &#39;meteor-data&#39;
-    jar = root / &#39;meteor-1.5.jar&#39;
+    jar = root / f&#39;meteor-{ver}.jar&#39;
     assert jar.exists(), &#34;METEOR not installed, please run &#39;pysimt-install-extra&#39;&#34;
     return jar</code></pre>
 </details>

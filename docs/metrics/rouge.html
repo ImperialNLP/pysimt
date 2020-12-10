@@ -32,7 +32,7 @@ from ..cocoeval import Rouge
 
 
 class ROUGEScorer:
-    def compute(self, refs, hyps, language=None):
+    def compute(self, refs, hyps, language=None, lowercase=False):
         if isinstance(hyps, str):
             # hyps is a file
             hyp_sents = open(hyps).read().strip().split(&#39;\n&#39;)
@@ -76,7 +76,7 @@ class ROUGEScorer:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class ROUGEScorer:
-    def compute(self, refs, hyps, language=None):
+    def compute(self, refs, hyps, language=None, lowercase=False):
         if isinstance(hyps, str):
             # hyps is a file
             hyp_sents = open(hyps).read().strip().split(&#39;\n&#39;)
@@ -103,7 +103,7 @@ class ROUGEScorer:
 <h3>Methods</h3>
 <dl>
 <dt id="pysimt.metrics.rouge.ROUGEScorer.compute"><code class="name flex">
-<span>def <span class="ident">compute</span></span>(<span>self, refs, hyps, language=None)</span>
+<span>def <span class="ident">compute</span></span>(<span>self, refs, hyps, language=None, lowercase=False)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -111,7 +111,7 @@ class ROUGEScorer:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def compute(self, refs, hyps, language=None):
+<pre><code class="python">def compute(self, refs, hyps, language=None, lowercase=False):
     if isinstance(hyps, str):
         # hyps is a file
         hyp_sents = open(hyps).read().strip().split(&#39;\n&#39;)
