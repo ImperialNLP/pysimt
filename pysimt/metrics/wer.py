@@ -1,3 +1,5 @@
+"""Word error rate (WER)."""
+
 from typing import Iterable, Union, Optional
 import editdistance
 

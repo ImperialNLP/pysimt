@@ -1,3 +1,5 @@
+"""Tokenized BLEU through sacreBLEU API."""
+
 from typing import Union, Iterable, TextIO
 
 from sacrebleu import corpus_bleu

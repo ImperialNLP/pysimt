@@ -1,3 +1,5 @@
+"""Detokenized BLEU i.e. sacreBLEU."""
+
 from typing import Union, Iterable, TextIO
 
 from sacrebleu import corpus_bleu

@@ -1,3 +1,5 @@
+"""METEOR metric."""
+
 import os
 import shutil
 import pathlib

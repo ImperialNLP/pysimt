@@ -1,3 +1,5 @@
+"""Character error rate (CER)."""
+
 from typing import Iterable, Union, Optional
 import editdistance
 
