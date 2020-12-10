@@ -30,24 +30,26 @@
 from .multibleu import BLEUScorer
 from .sacrebleu import SACREBLEUScorer
 from .meteor import METEORScorer
-from .rouge import ROUGEScorer
+from .cer import CERScorer
+from .wer import WERScorer
 from .simnmt import AVPScorer, AVLScorer, CWMScorer
 
 &#34;&#34;&#34;These metrics can be used in early stopping.&#34;&#34;&#34;
 
 # Generation related metrics
-beam_metrics = [&#34;BLEU&#34;, &#34;SACREBLEU&#34;, &#34;METEOR&#34;, &#34;ROUGE&#34;]
+beam_metrics = [&#34;BLEU&#34;, &#34;SACREBLEU&#34;, &#34;METEOR&#34;, &#34;CER&#34;, &#34;WER&#34;]
 
 metric_info = {
     &#39;BLEU&#39;: &#39;max&#39;,
     &#39;SACREBLEU&#39;: &#39;max&#39;,
     &#39;METEOR&#39;: &#39;max&#39;,
-    &#39;ROUGE&#39;: &#39;max&#39;,
     &#39;LOSS&#39;: &#39;min&#39;,
     &#39;ACC&#39;: &#39;max&#39;,
     &#39;RECALL&#39;: &#39;max&#39;,
     &#39;PRECISION&#39;: &#39;max&#39;,
     &#39;F1&#39;: &#39;max&#39;,
+    &#39;CER&#39;: &#39;min&#39;,
+    &#39;WER&#39;: &#39;max&#39;,
     # simultaneous translation
     &#39;AVP&#39;: &#39;min&#39;,   # Average proportion (Cho and Esipova, 2016)
     &#39;AVL&#39;: &#39;min&#39;,   # Average Lagging (Ma et al., 2019 (STACL))
@@ -61,35 +63,31 @@ metric_info = {
 <dl>
 <dt><code class="name"><a title="pysimt.metrics.cer" href="cer.html">pysimt.metrics.cer</a></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Character error rate (CER).</p></div>
 </dd>
 <dt><code class="name"><a title="pysimt.metrics.meteor" href="meteor.html">pysimt.metrics.meteor</a></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>METEOR metric.</p></div>
 </dd>
 <dt><code class="name"><a title="pysimt.metrics.metric" href="metric.html">pysimt.metrics.metric</a></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Base Metric class to be derived from.</p></div>
 </dd>
 <dt><code class="name"><a title="pysimt.metrics.multibleu" href="multibleu.html">pysimt.metrics.multibleu</a></code></dt>
 <dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="pysimt.metrics.rouge" href="rouge.html">pysimt.metrics.rouge</a></code></dt>
-<dd>
-<div class="desc"></div>
+<div class="desc"><p>Tokenized BLEU through sacreBLEU API.</p></div>
 </dd>
 <dt><code class="name"><a title="pysimt.metrics.sacrebleu" href="sacrebleu.html">pysimt.metrics.sacrebleu</a></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Detokenized BLEU i.e. sacreBLEU.</p></div>
 </dd>
 <dt><code class="name"><a title="pysimt.metrics.simnmt" href="simnmt.html">pysimt.metrics.simnmt</a></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Simultaneous MT latency metrics.</p></div>
 </dd>
 <dt><code class="name"><a title="pysimt.metrics.wer" href="wer.html">pysimt.metrics.wer</a></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Word error rate (WER).</p></div>
 </dd>
 </dl>
 </section>
@@ -117,7 +115,6 @@ metric_info = {
 <li><code><a title="pysimt.metrics.meteor" href="meteor.html">pysimt.metrics.meteor</a></code></li>
 <li><code><a title="pysimt.metrics.metric" href="metric.html">pysimt.metrics.metric</a></code></li>
 <li><code><a title="pysimt.metrics.multibleu" href="multibleu.html">pysimt.metrics.multibleu</a></code></li>
-<li><code><a title="pysimt.metrics.rouge" href="rouge.html">pysimt.metrics.rouge</a></code></li>
 <li><code><a title="pysimt.metrics.sacrebleu" href="sacrebleu.html">pysimt.metrics.sacrebleu</a></code></li>
 <li><code><a title="pysimt.metrics.simnmt" href="simnmt.html">pysimt.metrics.simnmt</a></code></li>
 <li><code><a title="pysimt.metrics.wer" href="wer.html">pysimt.metrics.wer</a></code></li>

@@ -28,8 +28,6 @@
 </summary>
 <pre><code class="python">from torch import nn
 
-from ..residual import Residual
-
 
 class BaseSublayer(nn.Module):
 
@@ -43,7 +41,7 @@ class BaseSublayer(nn.Module):
         super().__init__()
         self.is_pre_norm = is_pre_norm
         self.layer_norm = nn.LayerNorm(model_dim, eps=1e-6)
-        self.residual = Residual(dropout=dropout)
+        self.dropout = nn.Dropout(dropout)
 
     def forward(self, **kwargs):
         raise NotImplementedError(&#34;BaseSublayer does not implement forward.&#34;)
@@ -75,7 +73,7 @@ class BaseSublayer(nn.Module):
         :param x: The input x.
         :return: The output of the residual connection.
         &#34;&#34;&#34;
-        return self.residual((residual, x))</code></pre>
+        return residual + self.dropout(x)</code></pre>
 </details>
 </section>
 <section>
@@ -134,7 +132,7 @@ evaluation mode.
         super().__init__()
         self.is_pre_norm = is_pre_norm
         self.layer_norm = nn.LayerNorm(model_dim, eps=1e-6)
-        self.residual = Residual(dropout=dropout)
+        self.dropout = nn.Dropout(dropout)
 
     def forward(self, **kwargs):
         raise NotImplementedError(&#34;BaseSublayer does not implement forward.&#34;)
@@ -166,7 +164,7 @@ evaluation mode.
         :param x: The input x.
         :return: The output of the residual connection.
         &#34;&#34;&#34;
-        return self.residual((residual, x))</code></pre>
+        return residual + self.dropout(x)</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -257,7 +255,7 @@ evaluation mode.
     :param x: The input x.
     :return: The output of the residual connection.
     &#34;&#34;&#34;
-    return self.residual((residual, x))</code></pre>
+    return residual + self.dropout(x)</code></pre>
 </details>
 </dd>
 <dt id="pysimt.layers.transformers.base_sublayer.BaseSublayer.forward"><code class="name flex">

@@ -26,7 +26,7 @@
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">from torch import nn
+<pre><code class="python">from torch import nn, Tensor
 from typing import Iterable, Any
 
 
@@ -44,12 +44,14 @@ class Selector(nn.Module):
         # By default, GRU returns (output, h_n) but we are not interested in h_n
         &gt;&gt;&gt; layers.append(Selector(0))
         &gt;&gt;&gt; layers.append(torch.nn.Dropout(0.2))
+        &gt;&gt;&gt; self.block = nn.Sequential(*layers)
     &#34;&#34;&#34;
     def __init__(self, index: int):
+        &#34;&#34;&#34;&#34;&#34;&#34;
         super().__init__()
         self.index = index
 
-    def forward(self, x: Iterable[Any]):
+    def forward(self, x: Iterable[Tensor]) -&gt; Tensor:
         &#34;&#34;&#34;Returns the pre-determined `self.index`&#39;th position of `x`.&#34;&#34;&#34;
         return x[self.index]
 
@@ -85,8 +87,8 @@ when used in constructs such as <code>torch.nn.Sequential()</code>.</p>
 # By default, GRU returns (output, h_n) but we are not interested in h_n
 &gt;&gt;&gt; layers.append(Selector(0))
 &gt;&gt;&gt; layers.append(torch.nn.Dropout(0.2))
-</code></pre>
-<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p></div>
+&gt;&gt;&gt; self.block = nn.Sequential(*layers)
+</code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -105,12 +107,14 @@ when used in constructs such as <code>torch.nn.Sequential()</code>.</p>
         # By default, GRU returns (output, h_n) but we are not interested in h_n
         &gt;&gt;&gt; layers.append(Selector(0))
         &gt;&gt;&gt; layers.append(torch.nn.Dropout(0.2))
+        &gt;&gt;&gt; self.block = nn.Sequential(*layers)
     &#34;&#34;&#34;
     def __init__(self, index: int):
+        &#34;&#34;&#34;&#34;&#34;&#34;
         super().__init__()
         self.index = index
 
-    def forward(self, x: Iterable[Any]):
+    def forward(self, x: Iterable[Tensor]) -&gt; Tensor:
         &#34;&#34;&#34;Returns the pre-determined `self.index`&#39;th position of `x`.&#34;&#34;&#34;
         return x[self.index]
 
@@ -135,7 +139,7 @@ when used in constructs such as <code>torch.nn.Sequential()</code>.</p>
 <h3>Methods</h3>
 <dl>
 <dt id="pysimt.layers.selector.Selector.forward"><code class="name flex">
-<span>def <span class="ident">forward</span></span>(<span>self, x: Iterable[Any]) ‑> Callable[..., Any]</span>
+<span>def <span class="ident">forward</span></span>(<span>self, x: Iterable[torch.Tensor]) ‑> torch.Tensor</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Returns the pre-determined <code>self.index</code>'th position of <code>x</code>.</p></div>
@@ -143,7 +147,7 @@ when used in constructs such as <code>torch.nn.Sequential()</code>.</p>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def forward(self, x: Iterable[Any]):
+<pre><code class="python">def forward(self, x: Iterable[Tensor]) -&gt; Tensor:
     &#34;&#34;&#34;Returns the pre-determined `self.index`&#39;th position of `x`.&#34;&#34;&#34;
     return x[self.index]</code></pre>
 </details>

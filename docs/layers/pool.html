@@ -30,36 +30,68 @@
 
 
 class Pool(torch.nn.Module):
-    &#34;&#34;&#34;A pool layer with mean/max/sum/last options.&#34;&#34;&#34;
-    def __init__(self, op_type, pool_dim, keepdim=True):
+    &#34;&#34;&#34;A convenience layer to apply various sorts of pooling to a
+    sequential tensor. The pooling operation can be `last`, `mean`, `max`, or
+    `sum`.
+
+    Args:
+        operation: The pooling operator.
+            It should be one from `last`, `mean`, `max`, `sum`.
+        pool_dim: The dimension along which the pooling will be applied
+        keepdim: Passed along to the underlying `torch` functions for
+            `max`, `mean` and `sum` variants.
+
+    Examples:
+        &gt;&gt;&gt; import torch
+        &gt;&gt;&gt; from pysimt.layers import Pool
+        &gt;&gt;&gt; x = torch.rand(10, 32, 200) # n_timesteps, n_samples, feat_dim
+        &gt;&gt;&gt; p = Pool(&#39;sum&#39;, 0)
+        &gt;&gt;&gt; torch.equal(p(x), x.sum(0, keepdim=True))
+        True
+        &gt;&gt;&gt; p = Pool(&#39;max&#39;, 0)
+        &gt;&gt;&gt; torch.equal(p(x), x.max(0, keepdim=True)[0])
+        True
+        &gt;&gt;&gt; p = Pool(&#39;mean&#39;, 0)
+        &gt;&gt;&gt; torch.equal(p(x), x.mean(0, keepdim=True))
+        True
+        &gt;&gt;&gt; p = Pool(&#39;last&#39;, 0)
+        &gt;&gt;&gt; torch.equal(p(x), x.select(0, -1).unsqueeze(0))
+        True
+        &gt;&gt;&gt; torch.equal(p(x), x[-1].unsqueeze(0))
+        True
+        &gt;&gt;&gt; p = Pool(&#39;last&#39;, 1)
+        &gt;&gt;&gt; torch.equal(p(x), x.select(1, -1).unsqueeze(0))
+        True
+    &#34;&#34;&#34;
+    def __init__(self, operation: str, pool_dim: int, keepdim: bool = True):
+        &#34;&#34;&#34;&#34;&#34;&#34;
         super().__init__()
 
-        self.op_type = op_type
+        self.operation = operation
         self.pool_dim = pool_dim
         self.keepdim = keepdim
-        assert self.op_type in [&#34;last&#34;, &#34;mean&#34;, &#34;max&#34;, &#34;sum&#34;], \
+
+        assert self.operation in [&#34;last&#34;, &#34;mean&#34;, &#34;max&#34;, &#34;sum&#34;], \
             &#34;Pool() operation should be mean, max, sum or last.&#34;
 
-        if self.op_type == &#39;last&#39;:
-            self.__pool_fn = lambda x: x.select(
-                self.pool_dim, -1).unsqueeze(0)
-        else:
-            if self.op_type == &#39;max&#39;:
-                self.__pool_fn = lambda x: torch.max(
-                    x, dim=self.pool_dim, keepdim=self.keepdim)[0]
-            elif self.op_type == &#39;mean&#39;:
-                self.__pool_fn = lambda x: torch.mean(
-                    x, dim=self.pool_dim, keepdim=self.keepdim)
-            elif self.op_type == &#39;sum&#39;:
-                self.__pool_fn = lambda x: torch.sum(
-                    x, dim=self.pool_dim, keepdim=self.keepdim)
+        # Assign the shortcut
+        self.forward = getattr(self, &#39;_{}&#39;.format(self.operation))
 
-    def forward(self, x):
-        return self.__pool_fn(x)
+    def _last(self, x: torch.Tensor) -&gt; torch.Tensor:
+        return x.select(self.pool_dim, -1).unsqueeze(0)
+
+    def _max(self, x: torch.Tensor) -&gt; torch.Tensor:
+        return torch.max(x, dim=self.pool_dim, keepdim=self.keepdim)[0]
+
+    def _mean(self, x: torch.Tensor) -&gt; torch.Tensor:
+        return torch.mean(x, dim=self.pool_dim, keepdim=self.keepdim)
+
+    def _sum(self, x: torch.Tensor) -&gt; torch.Tensor:
+        return torch.sum(x, dim=self.pool_dim, keepdim=self.keepdim)
 
     def __repr__(self):
-        return &#34;Pool(op_type={}, pool_dim={}, keepdim={})&#34;.format(
-            self.op_type, self.pool_dim, self.keepdim)</code></pre>
+        return &#34;Pool(operation={}, pool_dim={}, keepdim={})&#34;.format(
+            self.operation, self.pool_dim, self.keepdim)</code></pre>
 </details>
 </section>
 <section>
@@ -73,46 +105,112 @@ class Pool(torch.nn.Module):
 <dl>
 <dt id="pysimt.layers.pool.Pool"><code class="flex name class">
 <span>class <span class="ident">Pool</span></span>
-<span>(</span><span>op_type, pool_dim, keepdim=True)</span>
+<span>(</span><span>operation: str, pool_dim: int, keepdim: bool = True)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>A pool layer with mean/max/sum/last options.</p>
-<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p></div>
+<div class="desc"><p>A convenience layer to apply various sorts of pooling to a
+sequential tensor. The pooling operation can be <code>last</code>, <code>mean</code>, <code>max</code>, or
+<code>sum</code>.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>operation</code></strong></dt>
+<dd>The pooling operator.
+It should be one from <code>last</code>, <code>mean</code>, <code>max</code>, <code>sum</code>.</dd>
+<dt><strong><code>pool_dim</code></strong></dt>
+<dd>The dimension along which the pooling will be applied</dd>
+<dt><strong><code>keepdim</code></strong></dt>
+<dd>Passed along to the underlying <code>torch</code> functions for
+<code>max</code>, <code>mean</code> and <code>sum</code> variants.</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<pre><code class="language-python-repl">&gt;&gt;&gt; import torch
+&gt;&gt;&gt; from pysimt.layers import Pool
+&gt;&gt;&gt; x = torch.rand(10, 32, 200) # n_timesteps, n_samples, feat_dim
+&gt;&gt;&gt; p = Pool('sum', 0)
+&gt;&gt;&gt; torch.equal(p(x), x.sum(0, keepdim=True))
+True
+&gt;&gt;&gt; p = Pool('max', 0)
+&gt;&gt;&gt; torch.equal(p(x), x.max(0, keepdim=True)[0])
+True
+&gt;&gt;&gt; p = Pool('mean', 0)
+&gt;&gt;&gt; torch.equal(p(x), x.mean(0, keepdim=True))
+True
+&gt;&gt;&gt; p = Pool('last', 0)
+&gt;&gt;&gt; torch.equal(p(x), x.select(0, -1).unsqueeze(0))
+True
+&gt;&gt;&gt; torch.equal(p(x), x[-1].unsqueeze(0))
+True
+&gt;&gt;&gt; p = Pool('last', 1)
+&gt;&gt;&gt; torch.equal(p(x), x.select(1, -1).unsqueeze(0))
+True
+</code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Pool(torch.nn.Module):
-    &#34;&#34;&#34;A pool layer with mean/max/sum/last options.&#34;&#34;&#34;
-    def __init__(self, op_type, pool_dim, keepdim=True):
+    &#34;&#34;&#34;A convenience layer to apply various sorts of pooling to a
+    sequential tensor. The pooling operation can be `last`, `mean`, `max`, or
+    `sum`.
+
+    Args:
+        operation: The pooling operator.
+            It should be one from `last`, `mean`, `max`, `sum`.
+        pool_dim: The dimension along which the pooling will be applied
+        keepdim: Passed along to the underlying `torch` functions for
+            `max`, `mean` and `sum` variants.
+
+    Examples:
+        &gt;&gt;&gt; import torch
+        &gt;&gt;&gt; from pysimt.layers import Pool
+        &gt;&gt;&gt; x = torch.rand(10, 32, 200) # n_timesteps, n_samples, feat_dim
+        &gt;&gt;&gt; p = Pool(&#39;sum&#39;, 0)
+        &gt;&gt;&gt; torch.equal(p(x), x.sum(0, keepdim=True))
+        True
+        &gt;&gt;&gt; p = Pool(&#39;max&#39;, 0)
+        &gt;&gt;&gt; torch.equal(p(x), x.max(0, keepdim=True)[0])
+        True
+        &gt;&gt;&gt; p = Pool(&#39;mean&#39;, 0)
+        &gt;&gt;&gt; torch.equal(p(x), x.mean(0, keepdim=True))
+        True
+        &gt;&gt;&gt; p = Pool(&#39;last&#39;, 0)
+        &gt;&gt;&gt; torch.equal(p(x), x.select(0, -1).unsqueeze(0))
+        True
+        &gt;&gt;&gt; torch.equal(p(x), x[-1].unsqueeze(0))
+        True
+        &gt;&gt;&gt; p = Pool(&#39;last&#39;, 1)
+        &gt;&gt;&gt; torch.equal(p(x), x.select(1, -1).unsqueeze(0))
+        True
+    &#34;&#34;&#34;
+    def __init__(self, operation: str, pool_dim: int, keepdim: bool = True):
+        &#34;&#34;&#34;&#34;&#34;&#34;
         super().__init__()
 
-        self.op_type = op_type
+        self.operation = operation
         self.pool_dim = pool_dim
         self.keepdim = keepdim
-        assert self.op_type in [&#34;last&#34;, &#34;mean&#34;, &#34;max&#34;, &#34;sum&#34;], \
+
+        assert self.operation in [&#34;last&#34;, &#34;mean&#34;, &#34;max&#34;, &#34;sum&#34;], \
             &#34;Pool() operation should be mean, max, sum or last.&#34;
 
-        if self.op_type == &#39;last&#39;:
-            self.__pool_fn = lambda x: x.select(
-                self.pool_dim, -1).unsqueeze(0)
-        else:
-            if self.op_type == &#39;max&#39;:
-                self.__pool_fn = lambda x: torch.max(
-                    x, dim=self.pool_dim, keepdim=self.keepdim)[0]
-            elif self.op_type == &#39;mean&#39;:
-                self.__pool_fn = lambda x: torch.mean(
-                    x, dim=self.pool_dim, keepdim=self.keepdim)
-            elif self.op_type == &#39;sum&#39;:
-                self.__pool_fn = lambda x: torch.sum(
-                    x, dim=self.pool_dim, keepdim=self.keepdim)
+        # Assign the shortcut
+        self.forward = getattr(self, &#39;_{}&#39;.format(self.operation))
 
-    def forward(self, x):
-        return self.__pool_fn(x)
+    def _last(self, x: torch.Tensor) -&gt; torch.Tensor:
+        return x.select(self.pool_dim, -1).unsqueeze(0)
+
+    def _max(self, x: torch.Tensor) -&gt; torch.Tensor:
+        return torch.max(x, dim=self.pool_dim, keepdim=self.keepdim)[0]
+
+    def _mean(self, x: torch.Tensor) -&gt; torch.Tensor:
+        return torch.mean(x, dim=self.pool_dim, keepdim=self.keepdim)
+
+    def _sum(self, x: torch.Tensor) -&gt; torch.Tensor:
+        return torch.sum(x, dim=self.pool_dim, keepdim=self.keepdim)
 
     def __repr__(self):
-        return &#34;Pool(op_type={}, pool_dim={}, keepdim={})&#34;.format(
-            self.op_type, self.pool_dim, self.keepdim)</code></pre>
+        return &#34;Pool(operation={}, pool_dim={}, keepdim={})&#34;.format(
+            self.operation, self.pool_dim, self.keepdim)</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -132,7 +230,7 @@ class Pool(torch.nn.Module):
 <h3>Methods</h3>
 <dl>
 <dt id="pysimt.layers.pool.Pool.forward"><code class="name flex">
-<span>def <span class="ident">forward</span></span>(<span>self, x) ‑> Callable[..., Any]</span>
+<span>def <span class="ident">forward</span></span>(<span>self, *input: Any) ‑> NoneType</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Defines the computation performed at every call.</p>
@@ -148,8 +246,18 @@ registered hooks while the latter silently ignores them.</p>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def forward(self, x):
-    return self.__pool_fn(x)</code></pre>
+<pre><code class="python">def _forward_unimplemented(self, *input: Any) -&gt; None:
+    r&#34;&#34;&#34;Defines the computation performed at every call.
+
+    Should be overridden by all subclasses.
+
+    .. note::
+        Although the recipe for forward pass needs to be defined within
+        this function, one should call the :class:`Module` instance afterwards
+        instead of this since the former takes care of running the
+        registered hooks while the latter silently ignores them.
+    &#34;&#34;&#34;
+    raise NotImplementedError</code></pre>
 </details>
 </dd>
 </dl>

@@ -38,11 +38,15 @@ class TFEmbedding(torch.nn.Embedding):
     Transformers paper and the implementation of OpenNMT.
 
     Args:
-        num_embeddings: Number of items in the vocabulary.
+        num_embeddings: The size of the dictionary of embeddings
+        embedding_dim: The size of each embedding vector
+        max_len: Maximum known sequence length for positional encodings
+        dropout: The dropout probability
 
     &#34;&#34;&#34;
     def __init__(self, num_embeddings: int, embedding_dim: int,
                  max_len: int = 1024, dropout: float = 0.1):
+        &#34;&#34;&#34;&#34;&#34;&#34;
         self.num_embeddings = num_embeddings
         self.embedding_dim = embedding_dim
         self.max_len = max_len
@@ -84,16 +88,18 @@ class ProjectedEmbedding(nn.Embedding):
     applied afterwards.
 
     Args:
-        num_embeddings:
-        embedding_dim:
-        out_dim:
-        activ:
-        dropout:
+        num_embeddings: The size of the dictionary of embeddings
+        embedding_dim: The size of each embedding vector
+        out_dim: The output size of the feed-forward projection layer
+        activ: The activation type of the feed-forward projection layer.
+            `None` and `linear` denote a linear layer.
+        dropout: the dropout probability
 
     &#34;&#34;&#34;
     def __init__(self, num_embeddings: int, embedding_dim: int,
                  out_dim: int, activ: Optional[str] = &#39;linear&#39;,
                  dropout: float = 0.0):
+        &#34;&#34;&#34;&#34;&#34;&#34;
         super().__init__(num_embeddings, embedding_dim, padding_idx=0)
         self.proj = FF(embedding_dim, out_dim, activ=activ, bias=False)
         self.do = nn.Dropout(dropout) if dropout &gt; 0.0 else lambda x: x
@@ -119,12 +125,19 @@ class ProjectedEmbedding(nn.Embedding):
 <div class="desc"><p>An extension layer to regular <code>torch.nn.Embedding</code> with MLP and dropout
 applied afterwards.</p>
 <h2 id="args">Args</h2>
-<p>num_embeddings:
-embedding_dim:
-out_dim:
-activ:
-dropout:
-Initializes internal Module state, shared by both nn.Module and ScriptModule.</p></div>
+<dl>
+<dt><strong><code>num_embeddings</code></strong></dt>
+<dd>The size of the dictionary of embeddings</dd>
+<dt><strong><code>embedding_dim</code></strong></dt>
+<dd>The size of each embedding vector</dd>
+<dt><strong><code>out_dim</code></strong></dt>
+<dd>The output size of the feed-forward projection layer</dd>
+<dt><strong><code>activ</code></strong></dt>
+<dd>The activation type of the feed-forward projection layer.
+<code>None</code> and <code>linear</code> denote a linear layer.</dd>
+<dt><strong><code>dropout</code></strong></dt>
+<dd>the dropout probability</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -134,16 +147,18 @@ Initializes internal Module state, shared by both nn.Module and ScriptModule.</p
     applied afterwards.
 
     Args:
-        num_embeddings:
-        embedding_dim:
-        out_dim:
-        activ:
-        dropout:
+        num_embeddings: The size of the dictionary of embeddings
+        embedding_dim: The size of each embedding vector
+        out_dim: The output size of the feed-forward projection layer
+        activ: The activation type of the feed-forward projection layer.
+            `None` and `linear` denote a linear layer.
+        dropout: the dropout probability
 
     &#34;&#34;&#34;
     def __init__(self, num_embeddings: int, embedding_dim: int,
                  out_dim: int, activ: Optional[str] = &#39;linear&#39;,
                  dropout: float = 0.0):
+        &#34;&#34;&#34;&#34;&#34;&#34;
         super().__init__(num_embeddings, embedding_dim, padding_idx=0)
         self.proj = FF(embedding_dim, out_dim, activ=activ, bias=False)
         self.do = nn.Dropout(dropout) if dropout &gt; 0.0 else lambda x: x
@@ -226,9 +241,14 @@ Transformers paper and the implementation of OpenNMT.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>num_embeddings</code></strong></dt>
-<dd>Number of items in the vocabulary.</dd>
-</dl>
-<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p></div>
+<dd>The size of the dictionary of embeddings</dd>
+<dt><strong><code>embedding_dim</code></strong></dt>
+<dd>The size of each embedding vector</dd>
+<dt><strong><code>max_len</code></strong></dt>
+<dd>Maximum known sequence length for positional encodings</dd>
+<dt><strong><code>dropout</code></strong></dt>
+<dd>The dropout probability</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -238,11 +258,15 @@ Transformers paper and the implementation of OpenNMT.</p>
     Transformers paper and the implementation of OpenNMT.
 
     Args:
-        num_embeddings: Number of items in the vocabulary.
+        num_embeddings: The size of the dictionary of embeddings
+        embedding_dim: The size of each embedding vector
+        max_len: Maximum known sequence length for positional encodings
+        dropout: The dropout probability
 
     &#34;&#34;&#34;
     def __init__(self, num_embeddings: int, embedding_dim: int,
                  max_len: int = 1024, dropout: float = 0.1):
+        &#34;&#34;&#34;&#34;&#34;&#34;
         self.num_embeddings = num_embeddings
         self.embedding_dim = embedding_dim
         self.max_len = max_len

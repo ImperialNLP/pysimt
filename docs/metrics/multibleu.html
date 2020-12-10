@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.9.2" />
 <title>pysimt.metrics.multibleu API documentation</title>
-<meta name="description" content="" />
+<meta name="description" content="Tokenized BLEU through sacreBLEU API." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -22,11 +22,16 @@
 <h1 class="title">Module <code>pysimt.metrics.multibleu</code></h1>
 </header>
 <section id="section-intro">
+<p>Tokenized BLEU through sacreBLEU API.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">from sacrebleu import corpus_bleu
+<pre><code class="python">&#34;&#34;&#34;Tokenized BLEU through sacreBLEU API.&#34;&#34;&#34;
+
+from typing import Union, Iterable, TextIO
+
+from sacrebleu import corpus_bleu
 
 from ..utils.misc import listify
 from ..utils.io import read_reference_files, read_hypothesis_file
@@ -35,8 +40,16 @@ from .metric import Metric
 
 class BLEUScorer:
     &#34;&#34;&#34;Computes the multi-bleu equivalent using SacreBLEU, with tokenization
-    option disabled.&#34;&#34;&#34;
-    def compute(self, refs, hyps, language=None):
+    option disabled.
+
+    Args:
+        refs: List of reference text files
+        hyps: A file path, or a list of hypothesis strings or an open file handle
+        language: unused
+    &#34;&#34;&#34;
+    def compute(self, refs: Iterable[str],
+                hyps: Union[str, Iterable[str], TextIO],
+                language=None) -&gt; Metric:
         if isinstance(hyps, str):
             hyps = read_hypothesis_file(hyps)
 
@@ -64,15 +77,32 @@ class BLEUScorer:
 </code></dt>
 <dd>
 <div class="desc"><p>Computes the multi-bleu equivalent using SacreBLEU, with tokenization
-option disabled.</p></div>
+option disabled.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>refs</code></strong></dt>
+<dd>List of reference text files</dd>
+<dt><strong><code>hyps</code></strong></dt>
+<dd>A file path, or a list of hypothesis strings or an open file handle</dd>
+<dt><strong><code>language</code></strong></dt>
+<dd>unused</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class BLEUScorer:
     &#34;&#34;&#34;Computes the multi-bleu equivalent using SacreBLEU, with tokenization
-    option disabled.&#34;&#34;&#34;
-    def compute(self, refs, hyps, language=None):
+    option disabled.
+
+    Args:
+        refs: List of reference text files
+        hyps: A file path, or a list of hypothesis strings or an open file handle
+        language: unused
+    &#34;&#34;&#34;
+    def compute(self, refs: Iterable[str],
+                hyps: Union[str, Iterable[str], TextIO],
+                language=None) -&gt; Metric:
         if isinstance(hyps, str):
             hyps = read_hypothesis_file(hyps)
 
@@ -88,7 +118,7 @@ option disabled.</p></div>
 <h3>Methods</h3>
 <dl>
 <dt id="pysimt.metrics.multibleu.BLEUScorer.compute"><code class="name flex">
-<span>def <span class="ident">compute</span></span>(<span>self, refs, hyps, language=None)</span>
+<span>def <span class="ident">compute</span></span>(<span>self, refs: Iterable[str], hyps: Union[str, Iterable[str], TextIO], language=None) ‑> <a title="pysimt.metrics.metric.Metric" href="metric.html#pysimt.metrics.metric.Metric">Metric</a></span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -96,7 +126,9 @@ option disabled.</p></div>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def compute(self, refs, hyps, language=None):
+<pre><code class="python">def compute(self, refs: Iterable[str],
+            hyps: Union[str, Iterable[str], TextIO],
+            language=None) -&gt; Metric:
     if isinstance(hyps, str):
         hyps = read_hypothesis_file(hyps)
 
