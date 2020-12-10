@@ -22,7 +22,7 @@ def freqs_to_dict(token_freqs, min_freq=0, max_items=0, exclude_symbols=False):
 
     tokendict = OrderedDict()
     if not exclude_symbols:
-        for key, value in Vocabulary.TOKENS.items():
+        for key, value in Vocabulary._TOKENS.items():
             # Second value is the count information
             tokendict[key] = "{} 0".format(value)
 
@@ -65,7 +65,7 @@ def get_freqs(filename, cumul_dict=None):
                     token_freqs[word] += 1
 
     # Remove already available special tokens
-    for key in Vocabulary.TOKENS:
+    for key in Vocabulary._TOKENS:
         if key in token_freqs:
             print('Removing ', key)
             del token_freqs[key]
