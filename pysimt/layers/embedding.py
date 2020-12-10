@@ -10,11 +10,15 @@ class TFEmbedding(torch.nn.Embedding):
     Transformers paper and the implementation of OpenNMT.
 
     Args:
-        num_embeddings: Number of items in the vocabulary.
+        num_embeddings: The size of the dictionary of embeddings
+        embedding_dim: The size of each embedding vector
+        max_len: Maximum known sequence length for positional encodings
+        dropout: The dropout probability
 
     """
     def __init__(self, num_embeddings: int, embedding_dim: int,
                  max_len: int = 1024, dropout: float = 0.1):
+        """"""
         self.num_embeddings = num_embeddings
         self.embedding_dim = embedding_dim
         self.max_len = max_len
@@ -56,16 +60,18 @@ class ProjectedEmbedding(nn.Embedding):
     applied afterwards.
 
     Args:
-        num_embeddings:
-        embedding_dim:
-        out_dim:
-        activ:
-        dropout:
+        num_embeddings: The size of the dictionary of embeddings
+        embedding_dim: The size of each embedding vector
+        out_dim: The output size of the feed-forward projection layer
+        activ: The activation type of the feed-forward projection layer.
+            `None` and `linear` denote a linear layer.
+        dropout: the dropout probability
 
     """
     def __init__(self, num_embeddings: int, embedding_dim: int,
                  out_dim: int, activ: Optional[str] = 'linear',
                  dropout: float = 0.0):
+        """"""
         super().__init__(num_embeddings, embedding_dim, padding_idx=0)
         self.proj = FF(embedding_dim, out_dim, activ=activ, bias=False)
         self.do = nn.Dropout(dropout) if dropout > 0.0 else lambda x: x

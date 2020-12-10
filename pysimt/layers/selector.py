@@ -1,4 +1,4 @@
-from torch import nn
+from torch import nn, Tensor
 from typing import Iterable, Any
 
 
@@ -16,12 +16,14 @@ class Selector(nn.Module):
         # By default, GRU returns (output, h_n) but we are not interested in h_n
         >>> layers.append(Selector(0))
         >>> layers.append(torch.nn.Dropout(0.2))
+        >>> self.block = nn.Sequential(*layers)
     """
     def __init__(self, index: int):
+        """"""
         super().__init__()
         self.index = index
 
-    def forward(self, x: Iterable[Any]):
+    def forward(self, x: Iterable[Tensor]) -> Tensor:
         """Returns the pre-determined `self.index`'th position of `x`."""
         return x[self.index]
 
