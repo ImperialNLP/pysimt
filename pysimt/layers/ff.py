@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import math
 
 import torch
@@ -9,32 +8,39 @@ from ..utils.nn import get_activation_fn
 
 
 class FF(nn.Module):
-    """A smart feedforward layer with activation support.
+    """A convenience feed-forward layer with non-linearity option.
 
-    Arguments:
-        in_features(int): Input dimensionality.
-        out_features(int): Output dimensionality.
-        bias(bool, optional): Enable/disable bias for the layer. (Default: True)
-        bias_zero(bool, optional): Start with a 0-vector bias. (Default: True)
-        activ(str, optional): A string like 'tanh' or 'relu' to define the
-            non-linearity type. `None` or `'linear'` is a linear layer (default).
+    Args:
+        input_size: The size of the input features
+        hidden_size: The size of the output features
+        bias: If `False`, disables the bias component
+        bias_zero: If `False`, randomly initialize the bias instead of zero
+            initialization
+        activ: The activation function name that will be searched
+            in `torch` and `torch.nn.functional` modules. `None` or `linear`
+            disables the activation function
+
+    Example:
+        >>> FF(300, 400, bias=True, activ='tanh') # a tanh MLP
+        >>> FF(300, 400, bias=False, activ=None) # a linear layer
     """
 
-    def __init__(self, in_features, out_features, bias=True,
+    def __init__(self, input_size, hidden_size, bias=True,
                  bias_zero=True, activ=None):
+        """"""
         super().__init__()
-        self.in_features = in_features
-        self.out_features = out_features
+        self.input_size = input_size
+        self.hidden_size = hidden_size
         self.use_bias = bias
         self.bias_zero = bias_zero
         self.activ_type = activ
         if self.activ_type in (None, 'linear'):
             self.activ_type = 'linear'
-        self.weight = nn.Parameter(torch.Tensor(out_features, in_features))
+        self.weight = nn.Parameter(torch.Tensor(hidden_size, input_size))
         self.activ = get_activation_fn(activ)
 
         if self.use_bias:
-            self.bias = nn.Parameter(torch.Tensor(out_features))
+            self.bias = nn.Parameter(torch.Tensor(hidden_size))
         else:
             self.register_parameter('bias', None)
 
@@ -54,8 +60,8 @@ class FF(nn.Module):
 
     def __repr__(self):
         repr_ = self.__class__.__name__ + '(' \
-            + 'in_features=' + str(self.in_features) \
-            + ', out_features=' + str(self.out_features) \
+            + 'input_size=' + str(self.input_size) \
+            + ', hidden_size=' + str(self.hidden_size) \
             + ', activ=' + str(self.activ_type) \
             + ', bias=' + str(self.use_bias)
         if self.use_bias:
