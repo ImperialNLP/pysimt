@@ -1,7 +1,5 @@
 from torch import nn
 
-from ..residual import Residual
-
 
 class BaseSublayer(nn.Module):
 
@@ -15,7 +13,7 @@ class BaseSublayer(nn.Module):
         super().__init__()
         self.is_pre_norm = is_pre_norm
         self.layer_norm = nn.LayerNorm(model_dim, eps=1e-6)
-        self.residual = Residual(dropout=dropout)
+        self.dropout = nn.Dropout(dropout)
 
     def forward(self, **kwargs):
         raise NotImplementedError("BaseSublayer does not implement forward.")
@@ -47,4 +45,4 @@ class BaseSublayer(nn.Module):
         :param x: The input x.
         :return: The output of the residual connection.
         """
-        return self.residual((residual, x))
+        return residual + self.dropout(x)
