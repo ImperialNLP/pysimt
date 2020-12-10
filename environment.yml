@@ -13,4 +13,5 @@ dependencies:
     - torch==1.7.0
     - sacrebleu>=1.4.13
     - subword_nmt
+    - editdistance==0.5.3
     - -e .
