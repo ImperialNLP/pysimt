@@ -6,8 +6,7 @@ from .residual import Residual
 from .selector import Selector
 from .positionwise_ff import PositionwiseFF
 
-# Position-aware Transformers embedding layer
-from .tf_embedding import TFEmbedding
+from embedding import TFEmbedding, ProjectedEmbedding
 
 # Attention layers
 from .attention import DotAttention
