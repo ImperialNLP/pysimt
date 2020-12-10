@@ -1,3 +1,5 @@
+from typing import Union, Iterable, TextIO
+
 from sacrebleu import corpus_bleu
 
 from ..utils.misc import listify
@@ -8,11 +10,18 @@ from .metric import Metric
 class SACREBLEUScorer:
     """Computes the usual SacreBLEU metric with the default v13a tokenizer.
     This metric expects de-tokenized references and hypotheses, i.e.
-    it is only sensible to use this with SPM files and the de-spm
+    it only makes sense to use this with SPM files and the `de-spm`
     post-processing filter. For the more usual tokenized BLEU, check the
-    BLEU metric.
+    `BLEU` metric.
+
+    Args:
+        refs: List of reference text files
+        hyps: A file path, or a list of hypothesis strings or an open file handle
+        language: unused
     """
-    def compute(self, refs, hyps, language=None):
+    def compute(self, refs: Iterable[str],
+                hyps: Union[str, Iterable[str], TextIO],
+                language=None) -> Metric:
         if isinstance(hyps, str):
             hyps = read_hypothesis_file(hyps)
 

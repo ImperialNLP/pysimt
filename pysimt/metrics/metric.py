@@ -5,16 +5,13 @@ from functools import total_ordering
 class Metric:
     """A base class that will be inherited by evaluation metrics.
 
-    Arguments:
-        name(str): A name for the metric that will be kept internally
-            after upper-casing
-        score(float): A floating point score
-        detailed_score(str, optional): A custom, more detailed string
-            representing the score given above (Default: "")
-        higher_better(bool, optional): If ``False``, the smaller the better
-            (Default: ``True``)
+    Args:
+        name: A name for the metric that will be kept internally after upper-casing
+        score: A floating point score
+        detailed_score: A custom, more detailed string
+            representing the score given above
+        higher_better: If `False`, the smaller the better
     """
-
     def __init__(self, name: str, score: float,
                  detailed_score: str = "", higher_better: bool = True):
         self.name = name.upper()

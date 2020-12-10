@@ -1,3 +1,5 @@
+from typing import Union, Iterable, TextIO
+
 from sacrebleu import corpus_bleu
 
 from ..utils.misc import listify
@@ -7,8 +9,16 @@ from .metric import Metric
 
 class BLEUScorer:
     """Computes the multi-bleu equivalent using SacreBLEU, with tokenization
-    option disabled."""
-    def compute(self, refs, hyps, language=None):
+    option disabled.
+
+    Args:
+        refs: List of reference text files
+        hyps: A file path, or a list of hypothesis strings or an open file handle
+        language: unused
+    """
+    def compute(self, refs: Iterable[str],
+                hyps: Union[str, Iterable[str], TextIO],
+                language=None) -> Metric:
         if isinstance(hyps, str):
             hyps = read_hypothesis_file(hyps)
 

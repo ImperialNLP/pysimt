@@ -3,15 +3,29 @@ import shutil
 import pathlib
 import subprocess
 
-from typing import List, Union, Iterable, TextIO
+from typing import Union, Iterable, TextIO
 
 from ..utils.misc import listify, get_meteor_jar
 from .metric import Metric
 
 
 class METEORScorer:
-    """Interface to compute METEOR scores using the original Java API."""
+    """Computes the METEOR score using the original JAVA API, and returns
+    a `Metric` object.
+
+    Args:
+        refs: List of reference text files
+        hyps: Either a string denoting the hypotheses' filename, or
+            a list that contains the hypotheses strings themselves
+        language: Two letter language code for METEOR. If `auto`, it will be
+            detected from the final suffix of the reference file, i.e. `en` for
+            `test.en`. If not successful, it will fall back to English.
+            (METEOR's language-specific support is only for Czech, German,
+            English, Spanish, French, and Russian.)
+        lowercase: unused
+    """
     def __init__(self):
+        """"""
         self.jar = str(get_meteor_jar())
         self.__cmdline = ["java", "-Xmx2G", "-jar", self.jar, "-", "-", "-stdio"]
         self.env = os.environ
@@ -21,7 +35,7 @@ class METEORScorer:
         if shutil.which('java') is None:
             raise RuntimeError('METEOR requires java which is not installed.')
 
-    def compute(self, refs: Union[str, List[str]],
+    def compute(self, refs: Union[str, Iterable[str]],
                 hyps: Union[str, Iterable[str], TextIO],
                 language: str = "auto") -> Metric:
         cmdline = self.__cmdline[:]
