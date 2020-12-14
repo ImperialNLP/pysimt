@@ -66,7 +66,7 @@ class ConditionalGRUDecoder(nn.Module):
                     "Context sizes are not compatible with mm_fusion_op!"
                 mm_inp_size = ctx_sizes[0]
 
-            fusion = [Fusion(mm_fusion_op, mm_inp_size, self.hidden_size)]
+            fusion = [Fusion(mm_fusion_op, input_size=mm_inp_size, output_size=self.hidden_size)]
             if mm_fusion_dropout > 0:
                 fusion.append(nn.Dropout(mm_fusion_dropout))
             self.fusion = nn.Sequential(*fusion)
