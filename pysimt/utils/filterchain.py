@@ -17,7 +17,7 @@ class FilterChain:
 
     `upper`: Uppercase the input(s).
 
-    `de-bpe`: Stitches back `@@ ` BPE subword units.
+    `de-bpe`: Stitches back `@@ ` and ` ##` BPE units.
 
     `de-spm`: Stitches back `▁` Sentence Piece (SPM).
 
@@ -28,11 +28,12 @@ class FilterChain:
     `de-hyphen`: De-hyphenate `foo @-@ bar` constructs of Moses tokenizer.
 
     Args:
-        filters: A list of strings representing filters to apply.
+        filters: A list of strings or a comma-separated string
+            representing filters to apply.
 
     """
     _FILTERS = {
-        'de-bpe': lambda s: s.replace("@@ ", "").replace("@@", ""),
+        'de-bpe': lambda s: s.replace("@@ ", "").replace("@@", "").replace(" ##", ""),
         'de-tag': lambda s: re.sub('<[a-zA-Z][a-zA-Z]>', '', s),
         # Decoder for Google sentenpiece
         # only for default params of spm_encode
@@ -50,7 +51,10 @@ class FilterChain:
         'upper': lambda s: s.upper(),
     }
 
-    def __init__(self, filters: List[str]):
+    def __init__(self, filters: Union[str, List[str]]):
+        if isinstance(filters, str):
+            filters = filters.split(',')
+
         assert not set(filters).difference(set(self._FILTERS.keys())), \
             "Unknown evaluation filter given."
         self.filters = filters
