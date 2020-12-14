@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 import numpy as np
 
@@ -53,7 +53,7 @@ class LabelSmoothingLoss(nn.Module):
         model_prob.masked_fill_(mask, 0)
 
 
-def get_activation_fn(name: str):
+def get_activation_fn(name: Optional[str]):
     """Returns a callable activation function from `torch`."""
     if name in (None, 'linear'):
         return lambda x: x
