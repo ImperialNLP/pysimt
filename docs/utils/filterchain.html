@@ -45,7 +45,7 @@ class FilterChain:
 
     `upper`: Uppercase the input(s).
 
-    `de-bpe`: Stitches back `@@ ` BPE subword units.
+    `de-bpe`: Stitches back `@@ ` and ` ##` BPE units.
 
     `de-spm`: Stitches back `▁` Sentence Piece (SPM).
 
@@ -56,11 +56,12 @@ class FilterChain:
     `de-hyphen`: De-hyphenate `foo @-@ bar` constructs of Moses tokenizer.
 
     Args:
-        filters: A list of strings representing filters to apply.
+        filters: A list of strings or a comma-separated string
+            representing filters to apply.
 
     &#34;&#34;&#34;
     _FILTERS = {
-        &#39;de-bpe&#39;: lambda s: s.replace(&#34;@@ &#34;, &#34;&#34;).replace(&#34;@@&#34;, &#34;&#34;),
+        &#39;de-bpe&#39;: lambda s: s.replace(&#34;@@ &#34;, &#34;&#34;).replace(&#34;@@&#34;, &#34;&#34;).replace(&#34; ##&#34;, &#34;&#34;),
         &#39;de-tag&#39;: lambda s: re.sub(&#39;&lt;[a-zA-Z][a-zA-Z]&gt;&#39;, &#39;&#39;, s),
         # Decoder for Google sentenpiece
         # only for default params of spm_encode
@@ -78,7 +79,10 @@ class FilterChain:
         &#39;upper&#39;: lambda s: s.upper(),
     }
 
-    def __init__(self, filters: List[str]):
+    def __init__(self, filters: Union[str, List[str]]):
+        if isinstance(filters, str):
+            filters = filters.split(&#39;,&#39;)
+
         assert not set(filters).difference(set(self._FILTERS.keys())), \
             &#34;Unknown evaluation filter given.&#34;
         self.filters = filters
@@ -135,7 +139,7 @@ class FilterChain:
 <dl>
 <dt id="pysimt.utils.filterchain.FilterChain"><code class="flex name class">
 <span>class <span class="ident">FilterChain</span></span>
-<span>(</span><span>filters: List[str])</span>
+<span>(</span><span>filters: Union[str, List[str]])</span>
 </code></dt>
 <dd>
 <div class="desc"><p>A sequential filter chain to post-process list of tokens. The <strong>available
@@ -144,7 +148,7 @@ filters are:</strong></p>
 Necessary for word-level BLEU, etc. when using char-level NMT.</p>
 <p><code>lower</code>: Lowercase the input(s).</p>
 <p><code>upper</code>: Uppercase the input(s).</p>
-<p><code>de-bpe</code>: Stitches back <code>@@</code> BPE subword units.</p>
+<p><code>de-bpe</code>: Stitches back <code>@@</code> and <code>##</code> BPE units.</p>
 <p><code>de-spm</code>: Stitches back <code>▁</code> Sentence Piece (SPM).</p>
 <p><code>de-segment</code>: Converts <code>&lt;tag:morpheme&gt;</code> to normal form</p>
 <p><code>de-compound</code>: Stitches back German compound splittings (zmorph)</p>
@@ -152,7 +156,8 @@ Necessary for word-level BLEU, etc. when using char-level NMT.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>filters</code></strong></dt>
-<dd>A list of strings representing filters to apply.</dd>
+<dd>A list of strings or a comma-separated string
+representing filters to apply.</dd>
 </dl></div>
 <details class="source">
 <summary>
@@ -169,7 +174,7 @@ Necessary for word-level BLEU, etc. when using char-level NMT.</p>
 
     `upper`: Uppercase the input(s).
 
-    `de-bpe`: Stitches back `@@ ` BPE subword units.
+    `de-bpe`: Stitches back `@@ ` and ` ##` BPE units.
 
     `de-spm`: Stitches back `▁` Sentence Piece (SPM).
 
@@ -180,11 +185,12 @@ Necessary for word-level BLEU, etc. when using char-level NMT.</p>
     `de-hyphen`: De-hyphenate `foo @-@ bar` constructs of Moses tokenizer.
 
     Args:
-        filters: A list of strings representing filters to apply.
+        filters: A list of strings or a comma-separated string
+            representing filters to apply.
 
     &#34;&#34;&#34;
     _FILTERS = {
-        &#39;de-bpe&#39;: lambda s: s.replace(&#34;@@ &#34;, &#34;&#34;).replace(&#34;@@&#34;, &#34;&#34;),
+        &#39;de-bpe&#39;: lambda s: s.replace(&#34;@@ &#34;, &#34;&#34;).replace(&#34;@@&#34;, &#34;&#34;).replace(&#34; ##&#34;, &#34;&#34;),
         &#39;de-tag&#39;: lambda s: re.sub(&#39;&lt;[a-zA-Z][a-zA-Z]&gt;&#39;, &#39;&#39;, s),
         # Decoder for Google sentenpiece
         # only for default params of spm_encode
@@ -202,7 +208,10 @@ Necessary for word-level BLEU, etc. when using char-level NMT.</p>
         &#39;upper&#39;: lambda s: s.upper(),
     }
 
-    def __init__(self, filters: List[str]):
+    def __init__(self, filters: Union[str, List[str]]):
+        if isinstance(filters, str):
+            filters = filters.split(&#39;,&#39;)
+
         assert not set(filters).difference(set(self._FILTERS.keys())), \
             &#34;Unknown evaluation filter given.&#34;
         self.filters = filters

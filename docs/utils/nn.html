@@ -26,7 +26,7 @@
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">from typing import List
+<pre><code class="python">from typing import List, Optional
 
 import numpy as np
 
@@ -81,7 +81,7 @@ class LabelSmoothingLoss(nn.Module):
         model_prob.masked_fill_(mask, 0)
 
 
-def get_activation_fn(name: str):
+def get_activation_fn(name: Optional[str]):
     &#34;&#34;&#34;Returns a callable activation function from `torch`.&#34;&#34;&#34;
     if name in (None, &#39;linear&#39;):
         return lambda x: x
@@ -351,7 +351,7 @@ model cannot attend over these positions.
 </details>
 </dd>
 <dt id="pysimt.utils.nn.get_activation_fn"><code class="name flex">
-<span>def <span class="ident">get_activation_fn</span></span>(<span>name: str)</span>
+<span>def <span class="ident">get_activation_fn</span></span>(<span>name: Union[str, NoneType])</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Returns a callable activation function from <code>torch</code>.</p></div>
@@ -359,7 +359,7 @@ model cannot attend over these positions.
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def get_activation_fn(name: str):
+<pre><code class="python">def get_activation_fn(name: Optional[str]):
     &#34;&#34;&#34;Returns a callable activation function from `torch`.&#34;&#34;&#34;
     if name in (None, &#39;linear&#39;):
         return lambda x: x
