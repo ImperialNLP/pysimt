@@ -176,7 +176,7 @@ def get_upstream_impl(dim, n_heads):
     nn.init.eye_(mha.out_proj.weight.data)
     list(map(lambda i: nn.init.eye_(i), mha.in_proj_weight.data.chunk(3, dim=0)))
     nn.init.eye_(mha.in_proj_weight.data[:dim])
-    nn.init.eye_(mha.in_proj_weight.data[dim:2*dim])
+    nn.init.eye_(mha.in_proj_weight.data[dim:2 * dim])
     nn.init.eye_(mha.in_proj_weight.data[-dim:])
     return mha
 
@@ -359,7 +359,7 @@ if __name__ == &#39;__main__&#39;:
     nn.init.eye_(mha.out_proj.weight.data)
     list(map(lambda i: nn.init.eye_(i), mha.in_proj_weight.data.chunk(3, dim=0)))
     nn.init.eye_(mha.in_proj_weight.data[:dim])
-    nn.init.eye_(mha.in_proj_weight.data[dim:2*dim])
+    nn.init.eye_(mha.in_proj_weight.data[dim:2 * dim])
     nn.init.eye_(mha.in_proj_weight.data[-dim:])
     return mha</code></pre>
 </details>
