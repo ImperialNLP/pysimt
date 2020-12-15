@@ -2,7 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.7](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-370/)
-[![docstr_coverage](<https://github.com/ImperialNLP/pysimt/blob/master/doccov.svg>)](https://github.com/HunterMcGushion/docstr_coverage)
+[![Python 3.8](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-380/)
+[![Documentation coverage](<https://github.com/ImperialNLP/pysimt/blob/master/doccov.svg>)](https://github.com/HunterMcGushion/docstr_coverage)
 
 This repository includes the codes, the experiment configurations and the scripts
 to prepare/download data for the [Simultaneous Machine Translation with Visual Context](https://www.aclweb.org/anthology/2020.emnlp-main.184.pdf)
