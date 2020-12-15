@@ -1,3 +1,5 @@
+"""A utility layer that returns a particular element from the previous layer."""
+
 from torch import nn, Tensor
 from typing import Iterable, Any
 

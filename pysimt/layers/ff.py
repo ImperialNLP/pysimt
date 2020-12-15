@@ -1,3 +1,5 @@
+"""A convenience feed-forward layer with non-linearity support."""
+
 import math
 
 import torch

@@ -1,3 +1,5 @@
+"""A convenience layer that merges an arbitrary number of inputs."""
+
 import operator
 from typing import Optional
 from functools import reduce

@@ -1,3 +1,5 @@
+"""A convenience layer to apply pooling to a sequential tensor."""
+
 import torch
 
 

@@ -1,3 +1,5 @@
+"""Embedding layer variants."""
+
 from typing import Optional
 
 import torch
