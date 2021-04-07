@@ -9,6 +9,13 @@ This repository includes the codes, the experiment configurations and the script
 to prepare/download data for the [Simultaneous Machine Translation with Visual Context](https://www.aclweb.org/anthology/2020.emnlp-main.184.pdf)
 paper presented at EMNLP 2020.
 
+### Note for RL-based codebase
+
+Please visit the [sim-mt](https://github.com/ImperialNLP/sim-mt) repository for the implementation of our RL-based pipeline. Specifically, **sim-mt** provides codebase for the following papers:
+
+- Julia Ive et al. (2021) - [Exploiting Multimodal Reinforcement Learning for Simultaneous Machine Translation](https://arxiv.org/abs/2102.11403)
+- Julia Ive et al. (2021) - [Exploring Supervised and Unsupervised Rewards in Machine Translation](https://arxiv.org/pdf/2102.11387.pdf)
+
 
 ## Overview
 
