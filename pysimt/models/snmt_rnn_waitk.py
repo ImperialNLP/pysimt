@@ -28,6 +28,8 @@ class SimultaneousWaitKNMT(SimultaneousNMT):
 
     def __init__(self, opts):
         super().__init__(opts)
+        assert self.opts.model['translator_type'] != 'bs', \
+            'Beam search not compatible with simultaneous models'
 
     def forward(self, batch, **kwargs):
         """Training forward-pass with explicit timestep-based loop."""

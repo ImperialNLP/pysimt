@@ -80,13 +80,21 @@ def main():
                               help='Comma-separated key:value pairs to provide new inputs.')
     parser_trans.add_argument('-o', '--output', type=str, required=True,
                               help='Output filename prefix')
+    parser_trans.add_argument('-k', '--beam-size', type=int, default=6,
+                              help='Beam size for beam-search')
+    parser_trans.add_argument('-a', '--lp-alpha', type=float, default=0.,
+                              help='Apply length-penalty (Default: 0.)')
+    parser_trans.add_argument('-u', '--suppress-unk', action='store_true',
+                              help='Do not generate <unk> tokens.')
+    parser_trans.add_argument('-N', '--n-best', action='store_true',
+                              help='Generate n-best list of beam candidates.')
 
     # gs: greedy search
     # sgs: simultaneous greedy search
     #   Can neural machine translation do simultaneous translation? (2016)
     #   https://arxiv.org/abs/1606.02012
-    parser_trans.add_argument('-f', '--func', default='gs', choices=['gs', 'sgs', 'wk'],
-                              help="greedy search (gs), simultaneous gs (sgs), wait-k (wk)")
+    parser_trans.add_argument('-f', '--func', default='gs', choices=['gs', 'sgs', 'wk', 'bs'],
+                              help="greedy search (gs), simultaneous gs (sgs), wait-k (wk), beam search (bs)")
 
     parser_trans.add_argument('--delta', type=str, default='',
                               help="Comma-separeted list of delta values for sgs")

@@ -215,7 +215,7 @@ class SimultaneousNMT(nn.Module):
     def load_data(self, split, batch_size, mode='train'):
         """Loads the requested dataset split."""
         # For wait_if_diff, wait_if_worse and test-time waitk decodings
-        if mode == 'beam' and self.opts.model['translator_type'] != 'gs':
+        if mode == 'beam' and self.opts.model['translator_type'] not in ('gs', 'bs'):
             batch_size = 1
 
         self.dataset = MultimodalDataset(
