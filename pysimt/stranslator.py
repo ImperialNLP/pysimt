@@ -33,7 +33,7 @@ class STranslator:
             sys.exit(1)
 
         # Handle batch size
-        if self.func != 'gs' and self.func != 'bs':
+        if self.func not in ('gs', 'bs'):
             logger.info(f'STranslator: setting batch_size=1 for {self.func!r} decoding')
             self.batch_size = 1
 
