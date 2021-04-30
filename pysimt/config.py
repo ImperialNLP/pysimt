@@ -36,6 +36,7 @@ TRAIN_DEFAULTS = {
     'max_iterations': int(1e6),  # Max number of updates to train
     'eval_metrics': 'loss',      # comma sep. metrics, 1st -> earlystopping
     'eval_filters': '',          # comma sep. list of filters to apply to refs/hyps
+    'eval_beam': 6,              # Validation beam size
     'eval_batch_size': 16,       # batch_size for beam-search
     'eval_freq': 3000,           # 0 means 'End of epochs'
     'eval_max_len': 100,         # max seq len to stop during beam search
