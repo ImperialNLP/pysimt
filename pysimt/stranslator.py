@@ -33,7 +33,7 @@ class STranslator:
             sys.exit(1)
 
         # Handle batch size
-        if self.func != 'gs':
+        if self.func not in ('gs', 'bs'):
             logger.info(f'STranslator: setting batch_size=1 for {self.func!r} decoding')
             self.batch_size = 1
 
@@ -118,6 +118,13 @@ class STranslator:
             self.batch_size, self.filter,
             max_len=self.max_len, delta=self.delta, s_0=self.n_init_tokens,
             criteria=self.criteria)
+        
+        if self.func == 'bs':
+            translator.beam_size = self.beam_size
+            translator.lp_alpha = self.lp_alpha
+            translator.suppress_unk = self.suppress_unk
+            translator.n_best = self.n_best
+            logger.info("Beam search with size {}".format(translator.beam_size))
 
         logger.info(f'Starting translation for {split!r}')
         with torch.no_grad():

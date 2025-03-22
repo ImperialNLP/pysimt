@@ -60,6 +60,8 @@ class MainLoop:
                     self.model, self.beam_iterator, out_prefix='',
                     batch_size=self.eval_batch_size,
                     max_len=self.eval_max_len)
+                if self.model.opts.model['translator_type'] == 'bs':
+                    self.translator.beam_size = self.eval_beam
 
         # Setup model
         self.model.setup()
@@ -270,7 +272,14 @@ class MainLoop:
 
         if self.monitor.beam_metrics:
             tr_args = self.model.opts.model.get('translator_args', {})
-            self.print(f'Performing greedy search (args: {tr_args})')
+            
+            translator_name = self.model.opts.model['translator_type']
+            if translator_name == 'bs':
+                beam_size = self.translator.beam_size
+                self.print(f'Performing beam search with size {beam_size} (args: {tr_args})')
+            else:
+                self.print(f'Performing greedy search (args: {tr_args})')
+            
             beam_time = time.time()
             # Use greedy search
             hyps, *_ = self.translator.run(**tr_args)

@@ -29,6 +29,8 @@ class SimultaneousTFWaitKNMT(SimultaneousTFNMT):
         super().__init__(opts)
         assert not self.opts.model['enc_bidirectional'], \
             'Bidirectional TF encoder is not currently supported for simultaneous MT.'
+        assert self.opts.model['translator_type'] != 'bs', \
+            'Beam search not compatible with simultaneous models'
 
     def forward(self, batch, **kwargs):
         """

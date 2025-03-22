@@ -1,3 +1,4 @@
+__version__ = '1.0.0'
 """
 `pysimt` is a `PyTorch`-based sequence-to-sequence (S2S) framework that facilitates
 research in unimodal and multi-modal machine translation. The framework
@@ -10,7 +11,6 @@ are provided through well-defined APIs as well.
 .. include:: ./docs.md
 """
 
-__version__ = '1.0.0'
 
 # Disable documentation generation for the following sub modules
 __pdoc__ = {
